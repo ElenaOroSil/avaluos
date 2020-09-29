@@ -1,0 +1,48 @@
+<div fxLayout="row wrap" class="matero-row" fxLayoutAlign="none center">
+  <div class="matero-col" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33.33" fxFlex.gt-md="25">
+  <mat-card style="max-width: 380px; color: #898d8d">
+
+      <mat-card-title class="title">SA3</mat-card-title>
+       <mat-card-subtitle>Bienvenido</mat-card-subtitle>   
+       <p style="font-size: 14px; margin-top: 0px;">Para iniciar sesión, ingrese sus datos</p>
+
+    <mat-card-content>
+      <form class="matero-form-horizontal" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+        <mat-form-field >         
+          <input matInput placeholder="&nbsp; Correo" formControlName="username" required>
+          <mat-icon matPrefix>mail</mat-icon>
+          <mat-error *ngIf="reactiveForm.get('username').invalid">Campo requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field >
+          <input matInput placeholder="&nbsp; Contraseña" type="password"
+                 formControlName="password" required>
+                 <mat-icon matPrefix>lock</mat-icon>
+          <mat-error *ngIf="reactiveForm.get('password').invalid">Campo requerido</mat-error>
+        </mat-form-field>
+        <div   fxLayout="row" fxLayoutAlign="end">
+        <a routerLink="/recover-password" style="outline: none;">¿Olvidó su contraseña?</a>
+        </div><br>       
+        <div class="m-y-16" fxLayout="row" fxLayoutAlign="space-between center">                 
+        </div>  
+
+        <div *ngIf="alert" class="{{classAlert}}" role="alert">
+          <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {{error}}
+        </div>
+       
+        <button class="w-full login-field" mat-raised-button [disabled]="loading" >
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          ACCEDER
+      </button>
+     </form>
+    </mat-card-content>
+  </mat-card>
+
+  </div>
+  <div class="matero-col" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="66.67" fxFlex.gt-md="75">
+    <img mat-card-image src="assets/images/img-login-2.jpg" >
+    </div>
+</div>

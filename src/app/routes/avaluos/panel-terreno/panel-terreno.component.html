@@ -1,0 +1,689 @@
+<section class="demo-expansion">
+    <mat-expansion-panel #terrenoPanel1 (opened)="searchTerreno()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Terreno</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card>
+        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+        </mat-card-actions>
+        <mat-card-content>
+          <h5>Tramos de calle, calles transversales, limítrofes y orientación</h5>
+          <form [formGroup]="terreno1FormGroup" class="matero-form-horizontal">
+            <div fxLayout="row wrap" fxLayoutGap="30px grid">
+              <div fxFlex="80" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Inmueble con frente a la calle de:</mat-label>
+                  <input matInput placeholder="Inmueble con frente a la calle de:" maxlength="200"
+                         formControlName="calleFrenteF" required>
+                  <mat-error *ngIf="terreno1FormGroup.get('calleFrenteF').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="20" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Punto cardinal</mat-label>
+                  <mat-select formControlName="calleFrentePuntoCard" required>
+                    <mat-option *ngFor="let item of puntosCardinales" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="terreno1FormGroup.get('calleFrentePuntoCard').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+          
+              <div fxFlex="80" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>entre la calle de:</mat-label>
+                  <input matInput placeholder="entre la calle de:" maxlength="200"
+                         formControlName="entreCalle" required>
+                  <mat-error *ngIf="terreno1FormGroup.get('entreCalle').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="20" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Punto cardinal</mat-label>
+                  <mat-select formControlName="entreCallePuntoCard" required>
+                    <mat-option *ngFor="let item of puntosCardinales" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="terreno1FormGroup.get('entreCallePuntoCard').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="80" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>y la calle de:</mat-label>
+                  <input matInput placeholder="y la calle de:" maxlength="200"
+                         formControlName="calleY" required>
+                  <mat-error *ngIf="terreno1FormGroup.get('calleY').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="20" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Punto cardinal</mat-label>
+                  <mat-select formControlName="calleYPuntoCard" required>
+                    <mat-option *ngFor="let item of puntosCardinales" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="terreno1FormGroup.get('calleYPuntoCard').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="80" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>cerrando la manzana con la calle de:</mat-label>
+                  <input matInput placeholder="cerrando la manzana con la calle de:" maxlength="200"
+                         formControlName="calleManzana" required>
+                  <mat-error *ngIf="terreno1FormGroup.get('calleManzana').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="20" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Punto cardinal</mat-label>
+                  <mat-select formControlName="calleManzanaPuntoCard" required>
+                    <mat-option *ngFor="let item of puntosCardinales" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="terreno1FormGroup.get('calleManzanaPuntoCard').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+                <div fxFlex="25" fxFlex.lt-md="100">
+                  <mat-form-field>
+                    <mat-label>Superficie de terreno</mat-label>
+                    <input matInput placeholder="Superficie de terreno" type="text" formControlName="superficieTotalTerreno" 
+                     required  maxlength="8"  appDecimal8Mask >
+                    <mat-error *ngIf="terreno1FormGroup.get('superficieTotalTerreno').invalid">Campo requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+              <div fxFlex="75" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Descripción superficie de terreno</mat-label>
+                   <textarea matInput placeholder="Descripción superficie de terreno" formControlName="descripcionSuperficie" cdkTextareaAutosize
+                      cdkAutosizeMinRows="3" ></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Medidas y colindancias fuente de información legal</mat-label>
+                <mat-select formControlName="idTipoFuenteInformacion" required>
+                  <mat-option *ngFor="let item of fuenteInformacion" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="terreno1FormGroup.get('idTipoFuenteInformacion').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+            </div>
+            <br>
+            <h5>Datos régimen en condominio</h5>  
+            <div fxLayout="row wrap" fxLayoutGap="10px grid">
+              <div fxFlex="25" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Punto cardinal</mat-label>
+                  <mat-select formControlName="orientacion1" required>
+                    <mat-option *ngFor="let item of puntosCardinales" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="terreno1FormGroup.get('orientacion1').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Medida</mat-label>
+                  <input matInput placeholder="Medida" formControlName="medida1" required
+                  maxlength="8"  appDecimal8Mask type="text">
+                <mat-error *ngIf="terreno1FormGroup.get('medida1').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Detalle colindante</mat-label>
+                  <input matInput placeholder="Detalle colindante"
+                         formControlName="detalleColindante1" required>
+                  <mat-error *ngIf="terreno1FormGroup.get('detalleColindante1').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="25" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Punto cardinal</mat-label>
+                  <mat-select formControlName="orientacion2" required>
+                    <mat-option *ngFor="let item of puntosCardinales" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="terreno1FormGroup.get('orientacion2').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Medida</mat-label>
+                  <input matInput placeholder="Medida" formControlName="medida2" required
+                  maxlength="8"  appDecimal8Mask type="text">
+                  <mat-error *ngIf="terreno1FormGroup.get('medida2').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Detalle colindante</mat-label>
+                  <input matInput placeholder="Detalle colindante"
+                         formControlName="detalleColindante2" required>
+                  <mat-error *ngIf="terreno1FormGroup.get('detalleColindante2').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="25" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Punto cardinal</mat-label>
+                  <mat-select formControlName="orientacion3" required>
+                    <mat-option *ngFor="let item of puntosCardinales" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="terreno1FormGroup.get('orientacion3').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Medida</mat-label>
+                  <input matInput placeholder="Medida" formControlName="medida3" required
+                  maxlength="8"  appDecimal8Mask type="text">
+                  <mat-error *ngIf="terreno1FormGroup.get('medida3').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Detalle colindante</mat-label>
+                  <input matInput placeholder="Detalle colindante"
+                         formControlName="detalleColindante3" required>
+                  <mat-error *ngIf="terreno1FormGroup.get('detalleColindante3').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="25" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Punto cardinal</mat-label>
+                  <mat-select formControlName="orientacion4" required>
+                    <mat-option *ngFor="let item of puntosCardinales" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="terreno1FormGroup.get('orientacion4').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Medida</mat-label>
+                  <input matInput placeholder="Medida" formControlName="medida4" required
+                  maxlength="8"  appDecimal8Mask type="text">
+                        <mat-error *ngIf="terreno1FormGroup.get('medida4').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Detalle colindante</mat-label>
+                  <input matInput placeholder="Detalle colindante"
+                         formControlName="detalleColindante4" required>
+                  <mat-error *ngIf="terreno1FormGroup.get('detalleColindante4').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div *ngIf="alertTerreno" class="{{classAlert}}" role="alertTerreno">
+              <button type="button" class="close" aria-label="Close" (click)="closeAlertTerreno()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              {{msg}}
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+              <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
+                      (click)="terrenoPanel1.expanded = false">
+                <mat-icon>close</mat-icon>
+              </button>
+              <button mat-fab style="background-color: #91d400;" matTooltip="Guardar" (click)="addTerreno()" type="onSubmit">
+                <mat-icon>done</mat-icon>
+              </button>
+            </div>
+
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </mat-expansion-panel>
+  </section>
+  <br>
+  <section class="demo-expansion">
+    <mat-expansion-panel #terrenoPanel2 (opened)="searchTerrenoFuenteLegal()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Información legal</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card>
+        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+        </mat-card-actions>
+        <mat-card-content>
+          <h5>Escritura</h5>
+          <form [formGroup]="terreno2FormGroup" class="matero-form-horizontal">
+            <div fxLayout="row wrap" fxLayoutGap="10px grid">
+              <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Escritura No.</mat-label>
+                  <input matInput placeholder="Escritura No." maxlength="200"  (keypress)="keyPress($event)" maxlength="20"
+                         formControlName="escritura" required>
+                  <mat-error *ngIf="terreno2FormGroup.get('escritura').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Volumen No.</mat-label>
+                  <input matInput placeholder="Volumen No." maxlength="7"
+                         formControlName="volumenEscritura" required>
+                  <mat-error *ngIf="terreno2FormGroup.get('volumenEscritura').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+        
+
+              <div fxFlex="25" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Fecha de escritura</mat-label>
+                  <input matInput [matDatepicker]="picker" required formControlName="fechaEscritura" [value]="date.value">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error *ngIf="terreno2FormGroup.get('fechaEscritura').invalid">Campo requerido</mat-error>
+                </mat-form-field> 
+                </div>
+
+              <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Notaria</mat-label>
+                  <input matInput placeholder="Notaria" maxlength="5" (keypress)="keyPress($event)" maxlength="5"
+                         formControlName="numeroNotariaEscritura" required>
+                  <mat-error *ngIf="terreno2FormGroup.get('numeroNotariaEscritura').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Notario</mat-label>
+                  <input matInput placeholder="Notario" maxlength="200" type="text"
+                         formControlName="nombreNotarioEscritura" required>
+                  <mat-error *ngIf="terreno2FormGroup.get('nombreNotarioEscritura').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="25" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Distrito judicial</mat-label>
+                  <mat-select formControlName="idDistritoJudicialNotario" required>
+                    <mat-option *ngFor="let item of entidad" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="terreno2FormGroup.get('idDistritoJudicialNotario').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <br>
+            <h5>Sentencia</h5>
+            <div fxLayout="row wrap" fxLayoutGap="10px grid">
+              <div fxFlex="50" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Juzgado</mat-label>
+                  <input matInput placeholder="Juzgado" maxlength="50" type="text"
+                         formControlName="juzgadoSentencia" required>
+                  <mat-error *ngIf="terreno2FormGroup.get('juzgadoSentencia').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="25" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker1" placeholder="Fecha"
+                         formControlName="fechaSentencia">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                  <mat-error *ngIf="terreno2FormGroup.get('fechaSentencia').invalid">Campo requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Expediente No.</mat-label>
+                  <input matInput placeholder="Expediente No." maxlength="16" type="text"
+                         formControlName="expedienteSentencia" required>
+                  <mat-error *ngIf="terreno2FormGroup.get('expedienteSentencia').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <br>
+            <h5>Alineamiento y número oficial</h5>
+            <div fxLayout="row wrap" fxLayoutGap="10px grid">
+              <div fxFlex="25" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker2" placeholder="Fecha"
+                         formControlName="fechaAlineaNumOficial">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                  <mat-error *ngIf="terreno2FormGroup.get('fechaAlineaNumOficial').invalid">Campo requerido</mat-error>
+                </mat-form-field>
+              </div>   
+
+              <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Folio No.</mat-label>
+                  <input matInput placeholder="Folio No." maxlength="20" type="text"
+                         formControlName="folioAlineaNumOficial" required>
+                  <mat-error *ngIf="terreno2FormGroup.get('folioAlineaNumOficial').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>              
+            </div>                       
+            <br>
+            <h5>Contrato privado</h5>  
+            <div fxLayout="row wrap" fxLayoutGap="10px grid">
+              <div fxFlex="25" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker4" placeholder="Fecha"
+                         formControlName="fechaContratoPrivado">
+                  <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                  <mat-datepicker #picker4></mat-datepicker>
+                  <mat-error *ngIf="terreno2FormGroup.get('fechaContratoPrivado').invalid">Campo requerido</mat-error>
+                </mat-form-field>
+              </div>   
+            </div>
+
+            <div fxLayout="row wrap" fxLayoutGap="10px grid">
+              <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Nombre del Adquirente</mat-label>
+                  <input matInput placeholder="Nombre del Adquirente" maxlength="50" type="text"
+                         formControlName="nombreAdquirente" required>
+                  <mat-error *ngIf="terreno2FormGroup.get('nombreAdquirente').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>            
+
+              <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Apellido paterno</mat-label>
+                  <input matInput placeholder="Apellido paterno" maxlength="50" type="text"
+                         formControlName="paternoAdquirente" required>
+                  <mat-error *ngIf="terreno2FormGroup.get('paternoAdquirente').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>      
+
+              <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Apellido materno</mat-label>
+                  <input matInput placeholder="Apellido materno" maxlength="50" type="text"
+                         formControlName="maternoAdquirente" required>
+                  <mat-error *ngIf="terreno2FormGroup.get('maternoAdquirente').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>     
+
+              <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Nombre del Enajenante</mat-label>
+                  <input matInput placeholder="Nombre del enajenante" maxlength="50" type="text"
+                         formControlName="nombreEnajenante" required>
+                  <mat-error *ngIf="terreno2FormGroup.get('nombreEnajenante').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>    
+
+              <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Apellido paterno</mat-label>
+                  <input matInput placeholder="Apellido paterno" maxlength="50" type="text"
+                         formControlName="paternoEnajenante" required>
+                  <mat-error *ngIf="terreno2FormGroup.get('paternoEnajenante').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>    
+
+              <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Apellido materno</mat-label>
+                  <input matInput placeholder="Apellido materno" maxlength="50" type="text"
+                         formControlName="maternoEnajenante" required>
+                  <mat-error *ngIf="terreno2FormGroup.get('maternoEnajenante').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>  
+            </div>
+
+            <div *ngIf="alertTerrenoFuenteLegal" class="{{classAlert}}" role="alertTerrenoFuenteLegal">
+              <button type="button" class="close" aria-label="Close" (click)="closeAlertTerrenoFuenteLegal()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              {{msg}}
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+              <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
+                      (click)="terrenoPanel2.expanded = false">
+                <mat-icon>close</mat-icon>
+              </button>
+              <button mat-fab style="background-color: #91d400;" matTooltip="Guardar" (click)="addTerrenoFuenteLegal()" type="onSubmit">
+                <mat-icon>done</mat-icon>
+              </button>
+            </div>
+
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </mat-expansion-panel>
+  </section>
+  <br>
+  <section class="demo-expansion">
+    <mat-expansion-panel #terrenoPanel3 (opened)="searchTerrenoComplemento()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Complemento y otras colindancias</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card>
+        <mat-card-actions fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+          <button mat-fab style="background-color: #00b140; outline: none;" matTooltip="Registrar otras colindancias"
+                  (click)="openDialog()" outline:none;>
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-card-actions>
+        <mat-card-content>
+          <form [formGroup]="terreno3FormGroup" class="matero-form-horizontal">
+            <div fxLayout="row wrap" fxLayoutGap="10px grid">
+            
+              <div fxFlex="25" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Topografía y configuración</mat-label>
+                  <mat-select formControlName="idTopografia" required>
+                    <mat-option *ngFor="let item of topografia" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="terreno3FormGroup.get('idTopografia').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="25" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Forma de terreno</mat-label>
+                  <mat-select formControlName="idFormaTerreno" required>
+                    <mat-option *ngFor="let item of formaTerreno" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="terreno3FormGroup.get('idFormaTerreno').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Densidad habitacional</mat-label>
+                  <mat-select formControlName="idDensidadHabitacional" required>
+                    <mat-option *ngFor="let item of densidadHabitacional" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="terreno3FormGroup.get('idDensidadHabitacional').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="100" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Servidumbre y/o restricciones</mat-label>
+                   <textarea matInput placeholder="Servidumbre y/o restricciones" formControlName="servidumbresORestricciones" cdkTextareaAutosize
+                      cdkAutosizeMinRows="2"></textarea>
+                </mat-form-field>
+              </div> 
+              
+              <div fxFlex="100" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Características panorámicas Vistas a:</mat-label>
+                   <input matInput placeholder="Características panorámicas Vistas a:" formControlName="caracteristPanoramicasF">
+                </mat-form-field>
+              </div>    
+
+              <div fxFlex="20" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Intencidad de construcción</mat-label>
+                   <input matInput placeholder="Intencidad de construcción" formControlName="intencidadConstruccionF">
+                </mat-form-field>
+              </div>  
+
+              <div fxFlex="80" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Descripción</mat-label>
+                   <input matInput placeholder="Descripción" formControlName="descIntencidadConstruccionF">
+                </mat-form-field>
+              </div>  
+                          
+            </div>
+            <div *ngIf="alertTerrenoComplemento" class="{{classAlert}}" role="alertTerrenoComplemento">
+              <button type="button" class="close" aria-label="Close" (click)="closeAlertTerrenoComplemento()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              {{msg}}
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+              <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
+                      (click)="terrenoPanel3.expanded = false">
+                <mat-icon>close</mat-icon>
+              </button>
+              <button mat-fab style="background-color: #91d400;" matTooltip="Guardar" (click)="addTerrenoComplemento()" type="onSubmit">
+                <mat-icon>done</mat-icon>
+              </button>
+            </div>
+
+          </form>
+          <br>
+          <div class="matero-row" fxLayout="row wrap">
+            <div fxFlex="100" class="matero-col">
+                 <mat-card>
+                <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Otras colindancias</mat-card-title>
+                <mat-divider></mat-divider><br>
+          
+                <mat-card-header fxLayout="column" fxLayoutAlign="center start">
+                  <div
+                       class="w-full flex flex-col sm:flex-row justify-between">          
+                  </div>
+                </mat-card-header>
+          
+                <mat-card-content class="-mt-6" fxLayout="column">          
+                  <div class="card overflow-auto -mt-16">
+          
+                    <!-- <table @stagger [dataSource]="dataSource" mat-table matSort class="mat-elevation-z8">-->
+                    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8"
+                           style="width: 100%;">
+          
+         
+                      <!-- Text Columns -->
+                      <ng-container *ngFor="let column of columns;">
+                        <ng-container *ngIf="column.type === 'text'" [matColumnDef]="column.property">
+                          <th *matHeaderCellDef class="uppercase" mat-header-cell mat-sort-header
+                              style="width: auto;">
+                            {{ column.label }}</th>
+                          <td *matCellDef="let row" [ngClass]="column.cssClasses" mat-cell>
+                            {{ row[column.property] }}</td>
+                        </ng-container>
+                      </ng-container>
+          
+          
+                      <tr *matHeaderRowDef="visibleColumns" mat-header-row></tr>
+                      <tr (click)="updateCustomer(row)"
+                          *matRowDef="let row; columns: visibleColumns;"
+                          @fadeInUp
+                          class="hover:bg-hover trans-ease-out cursor-pointer"
+                          mat-row ></tr>
+                    </table>
+          
+                    <mat-paginator [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize"
+                                   class="sticky left-0"></mat-paginator>
+                  </div>
+          
+                </mat-card-content>        
+              </mat-card>         
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-expansion-panel>
+  </section>
+
+ 
+
+
+
+
+

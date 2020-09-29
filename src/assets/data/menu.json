@@ -1,0 +1,77 @@
+{
+  "menu": [
+    {
+      "state": "inicio",
+      "name": "Inicio",
+      "type": "link",
+      "icon": "assets/images/icons/inicio.png"
+    },
+    {
+      "state": "avaluos",
+      "name": "Avalúos",
+      "type": "link",
+      "icon": "assets/images/icons/avaluos.png"
+    },
+    {
+      "state": "dashboard",
+      "name": "Comparables",
+      "type": "link",
+      "icon": "assets/images/icons/comparables.png"
+    },
+    
+    {
+      "state": "forms",
+      "name": "Administración",
+      "type": "sub",
+      "icon": "assets/images/icons/administracion.png",
+      "children": [
+        {
+          "state": "elements",
+          "name": "Form Elements",
+          "type": "link"
+        },
+        {
+          "state": "ng-select",
+          "name": "Ng Select",
+          "type": "link"
+        },
+        {
+          "state": "dynamic",
+          "name": "Dynamic Form",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "state": "tables",
+      "name": "Reportes",
+      "type": "sub",
+      "icon": "assets/images/icons/reportes.png",
+      "children": [
+        {
+          "state": "basic",
+          "name": "Basic Table",
+          "type": "link"
+        },
+        {
+          "state": "advanced",
+          "name": "Advanced Table",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "state": "profile",
+      "name": "Configuración",
+      "type": "sub",
+       "icon": "assets/images/icons/configuracion.png",
+      "children": [
+        {
+          "state": "settings",
+          "name": "Settings",
+          "type": "link"
+        }
+      ]
+    }
+  ]
+}

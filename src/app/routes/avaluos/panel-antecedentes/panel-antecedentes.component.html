@@ -1,0 +1,787 @@
+<section class="demo-expansion">
+    <mat-expansion-panel #antPanel1 (opened)="searchSolicitantes()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Datos del solicitante</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card>
+        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+        </mat-card-actions>
+        <mat-card-content>
+          <form [formGroup]="ant1FormGroup" class="matero-form-horizontal">
+            <div fxLayout="row wrap" fxLayoutGap="30px grid">
+
+              <div fxFlex="100" fxFlex.lt-md="100" fxl>    
+                <mat-label>Tipo de persona&nbsp;&nbsp;</mat-label>
+               <mat-radio-group formControlName="tpoPersonaSolicitante" required>
+                 <mat-radio-button value="F">Física&nbsp;&nbsp;</mat-radio-button>
+                 <mat-radio-button value="M">Moral</mat-radio-button>                
+               </mat-radio-group>  
+               <mat-error *ngIf="ant1FormGroup.get('tpoPersonaSolicitante').invalid">Campo requerido</mat-error>           
+             </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Nombre del solicitante</mat-label>
+                  <input matInput maxlength="50"  placeholder="Nombre del solicitante" formControlName="nombreSolicitante" required [value]="nombreSolicitante">
+                  <mat-error *ngIf="ant1FormGroup.get('nombreSolicitante').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Apellido paterno</mat-label>
+                  <input matInput maxlength="35"  placeholder="Apellido paterno" formControlName="apSolicitante" required [value]="apSolicitante">    
+                 <mat-error *ngIf="ant1FormGroup.get('apSolicitante').invalid">Campo 
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Apellido materno</mat-label>
+                  <input matInput maxlength="35"  placeholder="Apellido materno" formControlName="amSolicitante" [value]="amSolicitante">
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>RFC</mat-label>
+                  <input matInput maxlength="13" placeholder="RFC" formControlName="rfcSolicitante" required 
+                  #rfcSolicitante [value]="rfcSolicitante.value.toUpperCase()" 
+                  pattern="^(([ÑA-Z|ña-z|&amp;]{3}|[A-Z|a-z]{4})\d{2}((0[1-9]|1[012])(0[1-9]|1\d|2[0-8])|(0[13456789]|1[012])(29|30)|(0[13578]|1[02])31)(\w{2})([A|a|0-9]{1}))$|^(([ÑA-Z|ña-z|&amp;]{3}|[A-Z|a-z]{4})([02468][048]|[13579][26])0229)(\w{2})([A|a|0-9]{1})$">
+                  <mat-error *ngIf="ant1FormGroup.get('rfcSolicitante').invalid">Campo requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>CURP</mat-label>
+                  <input matInput maxlength="18" placeholder="CURP" formControlName="curpSolicitante" required 
+                  #curpSolicitante [value]="curpSolicitante.value.toUpperCase()" pattern="^[A-Z]{1}[AEIOU]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$">
+                  <mat-error *ngIf="ant1FormGroup.get('curpSolicitante').invalid">Campo requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Teléfono (con Lada)</mat-label>
+                  <input matInput placeholder="Teléfono"  (keypress)="keyPress($event)" maxlength="20"
+                  formControlName="telSolicitante" required [value]="telSolicitante" >
+                  <mat-icon matSuffix>phone</mat-icon>
+                  <mat-error *ngIf="ant1FormGroup.get('telSolicitante').invalid">Campo requerido</mat-error>
+                </mat-form-field>
+                </div>
+
+                <div fxFlex="33.3" fxFlex.lt-md="100">
+                  <mat-form-field>
+                    <mat-label>Extensión</mat-label>
+                    <input matInput placeholder="Extensión" (keypress)="keyPress($event)" maxlength="5"
+                    formControlName="extSolicitante"  [value]="extSolicitante" >
+                  </mat-form-field>
+                </div>
+
+                <div fxFlex="33.3" fxFlex.lt-md="100">
+                  <mat-form-field>
+                      <mat-label>Teléfono Móvil</mat-label>
+                      <input matInput placeholder="Teléfono Móvil"  (keypress)="keyPress($event)" maxlength="10"
+                       formControlName="movilSolicitante" required [value]="movilSolicitante" >
+                      <mat-icon matSuffix>smartphone</mat-icon>
+                      <mat-error *ngIf="ant1FormGroup.get('movilSolicitante').invalid">Campo requerido</mat-error>
+                    </mat-form-field>
+                </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>C.P.</mat-label>
+                  <input matInput placeholder="C.P." [value] = "cpSolicitante" (change)="searchCP($event, 'solicitante')"
+                         formControlName="cpSolicitante" required  maxlength="5"  (keypress)="keyPress($event)">
+                  <mat-error *ngIf="ant1FormGroup.get('cpSolicitante').invalid">Campo requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Entidad</mat-label>
+                  <select matNativeControl formControlName="infoIdentidad" [(ngModel)]="infoIdentidad">
+                    <option [value]="infoIdentidad" [selected]="infoIdentidad" >{{infoEntidad}}</option>
+                  </select>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Municipio/Alcaldía</mat-label>
+                  <select matNativeControl formControlName="infoIdmunicipio" [(ngModel)]="infoIdmunicipio">
+                    <option [(value)]="infoIdmunicipio"  [selected]="infoIdmunicipio" >{{infoMunicipio}}</option>
+                  </select>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Colonia</mat-label>
+                  <mat-select formControlName="idasentamiento" required>
+                    <mat-option *ngFor="let item of listaAsenSol" [value] = "item.idasentamiento" >{{item.asentamiento}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="ant1FormGroup.get('idasentamiento').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Calle</mat-label>
+                  <input matInput maxlength="50"  placeholder="Calle" formControlName="calleSolicitante" required [value]="calleSolicitante">
+                  <mat-error *ngIf="ant1FormGroup.get('calleSolicitante').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Número exterior</mat-label>
+                  <input matInput maxlength="25" placeholder="Número exterior" formControlName="numExtSolicitante" required [value]="numExtSolicitante">
+                  <mat-error *ngIf="ant1FormGroup.get('numExtSolicitante').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Número interior</mat-label>
+                  <input matInput maxlength="30" placeholder="Número interior" formControlName="numIntSolicitante" [value]="numIntSolicitante">
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Manzana</mat-label>
+                  <input matInput maxlength="10" placeholder="Manzana" formControlName="mnzaSolicitante" [value]="mnzaSolicitante">
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Lote</mat-label>
+                  <input matInput maxlength="10" placeholder="Lote" formControlName="loteSolicitante" [value]="loteSolicitante">
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Edificio</mat-label>
+                  <input matInput maxlength="10" placeholder="Edificio" formControlName="edifSolicitante" [value]="edifSolicitante">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div *ngIf="alertSolicitante" class="{{classAlert}}" role="alertSolicitante">
+              <button type="button" class="close" aria-label="Close" (click)="closeAlertSol()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              {{msg}}
+            </div>
+         
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+              <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
+                      (click)="antPanel1.expanded = false">
+                <mat-icon>close</mat-icon>
+              </button>
+              <button mat-fab style="background-color: #91d400;" matTooltip="Guardar" (click)="addSolicitante()" type="onSubmit">
+                <mat-icon>done</mat-icon>
+              </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </mat-expansion-panel>
+  </section>
+<br>
+<section class="demo-expansion">
+  <mat-expansion-panel #antPanel2 (opened)="searchPropietarios()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Datos del propietario</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+      </mat-card-actions>
+      <mat-card-content>
+        <form [formGroup]="ant2FormGroup" class="matero-form-horizontal">
+          <div fxLayout="row wrap" fxLayoutGap="30px grid">
+
+            <div fxFlex="100" fxFlex.lt-md="100" fxl>    
+              <mat-label>Tipo de persona&nbsp;&nbsp;</mat-label>
+             <mat-radio-group formControlName="tpoPersonaPropietario" required>
+               <mat-radio-button value="F">Física&nbsp;&nbsp;</mat-radio-button>
+               <mat-radio-button value="M">Moral</mat-radio-button>                
+             </mat-radio-group>  
+             <mat-error *ngIf="ant2FormGroup.get('tpoPersonaPropietario').invalid">Campo requerido</mat-error>           
+           </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+              <mat-form-field>
+                <mat-label>Nombre del propietario</mat-label>
+                <input matInput maxlength="50"  placeholder="Nombre del propietario" formControlName="nombrePropietario" required [value]="nombrePropietario">
+                <mat-error *ngIf="ant2FormGroup.get('nombrePropietario').invalid">Campo
+                  requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+            
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Apellido paterno</mat-label>
+                <input matInput maxlength="35"  placeholder="Apellido paterno" formControlName="apPropietario" required [value]="apPropietario">    
+               <mat-error *ngIf="ant2FormGroup.get('apPropietario').invalid">Campo 
+                  requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Apellido materno</mat-label>
+                <input matInput maxlength="35"  placeholder="Apellido materno" formControlName="amPropietario" [value]="amPropietario">
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>RFC</mat-label>
+                <input matInput maxlength="13" placeholder="RFC" formControlName="rfcPropietario" required 
+                #rfcPropietario [value]="rfcPropietario.value.toUpperCase()" 
+                pattern="^(([ÑA-Z|ña-z|&amp;]{3}|[A-Z|a-z]{4})\d{2}((0[1-9]|1[012])(0[1-9]|1\d|2[0-8])|(0[13456789]|1[012])(29|30)|(0[13578]|1[02])31)(\w{2})([A|a|0-9]{1}))$|^(([ÑA-Z|ña-z|&amp;]{3}|[A-Z|a-z]{4})([02468][048]|[13579][26])0229)(\w{2})([A|a|0-9]{1})$">
+                <mat-error *ngIf="ant2FormGroup.get('rfcPropietario').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>CURP</mat-label>
+                <input matInput maxlength="18" placeholder="CURP" formControlName="curpPropietario" required 
+                #curpPropietario [value]="curpPropietario.value.toUpperCase()" pattern="^[A-Z]{1}[AEIOU]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$">
+                <mat-error *ngIf="ant2FormGroup.get('curpPropietario').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Teléfono (con Lada)</mat-label>
+                <input matInput placeholder="Teléfono"  (keypress)="keyPress($event)" maxlength="20"
+                formControlName="telPropietario" required [value]="telPropietario">
+                <mat-icon matSuffix>phone</mat-icon>
+                <mat-error *ngIf="ant2FormGroup.get('telPropietario').invalid">Campo requerido</mat-error>
+              </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Extensión</mat-label>
+                  <input matInput placeholder="Extensión" (keypress)="keyPress($event)" maxlength="5"
+                  formControlName="extPropietario"  [value]="extPropietario"  >
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                    <mat-label>Teléfono Móvil</mat-label>
+                    <input matInput placeholder="Teléfono Móvil"  (keypress)="keyPress($event)" maxlength="10"
+                     formControlName="movilPropietario" required [value]="movilPropietario" >
+                    <mat-icon matSuffix>smartphone</mat-icon>
+                    <mat-error *ngIf="ant2FormGroup.get('movilPropietario').invalid">Campo requerido</mat-error>
+                  </mat-form-field>
+              </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>C.P.</mat-label>
+                <input matInput placeholder="C.P." [value] = "cpPropietario" (change)="searchCP($event, 'propietario')"
+                       formControlName="cpPropietario" required  maxlength="5" (keypress)="keyPress($event)">
+                <mat-error *ngIf="ant2FormGroup.get('cpPropietario').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Entidad</mat-label>
+                <select matNativeControl formControlName="infoPIdentidad" [(ngModel)]="infoPIdentidad">
+                  <option [value]="infoPIdentidad" [selected]="infoPIdentidad" >{{infoPEntidad}}</option>
+                </select>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Municipio/Alcaldía</mat-label>
+                <select matNativeControl formControlName="infoPIdmunicipio" [(ngModel)]="infoPIdmunicipio">
+                  <option [(value)]="infoPIdmunicipio"  [selected]="infoPIdmunicipio" >{{infoPMunicipio}}</option>
+                </select>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Colonia</mat-label>
+                <mat-select formControlName="idPasentamiento" required>
+                  <mat-option *ngFor="let item of listaAsenPro" [value] = "item.idasentamiento" >{{item.asentamiento}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="ant2FormGroup.get('idPasentamiento').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>        
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Calle</mat-label>
+                <input matInput maxlength="50"  placeholder="Calle" formControlName="callePropietario" required [value]="callePropietario">
+                <mat-error *ngIf="ant2FormGroup.get('callePropietario').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Número exterior</mat-label>
+                <input matInput maxlength="25" placeholder="Número exterior" formControlName="numExtPropietario" required [value]="numExtPropietario">
+                <mat-error *ngIf="ant2FormGroup.get('numExtPropietario').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Número interior</mat-label>
+                <input matInput maxlength="30" placeholder="Número interior" formControlName="numIntPropietario" [value]="numIntPropietario">
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Manzana</mat-label>
+                <input matInput maxlength="10" placeholder="Manzana" formControlName="mnzaPropietario" [value]="mnzaPropietario">
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Lote</mat-label>
+                <input matInput maxlength="10" placeholder="Lote" formControlName="lotePropietario" [value]="lotePropietario">
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Edificio</mat-label>
+                <input matInput maxlength="10" placeholder="Edificio" formControlName="edifPropietario" [value]="edifPropietario">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div *ngIf="alertPropietario" class="{{classAlert}}" role="alertPropietario">
+            <button type="button" class="close" aria-label="Close" (click)="closeAlertPro()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{msg}}
+          </div>
+     
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+              <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
+                      (click)="antPanel2.expanded = false">
+                <mat-icon>close</mat-icon>
+              </button>
+              <button mat-fab style="background-color: #91d400;" matTooltip="Guardar" (click)="addPropietario()" type="submit">
+                <mat-icon>done</mat-icon>
+              </button>
+            </div>
+
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </mat-expansion-panel>
+</section>
+<br>
+<section class="demo-expansion">
+  <mat-expansion-panel #antPanel3 (opened)="searchInmuebles()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Datos del inmueble</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+      </mat-card-actions>
+      <mat-card-content>
+        <h5>Ubicación del inmueble</h5>
+        <form [formGroup]="ant3FormGroup" class="matero-form-horizontal">
+          <div fxLayout="row wrap" fxLayoutGap="30px grid">
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>C.P.</mat-label>
+                <input matInput placeholder="C.P." [value] = "cpInmueble" (change)="searchCP($event, 'inmueble')"
+                       formControlName="cpInmueble" required  maxlength="5" (keypress)="keyPress($event)">
+                <mat-error *ngIf="ant3FormGroup.get('cpInmueble').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Entidad</mat-label>
+                <select matNativeControl formControlName="infoInIdentidad" [(ngModel)]="infoInIdentidad" >
+                  <option [value]="infoInIdentidad" [selected]="infoInIdentidad" >{{infoIEntidad}}</option>
+                </select>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Municipio/Alcaldía</mat-label>
+                <select matNativeControl formControlName="infoInIdmunicipio" [(ngModel)]="infoInIdmunicipio" >
+                  <option [(value)]="infoInIdmunicipio"  [selected]="infoInIdmunicipio" >{{infoIMunicipio}}</option>
+                </select>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Colonia</mat-label>
+                <mat-select formControlName="idIasentamiento" required>
+                  <mat-option *ngFor="let item of listaAsenInm" [value] = "item.idasentamiento" >{{item.asentamiento}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="ant3FormGroup.get('idIasentamiento').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Calle</mat-label>
+                <input matInput maxlength="50"  placeholder="Calle" formControlName="calleInmueble" required [value]="calleInmueble">
+                <mat-error *ngIf="ant3FormGroup.get('calleInmueble').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Número exterior</mat-label>
+                <input matInput maxlength="25" placeholder="Número exterior" formControlName="numExtInmueble" required [value]="numExtInmueble">
+                <mat-error *ngIf="ant3FormGroup.get('numExtInmueble').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Número interior</mat-label>
+                <input matInput maxlength="30" placeholder="Número interior" formControlName="numIntInmueble" [value]="numIntInmueble">
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Manzana</mat-label>
+                <input matInput maxlength="10" placeholder="Manzana" formControlName="mnzaInmueble" [value]="mnzaInmueble">
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Lote</mat-label>
+                <input matInput maxlength="10" placeholder="Lote" formControlName="loteInmueble" [value]="loteInmueble">
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Edificio</mat-label>
+                <input matInput maxlength="10" placeholder="Edificio" formControlName="edifInmueble" [value]="edifInmueble">
+              </mat-form-field>
+            </div>
+
+          </div>
+
+          <h5>Datos generales</h5>
+          <div fxLayout="row wrap" fxLayoutGap="30px grid">
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Región predial</mat-label>
+                <input matInput placeholder="Región predial" formControlName="regionPredial" required maxlength="3">
+                <mat-error *ngIf="ant3FormGroup.get('regionPredial').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Manzana predial</mat-label>
+                <input matInput placeholder="Manzana predial" formControlName="manzanaPredial" required maxlength="3">
+                <mat-error *ngIf="ant3FormGroup.get('manzanaPredial').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Lote predial</mat-label>
+                <input matInput placeholder="Lote predial" formControlName="lotePredial" required maxlength="2">
+                <mat-error *ngIf="ant3FormGroup.get('lotePredial').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Localidad predial</mat-label>
+                <input matInput placeholder="Localidad predial" formControlName="localidadPredial" required maxlength="3">
+                <mat-error *ngIf="ant3FormGroup.get('localidadPredial').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Dígito verificador</mat-label>
+                <input matInput placeholder="Dígito verificador" formControlName="digitoVerificador" required maxlength="1">
+                <mat-error *ngIf="ant3FormGroup.get('digitoVerificador').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Número de cuenta de agua</mat-label>
+                <input matInput placeholder="Número de cuenta de agua" type="text" formControlName="cuentaAgua" 
+                appAguaMask required id="agua-number">
+                <mat-error *ngIf="ant3FormGroup.get('cuentaAgua').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Inmueble que se valua</mat-label>
+                <input matInput placeholder="Inmueble que se valua" formControlName="descInmuebleEvaluar" maxlength="200">
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Uso de la construcción</mat-label>
+                <input matInput placeholder="Uso de la construcción" formControlName="idUsoConstruccion" required maxlength="2">
+                <mat-error *ngIf="ant3FormGroup.get('idUsoConstruccion').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Clase de la construcción</mat-label>
+                <mat-select formControlName="idClaseConstruccion" required>
+                  <mat-option *ngFor="let item of idClaseConstruccion" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="ant3FormGroup.get('idClaseConstruccion').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+   
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Régimen de la propiedad</mat-label>
+                <mat-select formControlName="idRegimenPropiedad" required>
+                  <mat-option *ngFor="let item of regimenPropiedad" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="ant3FormGroup.get('idRegimenPropiedad').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Porcentaje indiviso</mat-label>
+                <input matInput placeholder="Porcentaje indiviso" formControlName="porcentajeIndiviso" 
+                required  maxlength="6"  appDecimal6Mask type="text">
+                <mat-error *ngIf="ant3FormGroup.get('porcentajeIndiviso').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>         
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Objeto del avalúo</mat-label>
+                <mat-select formControlName="idObjetoAvaluo" required>
+                  <mat-option *ngFor="let item of idObjetoAvaluo" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="ant3FormGroup.get('idObjetoAvaluo').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Propósito del avalúo</mat-label>
+                <mat-select formControlName="idPropositoAvaluo" required>
+                  <mat-option *ngFor="let item of idPropositoAvaluo" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="ant3FormGroup.get('idPropositoAvaluo').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Área catastral</mat-label>
+                <input matInput placeholder="Área catastral" formControlName="areaCatastral" maxlength="10">
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Valor catastral</mat-label>
+                <input matInput placeholder="Valor catastral" formControlName="valorCatastral" 
+                required  maxlength="12"  appDecimal12Mask type="text" >
+                <mat-error *ngIf="ant3FormGroup.get('valorCatastral').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Corredor Enclave</mat-label>
+                <input matInput placeholder="Corredor Enclave" formControlName="corredorEnclave" required maxlength="10">
+                <mat-error *ngIf="ant3FormGroup.get('corredorEnclave').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Valor Corredor Enclave</mat-label>
+                <input matInput placeholder="Valor corredor en clave" formControlName="valorCorredorEnClave" 
+                 required  maxlength="12"  appDecimal12Mask type="text">
+                <mat-error *ngIf="ant3FormGroup.get('valorCorredorEnClave').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Corredor ó Enclave</mat-label>
+                <input matInput placeholder="Corredor ó Enclave" formControlName="corredorOEnClave" required maxlength="10">                      
+                <mat-error *ngIf="ant3FormGroup.get('corredorOEnClave').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Valor Corredor ó Enclave</mat-label>
+                <input matInput placeholder="Valor Corredor o Enclave" formControlName="valorCorredorOEnClave" 
+                required  maxlength="12"  appDecimal12Mask type="text">
+                <mat-error *ngIf="ant3FormGroup.get('valorCorredorOEnClave').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field appearance="fill">
+                <mat-label>Año del ejercicio fiscal</mat-label>
+                <input matInput placeholder="Año del ejercicio fiscal" formControlName="anioEjercicioFiscalf" (keypress)="keyPress($event)" maxlength="4"  > 
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field appearance="fill">
+                <mat-label>Año diferencia</mat-label>
+                <input matInput placeholder="Año diferencia" formControlName="aniosDiferenciaF" maxlength="2" (keypress)="keyPress($event)"  > 
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field appearance="fill">
+                <mat-label>Área valor</mat-label>
+                <input matInput placeholder="Área valor" formControlName="areaValorf" maxlength="10"   > 
+              </mat-form-field>
+            </div>
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field appearance="fill">
+                <mat-label>Corredor Enclave</mat-label>
+                <input matInput placeholder="Corredor Enclave" formControlName="corredorEnclavef"  maxlength="10"  > 
+              </mat-form-field>
+            </div>
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field appearance="fill">
+                <mat-label>Área valor año</mat-label>
+                <input matInput placeholder="Área valor año" formControlName="corredorEnclavef" maxlength="10"  > 
+              </mat-form-field>
+            </div>
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field appearance="fill">
+                <mat-label>Valor Corredor Enclave Año</mat-label>
+                <input matInput placeholder="Valor Corredor Enclave Año" formControlName="valorCorredorEnclaveAniof" maxlength="15"  > 
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div *ngIf="alertInmueble" class="{{classAlert}}" role="alertInmueble">
+            <button type="button" class="close" aria-label="Close" (click)="closeAlertInm()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{msg}}
+          </div>
+           
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+               <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar" (click)="antPanel3.expanded = false">
+               <mat-icon>close</mat-icon>
+               </button>
+               <button mat-fab style="background-color: #91d400;" matTooltip="Guardar"  (click)="addInmueble()" type="submit">
+                 <mat-icon>done</mat-icon>
+               </button>
+           </div>
+     
+         
+          <h5>Ubicación en el mapa</h5>
+          <div fxLayout="row wrap" fxLayoutGap="30px grid">
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Latitud</mat-label>
+                <input matInput placeholder="Latitud" formControlName="latitud" maxlength="21">
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Longitud</mat-label>
+                <input matInput placeholder="Longitud" formControlName="longitud"  maxlength="21">
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Altitud</mat-label>
+                <input matInput placeholder="Altitud" formControlName="altitud"   maxlength="21">
+              </mat-form-field>
+            </div>
+           
+            <div fxFlex="100" fxFlex.lt-md="100">
+            <agm-map [latitud]="latitudMap" [longitud]="longitudMap"></agm-map>
+            </div>
+          </div>            
+        </form>
+      </mat-card-content>
+    </mat-card>
+   
+  </mat-expansion-panel>
+</section>
+
+
+  

@@ -1,0 +1,233 @@
+<section class="demo-expansion">
+  <mat-expansion-panel #desInmueblePanel1>
+    <mat-expansion-panel-header>
+      <mat-panel-title>CONSTRUCCIONES PRIVATIVAS Y CONSTRUCCIONES COMUNES</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <button mat-fab style="background-color: #00b140; outline: none;" matTooltip="Registrar construcciones"
+        (click)="openDialog()" outline:none;>
+        <mat-icon>add</mat-icon>
+      </button>
+      </mat-card-actions>
+      <mat-card-content>
+        <form [formGroup]="desInmueble1FormGroup" class="matero-form-horizontal">
+          <div fxLayout="row wrap" fxLayoutGap="30px grid">
+
+            <div fxFlex="100" fxFlex.lt-md="100" fxl>
+              <mat-form-field>
+                <mat-label>Descripción</mat-label>
+                <input matInput placeholder="Descripción" formControlName="descripcion"
+                       required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('descripcion').invalid">Campo
+                  requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Clave uso</mat-label>
+                <input matInput placeholder="Clave uso" formControlName="claveUso" required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('claveUso').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Número de niveles del tipo</mat-label>
+                <input matInput placeholder="Número de niveles del tipo"
+                       formControlName="numNivelesTipo" required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('numNivelesTipo').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Clave rango de niveles</mat-label>
+                <input matInput placeholder="Clave rango de niveles"
+                       formControlName="claveRangoNiveles" required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('claveRangoNiveles').invalid">
+                  Campo requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Puntaje de clasificación</mat-label>
+                <input matInput placeholder="Puntaje de clasificación"
+                       formControlName="puntajeClasif" required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('puntajeClasif').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Clave clase</mat-label>
+                <input matInput placeholder="Clave clase" formControlName="claveClase"
+                       required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('claveClase').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Edad</mat-label>
+                <input matInput placeholder="Edad" formControlName="edad" required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('edad').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Vida útil total del tipo</mat-label>
+                <input matInput placeholder="Vida útil total del tipo"
+                       formControlName="vidaUtilTipo" required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('vidaUtilTipo').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Vida útil remanente</mat-label>
+                <input matInput placeholder="Vida útil remanente"
+                       formControlName="vidaUtilRemanente" required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('vidaUtilRemanente').invalid">
+                  Campo requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Clave conservación</mat-label>
+                <input matInput placeholder="Clave conservación"
+                       formControlName="claveConservacion" required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('claveConservacion').invalid">
+                  Campo requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Superficie</mat-label>
+                <input matInput placeholder="Superficie" formControlName="superficie"
+                       required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('superficie').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Valor unitario de reposición nuevo</mat-label>
+                <input matInput placeholder="Valor unitario de reposición nuevo"
+                       formControlName="valorUnitarioRepNvo" required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('valorUnitarioRepNvo').invalid">
+                  Campo requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Factor de edad</mat-label>
+                <input matInput placeholder="Factor de edad" formControlName="factorEdad"
+                       required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('factorEdad').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Factor resultante</mat-label>
+                <input matInput placeholder="Factor resultante"
+                       formControlName="factorResultante" required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('factorResultante').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Valor de la fracción n</mat-label>
+                <input matInput placeholder="Valor de la fracción n"
+                       formControlName="valorFraccionN" required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('valorFraccionN').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Valor unitario catastral</mat-label>
+                <input matInput placeholder="Valor unitario catastral"
+                       formControlName="valorUniCatastral" required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('valorUniCatastral').invalid">
+                  Campo requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Depreciación por edad</mat-label>
+                <input matInput placeholder="Depreciación por edad"
+                       formControlName="depreciacionEdad" required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('depreciacionEdad').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Superficie total de construcciones PRIVATIVAS</mat-label>
+                <input matInput placeholder="Superficie total de construcciones PRIVATIVAS"
+                       formControlName="supTotalPrivativas" required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('supTotalPrivativas').invalid">
+                  Campo requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Valor total de construcciones PRIVATIVAS</mat-label>
+                <input matInput placeholder="Valor total de construcciones PRIVATIVAS"
+                       formControlName="valorTotalPrivativas" required>
+                <mat-error *ngIf="desInmueble1FormGroup.get('valorTotalPrivativas').invalid">
+                  Campo requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Valor total de construcciones PRIVATIVAS por indiviso</mat-label>
+                <input matInput
+                       placeholder="Valor total de construcciones PRIVATIVAS por indiviso"
+                       formControlName="valorTotalPrivativasIndiviso" required>
+                <mat-error
+                           *ngIf="desInmueble1FormGroup.get('valorTotalPrivativasIndiviso').invalid">
+                  Campo requerido</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+    <mat-action-row>
+      <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
+              (click)="desInmueblePanel1.expanded = false">
+        <mat-icon>close</mat-icon>
+      </button>
+
+      <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
+        <mat-icon>done</mat-icon>
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</section>
+

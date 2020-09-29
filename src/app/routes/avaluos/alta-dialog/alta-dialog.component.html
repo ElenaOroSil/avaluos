@@ -1,0 +1,91 @@
+<div mat-dialog-content>
+  <mat-card >
+    <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px"> 
+      <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Registrar Avalúo</mat-card-title>
+     
+    </mat-card-actions>
+      <mat-card-content>
+        <form [formGroup]="reactiveForm" class="matero-form-horizontal" (ngSubmit)="onSubmit()">
+          <div fxLayout="row wrap" fxLayoutGap="30px grid" >
+    
+            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+              <mat-form-field>
+                <mat-label>Folio</mat-label>
+                <input matInput placeholder="Folio" formControlName="folio" required>
+                <mat-error *ngIf="reactiveForm.get('folio').invalid">Campo requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Tipo avalúo</mat-label>
+                <mat-select required formControlName="tpoAvaluo" >
+                  <mat-option>-- Seleccionar tipo avalúo --</mat-option>
+                  <mat-option *ngFor="let item of tpoAvaluo" [value]="item.clave">
+                    {{item.descripcion}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="reactiveForm.get('tpoAvaluo').invalid">Campo requerido</mat-error>
+              </mat-form-field>
+            </div>
+  
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker2" placeholder="Fecha"
+                       formControlName="fechaAvaluo">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                <mat-error *ngIf="reactiveForm.get('fechaAvaluo').invalid">Campo requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Perito</mat-label>
+                <mat-select required formControlName="perito" >
+                  <mat-option>-- Seleccionar perito --</mat-option>
+                  <mat-option *ngFor="let item of peritos" [value]="item.idperito">
+                    {{item.nombrecompleto}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="reactiveForm.get('perito').invalid">Campo requerido</mat-error>
+              </mat-form-field>
+            </div>
+   
+            <div fxFlex="66.6" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Sociedad</mat-label>
+                <mat-select required formControlName="sociedad" required>
+                  <mat-option *ngFor="let item of peritos" >
+                    {{item.sociedad}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="reactiveForm.get('sociedad').invalid">Campo requerido</mat-error>
+              </mat-form-field>
+            </div>
+           
+          </div>
+
+          <div *ngIf="alert" class="{{classAlert}}" role="alert">
+            <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{msg}}
+          </div> 
+         
+          <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+           <button mat-fab style="background-color: #f65545; outline:none;" matTooltip="Cerrar" (click)="onNoClick()" >
+              <mat-icon>clear</mat-icon>
+            </button>
+            <button mat-fab style="background-color: #00b140; outline:none;" matTooltip="Aceptar" >
+              <mat-icon>done</mat-icon>
+            </button>
+          </div>
+    
+   
+        </form>
+      </mat-card-content>
+    </mat-card>
+  
+</div>

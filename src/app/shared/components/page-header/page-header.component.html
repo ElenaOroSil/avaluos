@@ -1,0 +1,9 @@
+<div class="matero-page-header-inner" fxLayout="row" >
+  <div fx>
+  <img [src]="image" alt="" style="color: #009288">
+</div>
+<div fx style="padding-top: 10px;">
+  <h1 class="matero-page-title">{{title}} <br><small>{{subtitle}}</small></h1>
+  <breadcrumb *ngIf="showBreadCrumb" [nav]="nav"></breadcrumb>
+</div>
+</div>

@@ -1,0 +1,360 @@
+<section class="demo-expansion">
+    <mat-expansion-panel #anexoFotoPanel1>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Sujeto / Cuenta catastral</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+            <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+            </mat-card-actions>
+            <mat-card-content>
+                <form [formGroup]="anexoFoto1FormGroup" class="matero-form-horizontal">
+                    <div fxLayout="row wrap" fxLayoutGap="30px grid">
+
+                        <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                            <mat-form-field>
+                                <mat-label>Región</mat-label>
+                                <input matInput placeholder="Región" formControlName="region"
+                                       required>
+                                <mat-error *ngIf="anexoFoto1FormGroup.get('region').invalid">Campo
+                                    requerido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25" fxFlex.lt-md="100">
+                            <mat-form-field>
+                                <mat-label>Manzana</mat-label>
+                                <input matInput placeholder="Manzana" formControlName="manzana"
+                                       required>
+                                <mat-error *ngIf="anexoFoto1FormGroup.get('manzana').invalid">Campo
+                                    requerido</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25" fxFlex.lt-md="100">
+                            <mat-form-field>
+                                <mat-label>Lote</mat-label>
+                                <input matInput placeholder="Lote"
+                                       formControlName="lote" required>
+                                <mat-error *ngIf="anexoFoto1FormGroup.get('lote').invalid">Campo
+                                    requerido</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25" fxFlex.lt-md="100">
+                            <mat-form-field>
+                                <mat-label>Localidad</mat-label>
+                                <input matInput placeholder="Localidad"
+                                       formControlName="localidad" required>
+                                <mat-error *ngIf="anexoFoto1FormGroup.get('localidad').invalid">
+                                    Campo requerido</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+        <mat-action-row>
+            <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
+                    (click)="anexoFotoPanel1.expanded = false">
+                <mat-icon>close</mat-icon>
+            </button>
+
+            <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
+                <mat-icon>done</mat-icon>
+            </button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</section>
+<br>
+<section class="demo-expansion">
+    <mat-expansion-panel #anexoFotoPanel2>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Fotos / Inmueble-Avalúo</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+            <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+            </mat-card-actions>
+            <mat-card-content>
+                <form [formGroup]="anexoFoto2FormGroup" class="matero-form-horizontal">
+                    <div fxLayout="row wrap" fxLayoutGap="30px grid">
+
+                        <div fxFlex="100" fxFlex.lt-md="100" fxl>
+                            <mat-form-field>
+                                <mat-label>Foto</mat-label>
+                                <input matInput placeholder="Foto" formControlName="fotos"
+                                       required>
+                                <mat-error *ngIf="anexoFoto2FormGroup.get('fotos').invalid">Campo
+                                    requerido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="100" fxFlex.lt-md="100">
+                            <mat-form-field>
+                                <mat-label>Interior/Exterior</mat-label>
+                                <input matInput placeholder="Interior/Exterior"
+                                       formControlName="intExterior" required>
+                                <mat-error *ngIf="anexoFoto2FormGroup.get('intExterior').invalid">
+                                    Campo
+                                    requerido</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+        <mat-action-row>
+            <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
+                    (click)="anexoFotoPanel2.expanded = false">
+                <mat-icon>close</mat-icon>
+            </button>
+
+            <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
+                <mat-icon>done</mat-icon>
+            </button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</section>
+<br>
+<section class="demo-expansion">
+    <mat-expansion-panel #anexoFotoPanel3>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Comparable rentas / Cuenta catastral</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+            <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+            </mat-card-actions>
+            <mat-card-content>
+                <form [formGroup]="anexoFoto3FormGroup" class="matero-form-horizontal">
+                    <div fxLayout="row wrap" fxLayoutGap="30px grid">
+
+                        <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                            <mat-form-field>
+                                <mat-label>Región</mat-label>
+                                <input matInput placeholder="Región" formControlName="region"
+                                       required>
+                                <mat-error *ngIf="anexoFoto3FormGroup.get('region').invalid">Campo
+                                    requerido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25" fxFlex.lt-md="100">
+                            <mat-form-field>
+                                <mat-label>Manzana</mat-label>
+                                <input matInput placeholder="Manzana" formControlName="manzana"
+                                       required>
+                                <mat-error *ngIf="anexoFoto3FormGroup.get('manzana').invalid">Campo
+                                    requerido</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25" fxFlex.lt-md="100">
+                            <mat-form-field>
+                                <mat-label>Lote</mat-label>
+                                <input matInput placeholder="Lote"
+                                       formControlName="lote" required>
+                                <mat-error *ngIf="anexoFoto3FormGroup.get('lote').invalid">Campo
+                                    requerido</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25" fxFlex.lt-md="100">
+                            <mat-form-field>
+                                <mat-label>Localidad</mat-label>
+                                <input matInput placeholder="Localidad"
+                                       formControlName="localidad" required>
+                                <mat-error *ngIf="anexoFoto3FormGroup.get('localidad').invalid">
+                                    Campo requerido</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+        <mat-action-row>
+            <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
+                    (click)="anexoFotoPanel3.expanded = false">
+                <mat-icon>close</mat-icon>
+            </button>
+
+            <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
+                <mat-icon>done</mat-icon>
+            </button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</section>
+<br>
+<section class="demo-expansion">
+    <mat-expansion-panel #anexoFotoPanel4>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Comparable rentas / Fotos</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+            <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+            </mat-card-actions>
+            <mat-card-content>
+                <form [formGroup]="anexoFoto4FormGroup" class="matero-form-horizontal">
+                    <div fxLayout="row wrap" fxLayoutGap="30px grid">
+
+                        <div fxFlex="100" fxFlex.lt-md="100" fxl>
+                            <mat-form-field>
+                                <mat-label>Foto</mat-label>
+                                <input matInput placeholder="Foto" formControlName="fotos"
+                                       required>
+                                <mat-error *ngIf="anexoFoto4FormGroup.get('fotos').invalid">Campo
+                                    requerido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="100" fxFlex.lt-md="100">
+                            <mat-form-field>
+                                <mat-label>Interior/Exterior</mat-label>
+                                <input matInput placeholder="Interior/Exterior"
+                                       formControlName="intExterior" required>
+                                <mat-error *ngIf="anexoFoto4FormGroup.get('intExterior').invalid">
+                                    Campo
+                                    requerido</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+        <mat-action-row>
+            <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
+                    (click)="anexoFotoPanel4.expanded = false">
+                <mat-icon>close</mat-icon>
+            </button>
+
+            <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
+                <mat-icon>done</mat-icon>
+            </button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</section>
+<br>
+<section class="demo-expansion">
+    <mat-expansion-panel #anexoFotoPanel5>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Comparable ventas / Cuenta catastral</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+            <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+            </mat-card-actions>
+            <mat-card-content>
+                <form [formGroup]="anexoFoto5FormGroup" class="matero-form-horizontal">
+                    <div fxLayout="row wrap" fxLayoutGap="30px grid">
+
+                        <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                            <mat-form-field>
+                                <mat-label>Región</mat-label>
+                                <input matInput placeholder="Región" formControlName="region"
+                                       required>
+                                <mat-error *ngIf="anexoFoto5FormGroup.get('region').invalid">Campo
+                                    requerido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25" fxFlex.lt-md="100">
+                            <mat-form-field>
+                                <mat-label>Manzana</mat-label>
+                                <input matInput placeholder="Manzana" formControlName="manzana"
+                                       required>
+                                <mat-error *ngIf="anexoFoto5FormGroup.get('manzana').invalid">Campo
+                                    requerido</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25" fxFlex.lt-md="100">
+                            <mat-form-field>
+                                <mat-label>Lote</mat-label>
+                                <input matInput placeholder="Lote"
+                                       formControlName="lote" required>
+                                <mat-error *ngIf="anexoFoto5FormGroup.get('lote').invalid">Campo
+                                    requerido</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25" fxFlex.lt-md="100">
+                            <mat-form-field>
+                                <mat-label>Localidad</mat-label>
+                                <input matInput placeholder="Localidad"
+                                       formControlName="localidad" required>
+                                <mat-error *ngIf="anexoFoto5FormGroup.get('localidad').invalid">
+                                    Campo requerido</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+        <mat-action-row>
+            <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
+                    (click)="anexoFotoPanel5.expanded = false">
+                <mat-icon>close</mat-icon>
+            </button>
+
+            <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
+                <mat-icon>done</mat-icon>
+            </button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</section>
+<br>
+<section class="demo-expansion">
+    <mat-expansion-panel #anexoFotoPanel6>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Comparable venta / Fotos</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+            <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+            </mat-card-actions>
+            <mat-card-content>
+                <form [formGroup]="anexoFoto6FormGroup" class="matero-form-horizontal">
+                    <div fxLayout="row wrap" fxLayoutGap="30px grid">
+
+                        <div fxFlex="100" fxFlex.lt-md="100" fxl>
+                            <mat-form-field>
+                                <mat-label>Foto</mat-label>
+                                <input matInput placeholder="Foto" formControlName="fotos"
+                                       required>
+                                <mat-error *ngIf="anexoFoto6FormGroup.get('fotos').invalid">Campo
+                                    requerido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="100" fxFlex.lt-md="100">
+                            <mat-form-field>
+                                <mat-label>Interior/Exterior</mat-label>
+                                <input matInput placeholder="Interior/Exterior"
+                                       formControlName="intExterior" required>
+                                <mat-error *ngIf="anexoFoto6FormGroup.get('intExterior').invalid">
+                                    Campo
+                                    requerido</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+        <mat-action-row>
+            <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
+                    (click)="anexoFotoPanel6.expanded = false">
+                <mat-icon>close</mat-icon>
+            </button>
+
+            <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
+                <mat-icon>done</mat-icon>
+            </button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</section>
+
+
+  
+

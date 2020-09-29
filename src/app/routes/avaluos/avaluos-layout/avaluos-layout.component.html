@@ -1,0 +1,72 @@
+
+<page-header></page-header>
+
+             <div fxLayout="row wrap" class="matero-row">
+
+                <div class="matero-col" fxFlex="100"  fxFlex.gt-md="100" >
+                  <mat-card  style="background-color: #EFF1FE;">
+                    <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Datos del avalúo
+                    </mat-card-title>
+                    <mat-divider></mat-divider>                    
+                    <mat-card-content >
+                      <div fxLayout="row wrap" fxLayoutGap="100px grid" style="padding-top: 15px;">
+                        <div class="text-center" fxFlex.gt-md="20" fxFlex.md="20" fxFlex.sm="20" fxFlex.xs="20">
+                          <h5 >Folio:&nbsp;</h5>
+                          <div class="text-center">
+                            <p class="f-s-12">{{folio}}</p>
+                          </div>
+                        </div>
+
+                        <div class="text-center" fxFlex.gt-md="20" fxFlex.md="20" fxFlex.sm="20" fxFlex.xs="20">
+                          <h5 >Valuador:</h5>
+                          <div class="text-center">
+                            <p class="f-s-12">{{perito}}</p>
+                          </div>
+                        </div>
+
+                        <div class="text-center" fxFlex.gt-md="20" fxFlex.md="20" fxFlex.sm="20" fxFlex.xs="20">
+                          <h5 >Fecha del avalúo:</h5>
+                          <div class="text-center">
+                            <p class="f-s-12">{{fechaavaluo}}</p>
+                          </div>
+                        </div>
+
+                        <div class="text-center" fxFlex.gt-md="20" fxFlex.md="20" fxFlex.sm="20" fxFlex.xs="20">
+                          <h5 >Sociedad:</h5>
+                          <div class="text-center">
+                            <p class="f-s-12">{{sociedad}}</p>
+                          </div>
+                        </div> 
+                        
+                        <div class="text-center" fxFlex.gt-md="20" fxFlex.md="20" fxFlex.sm="20" fxFlex.xs="20">
+                          <h5 >Estatus:</h5>
+                          <div class="text-center">
+                            <p class="f-s-12">{{estatusavaluo}}</p>
+                          </div>
+                        </div>   
+                      </div>                              
+                    </mat-card-content>
+                  </mat-card>
+               
+                  <nav mat-tab-nav-bar>
+                    <a mat-tab-link
+                    *ngFor="let link of navLinks"
+                    [routerLink]="['/' + link.link]"
+                    routerLinkActive #rla="routerLinkActive"
+                    [active]="rla.isActive">
+                    <img src="{{link.imgAtv}}" />
+                  {{ link.label}}
+                   </a>
+                  </nav>
+                 
+              <router-outlet></router-outlet>
+            </div>
+            </div>
+
+           
+             
+
+              
+     
+
+

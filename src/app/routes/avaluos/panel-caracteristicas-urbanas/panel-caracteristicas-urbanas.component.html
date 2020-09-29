@@ -1,0 +1,397 @@
+<section class="demo-expansion">
+    <mat-expansion-panel #caractPanel1 (opened)="searchCaractUrbanas()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Características urbanas</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card>
+        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+        </mat-card-actions>
+        <mat-card-content>
+          <form [formGroup]="carUrb1FormGroup" class="matero-form-horizontal">
+            <div fxLayout="row wrap" fxLayoutGap="30px grid">
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Clasificación de la zona</mat-label>
+                  <mat-select formControlName="clasifZona" required>
+                    <mat-option *ngFor="let item of clasifZonaCat" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="carUrb1FormGroup.get('clasifZona').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Estatus de la clasificación de la zona</mat-label>
+                  <mat-select formControlName="estatusClasifZona" >
+                    <mat-option *ngFor="let item of estClasifZonaCat" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>Índice de saturación de la zona</mat-label>
+                <mat-select formControlName="indiceSatZona" [(value)]="indiceSatZona" required >
+                  <mat-option *ngFor="let p of indiceSatZonaCat" [value]="p">
+                    {{ p.valor }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="carUrb1FormGroup.get('indiceSatZona').invalid">Campo
+                  requerido</mat-error>
+              </mat-form-field>
+              </div>
+
+              <div fxFlex="100" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Tipo construcción</mat-label>
+                  <input matInput placeholder="Tipo construcción" maxlength="200"
+                         formControlName="tpoConstruccion" required>
+                  <mat-error *ngIf="carUrb1FormGroup.get('tpoConstruccion').invalid">Campo requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Nivel socio económico</mat-label>
+                  <mat-select formControlName="nivelSocioeconomico" required>
+                    <mat-option *ngFor="let item of nivleSocioEconoCat" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="carUrb1FormGroup.get('nivelSocioeconomico').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Densidad de población</mat-label>
+                  <mat-select formControlName="densidadPob" required>
+                    <mat-option *ngFor="let item of densidadPobCat" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="carUrb1FormGroup.get('densidadPob').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Número máximo de niveles a construir</mat-label>
+                  <input matInput placeholder="Número máximo de niveles a construir"  formControlName="numMaxNivConstruir" 
+                      required type="number"  onKeyPress="if(this.value.length>6) return false;">
+                  <mat-error *ngIf="carUrb1FormGroup.get('numMaxNivConstruir').invalid">Campo requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="100" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Contaminación ambiental de la zona</mat-label>
+                  <input matInput placeholder="Contaminación ambiental de la zona"  formControlName="contAmbZona" 
+                      required maxlength="250" >
+                  <mat-error *ngIf="carUrb1FormGroup.get('contAmbZona').invalid">Campo requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Densidad de la vivienda</mat-label>
+                  <mat-select formControlName="densidadVivienda" >
+                    <mat-option *ngFor="let item of dencidadViviendaCat" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+
+              <div fxFlex="50" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Uso de suelo</mat-label>
+                  <mat-select formControlName="usoSuelo" required>
+                    <mat-option *ngFor="let item of usoSueloCat" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="carUrb1FormGroup.get('usoSuelo').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>           
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Porcentaje de área libre</mat-label>
+                  <input matInput placeholder="Porcentaje de área libre"  formControlName="porcentAreaLibre" 
+                      required type="text"  appDecimal5Mask maxlength="5">
+                  <mat-error *ngIf="carUrb1FormGroup.get('porcentAreaLibre').invalid">Campo requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Superficie mínimo del lote</mat-label>
+                  <input matInput placeholder="Superficie mínimo del lote"  formControlName="supMinLote" 
+                      type=number onKeyPress="if(this.value.length>7) return false;">  
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Superficie tipo de lote</mat-label>
+                  <input matInput placeholder="Superficie tipo de lote"  formControlName="superfTpoLote" 
+                      required type="number"  onKeyPress="if(this.value.length>7) return false;">
+                  <mat-error *ngIf="carUrb1FormGroup.get('superfTpoLote').invalid">Campo requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="100" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Vías de acceso e importancia</mat-label>
+                  <input matInput placeholder="Superficie tipo de lote"  formControlName="viasAccesoImp" 
+                      required   maxlength="500">
+                  <mat-error *ngIf="carUrb1FormGroup.get('viasAccesoImp').invalid">Campo requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="100" fxFlex.lt-md="100">
+                <mat-form-field appearance="fill">
+                  <mat-label>Descripción uso de suelo</mat-label>
+                  <input matInput placeholder="Descripción uso de suelo" formControlName="descripUsoSueloF"   > 
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="25" fxFlex.lt-md="100">
+                <mat-form-field appearance="fill">
+                  <mat-label>Clave uso de suelo</mat-label>
+                  <input matInput placeholder="Clave uso de suelo" formControlName="claveUsoSueloF"  > 
+                </mat-form-field>
+              </div>
+             
+              <div fxFlex="25" fxFlex.lt-md="100">
+                <mat-form-field appearance="fill">
+                  <mat-label>Coeficiente uso de suelo</mat-label>
+                  <input matInput placeholder="Coeficiente uso de suelo" formControlName="coeficienteDeUsoDelSueloF"  > 
+                </mat-form-field>
+              </div>
+            </div>
+             <br>
+            <div *ngIf="alertCaract" class="{{classAlert}}" role="alertCaract">
+              <button type="button" class="close" aria-label="Close" (click)="closeAlertCaract()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              {{msg}}
+            </div>
+        
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+              <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar" type="button"
+                      (click)="caractPanel1.expanded = false">
+                <mat-icon>close</mat-icon>
+              </button>
+              <button mat-fab style="background-color: #91d400; outline: none;" matTooltip="Guardar" (click)="addCaractUrbanas()" type="submit" >
+                <mat-icon>done</mat-icon>
+              </button>
+            </div>
+
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </mat-expansion-panel>
+  </section>
+  <br>
+  <section class="demo-expansion">
+    <mat-expansion-panel #caractPanel2 (opened)="searchEquipamientoUrbano()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Servicios públicos y equipamiento urbano</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card>
+        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+        </mat-card-actions>
+        <mat-card-content>
+          <form [formGroup]="carUrb2FormGroup" class="matero-form-horizontal">
+            <div fxLayout="row wrap" fxLayoutGap="30px grid">
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Teléfonos suministro</mat-label>
+                  <mat-select formControlName="idSuministroTelefonico" required>
+                    <mat-option *ngFor="let item of suministroTelCat" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="carUrb2FormGroup.get('idSuministroTelefonico').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Acometida telefónica al inmueble</mat-label>
+                  <mat-select formControlName="idAcometidaInmueble" required>
+                    <mat-option *ngFor="let item of acometidaInmuebleCat" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="carUrb2FormGroup.get('idAcometidaInmueble').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Señalizaciòn de vías</mat-label>
+                  <mat-select formControlName="idSenalizacionVias" required>
+                    <mat-option *ngFor="let item of senalizacionViasCat" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="carUrb2FormGroup.get('idSenalizacionVias').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+             
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Nomenclatura de calles</mat-label>
+                  <mat-select formControlName="idNomenclaturaCalle" required>
+                    <mat-option *ngFor="let item of senalizacionViasCat" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="carUrb2FormGroup.get('idNomenclaturaCalle').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Recolección de basura</mat-label>
+                  <mat-select formControlName="idRecoleccionBasura" required>
+                    <mat-option *ngFor="let item of recoleccionBasuraCat" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="carUrb2FormGroup.get('idRecoleccionBasura').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Distancia transporte urbano</mat-label>
+                  <input matInput placeholder="Distancia transporte urbano"  formControlName="distanciaTransporteUrbano" 
+                 type="text" maxlength="6" appDecimal6Mask>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Frecuencia transporte urbano</mat-label>
+                  <input matInput placeholder="Frecuencia transporte urbano"  formControlName="frecuenciaTransporteUrbano" 
+                  type="text" maxlength="6" appDecimal6Mask>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Distancia transporte suburbano</mat-label>
+                  <input matInput placeholder="Distancia transporte suburbano"  formControlName="distanciaTransporteSuburbano" 
+                  type="text" maxlength="6" appDecimal6Mask>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="33.3" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Frecuencia transporte suburbano</mat-label>
+                  <input matInput placeholder="Frecuencia transporte suburbano"  formControlName="frecuenciaTransporteSuburbano" 
+                  type="text" maxlength="6" appDecimal6Mask>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="100" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Nivel de equipamiento urbano</mat-label>
+                  <input matInput maxlength="200"  placeholder="Nivel de equipamiento urbano" formControlName="nivelEquipamientoF">
+                </mat-form-field>
+              </div>
+               <br>
+
+              <div fxFlex="25" fxFlex.lt-md="100">
+              <section>
+                <mat-slide-toggle color="primary" formControlName="templos" >
+                  Templos
+                </mat-slide-toggle>
+              </section>
+              </div>
+
+              <div fxFlex="25" fxFlex.lt-md="100">
+                <section>
+                  <mat-slide-toggle color="primary" formControlName="mercados">
+                    Mercados
+                  </mat-slide-toggle>
+                </section>
+                </div>
+
+                <div fxFlex="25" fxFlex.lt-md="100">
+                  <section>
+                    <mat-slide-toggle color="primary" formControlName="plazasPublicas">
+                      Plazas públicas
+                    </mat-slide-toggle>
+                  </section>
+                  </div>
+
+                  <div fxFlex="25" fxFlex.lt-md="100">
+                    <section>
+                      <mat-slide-toggle color="primary" formControlName="parquesJardines">
+                        Parques y jardines
+                      </mat-slide-toggle>
+                    </section>
+                    </div>
+
+                    <div fxFlex="25" fxFlex.lt-md="100">
+                      <section>
+                        <mat-slide-toggle color="primary" formControlName="escuelas">
+                          Escuelas
+                        </mat-slide-toggle>
+                      </section>
+                      </div>
+
+                      <div fxFlex="25" fxFlex.lt-md="100">
+                        <section>
+                          <mat-slide-toggle color="primary" formControlName="hospitales">
+                            Hospitales
+                          </mat-slide-toggle>
+                        </section>
+                        </div>
+
+                        <div fxFlex="25" fxFlex.lt-md="100">
+                          <section>
+                            <mat-slide-toggle color="primary" formControlName="bancos">
+                              Bancos
+                            </mat-slide-toggle>
+                          </section>
+                          </div>
+
+                          <div fxFlex="25" fxFlex.lt-md="100">
+                            <section>
+                              <mat-slide-toggle color="primary" formControlName="estacionTransporte">
+                                Estación de transporte
+                              </mat-slide-toggle>
+                            </section>
+                            </div>
+            </div>
+             <br>
+            <div *ngIf="alertServicios" class="{{classAlert}}" role="alertServicios">
+              <button type="button" class="close" aria-label="Close" (click)="closeAlertServicios()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              {{msg}}
+            </div>
+       
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+              <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar" type="button"
+                      (click)="caractPanel2.expanded = false">
+                <mat-icon>close</mat-icon>
+              </button>
+              <button mat-fab style="background-color: #91d400; outline: none;" matTooltip="Guardar" (click)="addEquipamientoUrbano()" type="submit" >
+                <mat-icon>done</mat-icon>
+              </button>
+            </div>
+
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </mat-expansion-panel>
+  </section>
+
