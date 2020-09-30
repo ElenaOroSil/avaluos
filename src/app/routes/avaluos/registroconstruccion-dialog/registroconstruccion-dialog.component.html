@@ -10,7 +10,7 @@
             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
               <mat-form-field>
                 <mat-label>Tipo de Construcción</mat-label>
-                <mat-select formControlName="tipoConstruccion" placeholder="Tipo de construcción">
+                <mat-select formControlName="tipoConstruccion" placeholder="Tipo de construcción" [(value)]="tipoConstruccion">
                   <mat-option value="P">Privativa</mat-option>
                   <mat-option value="C">Común</mat-option>
                 </mat-select>
@@ -107,11 +107,11 @@
               </mat-form-field>
             </div>
 
-            <div fxFlex="33.3" fxFlex.lt-md="100" fxl hidden >
+            <div fxFlex="33.3" fxFlex.lt-md="100" fxl  *ngIf = "tipoConstruccion == 'C'">
               <mat-form-field>
                 <mat-label>Indiviso</mat-label>
                 <input matInput placeholder="Indiviso" formControlName="indiviso" required
-                maxlength="6"  appDecimal5Mask type="hidden">
+                maxlength="6"  appDecimal5Mask type="text">
               <mat-error *ngIf="registroConstFormGroup.get('indiviso').invalid">Campo
                   requerido
                 </mat-error>
