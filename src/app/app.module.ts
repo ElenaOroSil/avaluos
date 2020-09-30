@@ -57,9 +57,8 @@ export function StartupServiceFactory(startupService: StartupService) {
   PanelCaracteristicasUrbanasComponent, PanelTerrenoComponent, PanelDesInmuebleComponent,
   PanelElemConstruccionComponent, PanelConsPreviasComponent, PanelAvaluoFisicoComponent,
   PanelValorRentasComponent, PanelAnexoFotograficoComponent, PanelVisitasComponent, 
-  AguaMaskDirective, Decimal8MaskDirective, Decimal5MaskDirective, Decimal6MaskDirective,
-  Decimal12MaskDirective,
-  ColindanciasDialogComponent,
+  AguaMaskDirective, Decimal8MaskDirective, Decimal5MaskDirective, 
+  Decimal6MaskDirective, Decimal12MaskDirective, ColindanciasDialogComponent,
   RegistroconstruccionDialogComponent
 ],
   imports: [

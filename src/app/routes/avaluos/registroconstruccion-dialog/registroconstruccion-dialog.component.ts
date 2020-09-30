@@ -28,7 +28,7 @@ export class RegistroconstruccionDialogComponent implements OnInit {
   tpoConstruccion: Catalogo[];
   usoConstruccion: Catalogo[];
   rangoNivel: Catalogo[];
-  edoDeConservacion: Catalogo[];
+  edoConservacion: Catalogo[];
 
   //RegistroConstrucción
   C: string;
@@ -40,7 +40,8 @@ export class RegistroconstruccionDialogComponent implements OnInit {
   uso;
   rangoDeNivel;
   edad;
-  edoConservacion;
+  edoDeConservacion;
+  indiviso;
 
   constructor(public dialogRef: MatDialogRef<RegistroconstruccionDialogComponent>,
     private formBuilder: FormBuilder,
@@ -67,12 +68,8 @@ export class RegistroconstruccionDialogComponent implements OnInit {
       'rangoDeNivel': new FormControl(''),
       'edad': new FormControl(''),
       'edoDeConservacion': new FormControl(''),
-      'orientacion3a': new FormControl(''),
-      'medida3a': new FormControl(''),
-      'detalleColindante3a': new FormControl(''),
-      'orientacion4a': new FormControl(''),
-      'medida4a': new FormControl(''),
-      'detalleColindante4a': new FormControl(''),
+      'indiviso': new FormControl(''),
+     
     });
   }
 
@@ -143,25 +140,20 @@ export class RegistroconstruccionDialogComponent implements OnInit {
   onSubmit() {
   this.submitted = true;
 
-  console.log("SUBE");
-
-
-
   // stop here if form is invalid
   if (this.registroConstFormGroup.invalid) {
      return;
   }
 
   this.desInmueble = { idinmconstruccion: 0, 
-  tipoconstruccion: this.ant1.tpoConstruccion.value, idtipoconstruccion: this.ant1.tipo.value, 
+  tipoconstruccion: this.ant1.tipoConstruccion.value, idtipoconstruccion: this.ant1.tipo.value, 
   superficie: this.ant1.superficie.value, descripcionmodulo: this.ant1.descripcion.value, 
   niveltipo: this.ant1.nivelTipo.value,  idusoconstruccion: this.ant1.uso.value,
-  idrangoniveltgdf: this.ant1.rangoNivel.value, clasef: null, puntajef: null, edad: this.ant1.edad.value,  
-  idestadoconservacion: this.ant1.edoConservacion.value, indiviso: this.ant1.indiviso.value, 
+  idrangoniveltgdf: this.ant1.rangoDeNivel.value, clasef: null, puntajef: null, edad: this.ant1.edad.value,  
+  idestadoconservacion: this.ant1.edoDeConservacion.value, indiviso: this.ant1.indiviso.value, 
   idclaseconstruccionf: null, estadogralconservacionf: null, vidaminimaremanentef: null,
   indicecostosremanentef: null, totalpuntosajustadosf: null, clasesm: null, puntajesm: null }
 
-  console.log(this.desInmueble)
   
   this.loading = true;
   this.desInmService.addConstruccion(this.folio, this.desInmueble)

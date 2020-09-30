@@ -10,7 +10,7 @@
             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
               <mat-form-field>
                 <mat-label>Tipo de Construcción</mat-label>
-                <mat-select [(value)]="tipoConstruccion" placeholder="Tipo de construcción">
+                <mat-select formControlName="tipoConstruccion" placeholder="Tipo de construcción">
                   <mat-option value="P">Privativa</mat-option>
                   <mat-option value="C">Común</mat-option>
                 </mat-select>
@@ -55,7 +55,7 @@
             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
               <mat-form-field>
                 <mat-label>Nivel tipo</mat-label>
-                <input matInput placeholder="Nivel tipo" maxlength="1"
+                <input matInput placeholder="Nivel tipo" type="number" onKeyPress="if(this.value.length>1) return false;"
                        formControlName="nivelTipo" required>
                 <mat-error *ngIf="registroConstFormGroup.get('nivelTipo').invalid">Campo
                   requerido
@@ -104,6 +104,17 @@
                 </mat-select>
                 <mat-error *ngIf="registroConstFormGroup.get('edoDeConservacion').invalid">Campo
                   requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="33.3" fxFlex.lt-md="100" fxl hidden >
+              <mat-form-field>
+                <mat-label>Indiviso</mat-label>
+                <input matInput placeholder="Indiviso" formControlName="indiviso" required
+                maxlength="6"  appDecimal5Mask type="hidden">
+              <mat-error *ngIf="registroConstFormGroup.get('indiviso').invalid">Campo
+                  requerido
+                </mat-error>
               </mat-form-field>
             </div>
         
