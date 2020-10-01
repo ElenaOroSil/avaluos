@@ -36,7 +36,7 @@ export class DescripcionInmuebleService {
     params = params.append('Folio', folio);
     params = params.append('TipoConstruccion', tpoCons);
 
-    return this.http.get<any>(`${environment.SERVER_URL}/consultaInmuebleConstruccion`, {params: params})   
+    return this.http.get<any>(`${environment.SERVER_URL}/consultaInmuebleConstruc`, {params: params})   
     .pipe(map(desInmConstruccion => {
     
       return desInmConstruccion;

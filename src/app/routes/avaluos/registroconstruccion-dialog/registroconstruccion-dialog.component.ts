@@ -22,6 +22,7 @@ export class RegistroconstruccionDialogComponent implements OnInit {
   submitted = false;
   desInmueble: DescripcionInmueble;
   folio = localStorage.getItem('folio');
+  returnValue: string = "";
 
 
   //registro CATÁLOGOS
@@ -130,7 +131,7 @@ export class RegistroconstruccionDialogComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(this.returnValue);
   }
 
       // convenience getter for easy access to form fields
@@ -162,6 +163,7 @@ export class RegistroconstruccionDialogComponent implements OnInit {
           data => {
 
           if(data.ok){
+            this.returnValue = this.desInmueble.tipoconstruccion;
             this.alertRegistroConstruccion = true;        
             this.loading = false;
             this.msg = data.mensaje;
