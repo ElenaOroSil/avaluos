@@ -4,7 +4,7 @@
           <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Otras colindancias</mat-card-title>
       </mat-card-actions>
       <mat-card-content>
-        <form [formGroup]="terreno4FormGroup" class="matero-form-horizontal" (ngSubmit)="onSubmit()">
+        <form [formGroup]="terreno4FormGroup" class="matero-form-horizontal" >
           <div fxLayout="row wrap" fxLayoutGap="10px grid">
             <div fxFlex="100" fxFlex.lt-md="100" fxl>
               <mat-form-field>
@@ -157,17 +157,15 @@
             </button>
             {{msg}}
           </div>
-
+        </form>
           <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
             <button mat-fab style="background-color: #f65545; outline:none;" matTooltip="Cerrar" (click)="onNoClick()" >
                <mat-icon>clear</mat-icon>
              </button>
-             <button mat-fab style="background-color: #00b140; outline:none;" matTooltip="Aceptar" >
+             <button mat-fab style="background-color: #00b140; outline:none;" matTooltip="Aceptar" (click)="guardarColindancia()">
                <mat-icon>done</mat-icon>
              </button>
-           </div>
-
-        </form>
+           </div>      
       </mat-card-content>
     </mat-card>
 </div>

@@ -13,7 +13,7 @@ export class DescripcionInmuebleService {
 
   addConstruccion(folio: string, value: DescripcionInmueble){
 
-    console.log(value)
+    console.log("paso1")
 
      return this.http.post<any>(`${environment.SERVER_URL}/InmuebleConstrucciones`, { 'IdInmConstruccion': value.idinmconstruccion, 
      'Folio': folio, 'TipoConstruccion': value.tipoconstruccion, 'IdTipoConstruccion': value.idtipoconstruccion, 

@@ -100,7 +100,7 @@ export class ColindanciasDialogComponent implements OnInit {
   }
 
       //Llama servicio para alta de terreno
-      onSubmit() {
+      guardarColindancia() {
         this.submitted = true;
     
       // stop here if form is invalid

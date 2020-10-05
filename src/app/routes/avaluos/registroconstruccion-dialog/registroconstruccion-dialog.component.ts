@@ -138,7 +138,7 @@ export class RegistroconstruccionDialogComponent implements OnInit {
       get ant1() { return this.registroConstFormGroup.controls; }
 
    //Llama servicio para alta de terreno
-  onSubmit() {
+  guardarRegConstruccion() {
   this.submitted = true;
 
   // stop here if form is invalid

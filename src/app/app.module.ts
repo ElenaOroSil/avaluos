@@ -2,6 +2,7 @@ import { NgModule, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Injectable } from '@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { InicioComponent } from './routes/inicio/inicio.component';
 import { LoginComponent } from './routes/sessions/login/login.component';
@@ -35,8 +36,9 @@ import { Decimal8MaskDirective } from './_services/decimal8-mask-directive';
 import { Decimal5MaskDirective } from './_services/decimal5-mask-directive';
 import { Decimal6MaskDirective } from './_services/decimal6-mask-directive';
 import { Decimal12MaskDirective } from './_services/decimal12-mask-directive';
-import { AlertService } from './_services/alert.service' 
-import {NgxMaskModule} from 'ngx-mask'
+import { AlertService } from './_services/alert.service';
+import {NgxMaskModule} from 'ngx-mask';
+
 
 /* Angular material */
 import { MaterialModule } from './material.module';
@@ -65,6 +67,7 @@ export function StartupServiceFactory(startupService: StartupService) {
     BrowserModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NoopAnimationsModule,
     HttpClientModule,
     CoreModule,
     SharedModule,
