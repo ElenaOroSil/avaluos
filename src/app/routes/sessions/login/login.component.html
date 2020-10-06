@@ -1,10 +1,9 @@
 <div fxLayout="row wrap" class="matero-row" fxLayoutAlign="none center">
   <div class="matero-col" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33.33" fxFlex.gt-md="25">
-  <mat-card style="max-width: 380px; color: #898d8d">
-
+  <mat-card>
       <mat-card-title class="title">SA3</mat-card-title>
        <mat-card-subtitle>Bienvenido</mat-card-subtitle>   
-       <p style="font-size: 14px; margin-top: 0px;">Para iniciar sesión, ingrese sus datos</p>
+       <p>Para iniciar sesión, ingrese sus datos</p>
 
     <mat-card-content>
       <form class="matero-form-horizontal" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
@@ -21,7 +20,7 @@
           <mat-error *ngIf="reactiveForm.get('password').invalid">Campo requerido</mat-error>
         </mat-form-field>
         <div   fxLayout="row" fxLayoutAlign="end">
-        <a routerLink="/recover-password" style="outline: none;">¿Olvidó su contraseña?</a>
+        <a routerLink="/recover-password" >¿Olvidó su contraseña?</a>
         </div><br>       
         <div class="m-y-16" fxLayout="row" fxLayoutAlign="space-between center">                 
         </div>  
