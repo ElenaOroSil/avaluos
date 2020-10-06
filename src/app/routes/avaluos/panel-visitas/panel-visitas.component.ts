@@ -24,7 +24,7 @@ export class PanelVisitasComponent implements OnInit {
   alert: boolean = false;
   classAlert: string;
   msg= '';
-
+  isExpanded:boolean = false;
 
   nombreVisita;
   apVisita;
@@ -36,6 +36,7 @@ export class PanelVisitasComponent implements OnInit {
   fechaVisita;
   time;
   observaciones;
+ 
 
 
   constructor(private formBuilder: FormBuilder, private datePipe: DatePipe,
@@ -59,8 +60,14 @@ export class PanelVisitasComponent implements OnInit {
 
 
    ngOnInit() {
+
+    this.expand();
      
   }
+
+  expand(){
+    this.isExpanded = !this.isExpanded;
+    }
 
    getErrorMessage(form: FormGroup) {
 

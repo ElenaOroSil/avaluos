@@ -1,5 +1,5 @@
 <section class="demo-expansion">
-    <mat-expansion-panel #caractPanel1 (opened)="searchCaractUrbanas()">
+    <mat-expansion-panel #caractPanel1 (opened)="searchCaractUrbanas()" [expanded]='isExpanded'>
       <mat-expansion-panel-header>
         <mat-panel-title>Características urbanas</mat-panel-title>
       </mat-expansion-panel-header>
@@ -200,7 +200,7 @@
   </section>
   <br>
   <section class="demo-expansion">
-    <mat-expansion-panel #caractPanel2 (opened)="searchEquipamientoUrbano()">
+    <mat-expansion-panel #caractPanel2 (opened)="searchEquipamientoUrbano()" [expanded]='isExpanded'>
       <mat-expansion-panel-header>
         <mat-panel-title>Servicios públicos y equipamiento urbano</mat-panel-title>
       </mat-expansion-panel-header>

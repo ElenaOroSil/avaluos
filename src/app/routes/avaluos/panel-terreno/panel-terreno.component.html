@@ -1,5 +1,5 @@
 <section class="demo-expansion">
-    <mat-expansion-panel #terrenoPanel1 (opened)="searchTerreno()">
+    <mat-expansion-panel #terrenoPanel1 (opened)="searchTerreno()" [expanded]='isExpanded'>
       <mat-expansion-panel-header>
         <mat-panel-title>Terreno</mat-panel-title>
       </mat-expansion-panel-header>
@@ -288,8 +288,8 @@
     </mat-expansion-panel>
   </section>
   <br>
-  <section class="demo-expansion">
-    <mat-expansion-panel #terrenoPanel2 (opened)="searchTerrenoFuenteLegal()">
+  <section class="demo-expansion" >
+    <mat-expansion-panel #terrenoPanel2 (opened)="searchTerrenoFuenteLegal()" [expanded]='isExpanded'>
       <mat-expansion-panel-header>
         <mat-panel-title>Información legal</mat-panel-title>
       </mat-expansion-panel-header>
@@ -531,7 +531,7 @@
   </section>
   <br>
   <section class="demo-expansion">
-    <mat-expansion-panel #terrenoPanel3 (opened)="searchTerrenoComplemento()">
+    <mat-expansion-panel #terrenoPanel3 (opened)="searchTerrenoComplemento()" [expanded]='isExpanded'>
       <mat-expansion-panel-header>
         <mat-panel-title>Complemento y otras colindancias</mat-panel-title>
       </mat-expansion-panel-header>

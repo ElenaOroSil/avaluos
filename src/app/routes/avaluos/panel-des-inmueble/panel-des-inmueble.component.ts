@@ -39,6 +39,7 @@ export class PanelDesInmuebleComponent implements OnInit {
   selected = 2;
   editRowId:number=-1
   @ViewChildren(MatInput,{read:ElementRef}) inputs:QueryList<ElementRef>;
+  isExpanded:boolean = false;
 
    //registro CATÁLOGOS
    tpoConstruccion: Catalogo[];
@@ -95,6 +96,8 @@ export class PanelDesInmuebleComponent implements OnInit {
 
   ngOnInit(): void {
 
+      this.expand();
+
       //Combos de Colindancias
       this.getCatalogoTpoConstruccion("TIPOCONSTRUCCION", "P");
       this.getCatalogosDesInmueble("USOCONSTRUCCION");
@@ -141,6 +144,9 @@ export class PanelDesInmuebleComponent implements OnInit {
     });
   }
 
+  expand(){
+    this.isExpanded = !this.isExpanded;
+    }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

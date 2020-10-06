@@ -31,6 +31,7 @@ export class PanelAntecedentesComponent implements OnInit {
   alertInmueble: boolean = false;
   classAlert: string;
   msg= '';
+  isExpanded:boolean = false;
   
 
   infoPIdentidad: string;
@@ -131,6 +132,8 @@ export class PanelAntecedentesComponent implements OnInit {
     private catalogoService: CatalogosService) { }
 
   ngOnInit(): void {
+
+    this.expand();
 
     //Combos de Inmuebles
     this.getCatInmuebles("REGIMENPROPIEDAD");
@@ -233,6 +236,10 @@ export class PanelAntecedentesComponent implements OnInit {
 
 
   }
+
+  expand(){
+    this.isExpanded = !this.isExpanded;
+    }
 
   //Llama servicio sección Características Urbanas CATÁLOGOS
   getCatInmuebles (tipo: string) {

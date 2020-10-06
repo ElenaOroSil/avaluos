@@ -33,6 +33,7 @@ export class PanelCaracteristicasUrbanasComponent implements OnInit {
   alertServicios: boolean = false;
   classAlert: string;
   msg= '';
+  isExpanded:boolean = false;
 
  //Caracteristicas Urbanas CATÁLOGOS
   clasifZonaCat: Catalogo[];
@@ -87,6 +88,8 @@ export class PanelCaracteristicasUrbanasComponent implements OnInit {
     private catalogoService: CatalogosService) {  }
 
   ngOnInit(): void {
+
+    this.expand();
 
     //Combos de Características Urbanas
     this.getCatCaractUrbanas("CLASIFICACIONZONA");
@@ -148,9 +151,12 @@ export class PanelCaracteristicasUrbanasComponent implements OnInit {
       'nivelEquipamientoF': new FormControl('')
 
     });
-
    
   }
+
+  expand(){
+    this.isExpanded = !this.isExpanded;
+    }
 
    // convenience getter for easy access to form fields
    get ant1() { return this.carUrb1FormGroup.controls; }

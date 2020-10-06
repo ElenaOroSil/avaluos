@@ -1,5 +1,5 @@
 <section class="demo-expansion">
-  <mat-expansion-panel #desInmueblePanel1>
+  <mat-expansion-panel #desInmueblePanel1 [expanded]='isExpanded'>
     <mat-expansion-panel-header>
       <mat-panel-title>CONSTRUCCIONES PRIVATIVAS Y CONSTRUCCIONES COMUNES</mat-panel-title>
     </mat-expansion-panel-header>
@@ -256,7 +256,7 @@
             <ng-container matColumnDef="actions">
               <th *matHeaderCellDef mat-header-cell mat-sort-header>Acciones</th>
               <td *matCellDef="let row" class="w-10 text-secondary" mat-cell>
-                <a (click)="$event.stopPropagation()"
+                <a (click)="$event.stopPropagation()" matTooltip="Consulta de matrices"
                    class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                    mat-icon-button>
                   <img src="assets/images/icons/detalle.png" />

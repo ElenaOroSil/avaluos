@@ -42,7 +42,7 @@ export class PanelTerrenoComponent implements OnInit {
   color: string;
   subject$: ReplaySubject<TerrenoColindancias[]> = new ReplaySubject<TerrenoColindancias[]>(1);
   data$: Observable<TerrenoColindancias[]> = this.subject$.asObservable();
-  
+  isExpanded:boolean = false;
 
   //Terreno CATÁLOGOS
   puntosCardinales: Catalogo[];
@@ -144,6 +144,7 @@ export class PanelTerrenoComponent implements OnInit {
 
   ngOnInit(): void {
 
+     this.expand();
   
      //Combos de Características Urbanas
      this.getCatTerreno("PUNTOSCARDINALES");
@@ -227,9 +228,12 @@ export class PanelTerrenoComponent implements OnInit {
     });   
   }
 
+  expand(){
+    this.isExpanded = !this.isExpanded;
+  }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-
   }
 
   // convenience getter for easy access to form fields

@@ -1,5 +1,5 @@
 <section class="demo-expansion">
-    <mat-expansion-panel #antPanel1 (opened)="searchSolicitantes()">
+    <mat-expansion-panel #antPanel1 (opened)="searchSolicitantes()" [expanded]='isExpanded'>
       <mat-expansion-panel-header>
         <mat-panel-title>Datos del solicitante</mat-panel-title>
       </mat-expansion-panel-header>
@@ -203,8 +203,8 @@
     </mat-expansion-panel>
   </section>
 <br>
-<section class="demo-expansion">
-  <mat-expansion-panel #antPanel2 (opened)="searchPropietarios()">
+<section class="demo-expansion" >
+  <mat-expansion-panel #antPanel2 (opened)="searchPropietarios()" [expanded]='isExpanded'>
     <mat-expansion-panel-header>
       <mat-panel-title>Datos del propietario</mat-panel-title>
     </mat-expansion-panel-header>
@@ -409,8 +409,8 @@
   </mat-expansion-panel>
 </section>
 <br>
-<section class="demo-expansion">
-  <mat-expansion-panel #antPanel3 (opened)="searchInmuebles()">
+<section class="demo-expansion" >
+  <mat-expansion-panel #antPanel3 (opened)="searchInmuebles()" [expanded]='isExpanded'>
     <mat-expansion-panel-header>
       <mat-panel-title>Datos del inmueble</mat-panel-title>
     </mat-expansion-panel-header>
