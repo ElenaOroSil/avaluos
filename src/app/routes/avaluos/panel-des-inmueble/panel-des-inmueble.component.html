@@ -206,14 +206,14 @@
                             <!-- Clase s/matriz Column -->
                             <ng-container matColumnDef="claseSM" sticky>
                               <th mat-header-cell *matHeaderCellDef>CLASE S/MATRIZ</th>
-                              <td mat-cell *matCellDef="let row" style="background-color:#e4cbb2; text-align: center;">{{row.claseSM}}</td>
+                              <td mat-cell *matCellDef="let row" style="background-color:#fff5eb; text-align: center;">{{row.claseSM}}</td>
                             </ng-container>
 
 
                              <!-- Puntaje  s/matriz Column -->
                              <ng-container matColumnDef="puntajeSM" sticky>
                               <th mat-header-cell *matHeaderCellDef>PUNTAJE S/MATRIZ</th>
-                              <td mat-cell *matCellDef="let row" style="background-color:#e4cbb2; text-align: center;">{{row.puntajeSM}}</td>
+                              <td mat-cell *matCellDef="let row" style="background-color:#fff5eb; text-align: center;">{{row.puntajeSM}}</td>
                             </ng-container>
 
                              <!-- Action Column -->
@@ -226,10 +226,10 @@
                    <mat-icon>view_comfy</mat-icon >   
                 </a>
 
-                <a (click)="$event.stopPropagation()"
+                <a (click)="$event.stopPropagation()" matTooltip="Edo. Gral. de conservación"
                    class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                    mat-icon-button>
-                  <img src="assets/images/icons/duplicar.png" />
+                   <mat-icon>toc</mat-icon >   
                 </a>
                 <a (click)="editar(row)" matTooltip={{editSave}}
                    class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"

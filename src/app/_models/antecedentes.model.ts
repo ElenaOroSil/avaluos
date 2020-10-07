@@ -20,25 +20,25 @@ export class Solicitante {
     edificio: string;
    
    constructor(solicitante) {
-       this.nombre = solicitante.nombre,
-       this.paterno = solicitante.paterno,
-       this.materno = solicitante.materno,
-       this.tipoPersona = solicitante.tipoPersona,  
-       this.rfc = solicitante.rfc,
-       this.curp = solicitante.curp,
-       this.telefonoFijo = solicitante.telefonoFijo,
-       this.extTelefono = solicitante.extTelefono,
-       this.telefonoMovil = solicitante.telefonoMovil,
-       this.cp = solicitante.cp
-       this.idEntidad = solicitante.idEntidad
-       this.idMunicipio = solicitante.idMunicipio
-       this.idAsentamiento = solicitante.idAsentamiento
-       this.calle = solicitante.calle
-       this.exterior = solicitante.exterior
-       this.interior = solicitante.interior
-       this.manzana = solicitante.manzana
-       this.lote = solicitante.lote
-       this.edificio = solicitante.edificio
+       this.nombre = solicitante.nombre;
+       this.paterno = solicitante.paterno;
+       this.materno = solicitante.materno;
+       this.tipoPersona = solicitante.tipoPersona; 
+       this.rfc = solicitante.rfc;
+       this.curp = solicitante.curp;
+       this.telefonoFijo = solicitante.telefonoFijo;
+       this.extTelefono = solicitante.extTelefono;
+       this.telefonoMovil = solicitante.telefonoMovil;
+       this.cp = solicitante.cp;
+       this.idEntidad = solicitante.idEntidad;
+       this.idMunicipio = solicitante.idMunicipio;
+       this.idAsentamiento = solicitante.idAsentamiento;
+       this.calle = solicitante.calle;
+       this.exterior = solicitante.exterior;
+       this.interior = solicitante.interior;
+       this.manzana = solicitante.manzana;
+       this.lote = solicitante.lote;
+       this.edificio = solicitante.edificio;
    }
 }
 
@@ -64,25 +64,25 @@ export class Propietario {
     edificio: string;
    
    constructor(propietario) {
-       this.nombre = propietario.nombre,
-       this.paterno = propietario.paterno,
-       this.materno = propietario.materno,
-       this.tipoPersona = propietario.tipoPersona,  
-       this.rfc = propietario.rfc,
-       this.curp = propietario.curp,
-       this.telefonoFijo = propietario.telefonoFijo,
-       this.extTelefono = propietario.extTelefono,
-       this.telefonoMovil = propietario.telefonoMovil,
-       this.cp = propietario.cp
-       this.idEntidad = propietario.idEntidad
-       this.idMunicipio = propietario.idMunicipio
-       this.idAsentamiento = propietario.idAsentamiento
-       this.calle = propietario.calle
-       this.exterior = propietario.exterior
-       this.interior = propietario.interior
-       this.manzana = propietario.manzana
-       this.lote = propietario.lote
-       this.edificio = propietario.edificio
+       this.nombre = propietario.nombre;
+       this.paterno = propietario.paterno;
+       this.materno = propietario.materno;
+       this.tipoPersona = propietario.tipoPersona;
+       this.rfc = propietario.rfc;
+       this.curp = propietario.curp;
+       this.telefonoFijo = propietario.telefonoFijo;
+       this.extTelefono = propietario.extTelefono;
+       this.telefonoMovil = propietario.telefonoMovil;
+       this.cp = propietario.cp;
+       this.idEntidad = propietario.idEntidad;
+       this.idMunicipio = propietario.idMunicipio;
+       this.idAsentamiento = propietario.idAsentamiento;
+       this.calle = propietario.calle;
+       this.exterior = propietario.exterior;
+       this.interior = propietario.interior;
+       this.manzana = propietario.manzana;
+       this.lote = propietario.lote;
+       this.edificio = propietario.edificio;
    }
 }
 

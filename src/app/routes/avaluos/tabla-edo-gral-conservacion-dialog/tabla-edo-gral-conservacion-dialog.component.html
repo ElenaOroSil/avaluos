@@ -1,0 +1,249 @@
+<div mat-dialog-content>
+      <mat-card>
+        <mat-card-content>
+          <form [formGroup]="edoGralFormGroup" class="matero-form-horizontal">
+              <div class="matero-row" fxLayout="row wrap">
+                <div fxFlex="100" class="matero-col">
+                     <mat-card>
+                    <mat-card-title fx-item style="color: #009288; font-weight: lighter;">ESTADO GENERAL DE CONSERVACIÓN, VIDA MÍNIMA (Años) E ÍNDICE DEL COSTO REMANENTES</mat-card-title>
+                    <mat-divider></mat-divider><br>
+              
+                    <mat-card-header fxLayout="column" fxLayoutAlign="center start">
+                      <div
+                           class="w-full flex flex-col sm:flex-row justify-between">          
+                      </div>
+                    </mat-card-header>
+              
+                    <mat-card-content class="-mt-6" fxLayout="column">          
+                      <div class="card overflow-auto -mt-16">                            
+                        <div class="example-table-container">
+  
+                          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;"
+                                 matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
+                            <!-- Id Column -->
+                            <ng-container matColumnDef="partidas">
+                              <mat-header-cell *matHeaderCellDef> Partidas </mat-header-cell>
+                              <td mat-cell *matCellDef="let row">{{row.partidas}}</td>
+                            </ng-container>
+                      
+                            <!-- Folio Column -->
+                            <ng-container matColumnDef="puntosPorPartida">
+                              <th mat-header-cell *matHeaderCellDef>Folio</th>
+                              <td mat-cell *matCellDef="let row">{{row.folio}}</td>
+                            </ng-container>
+                      
+                             <!-- Tipo construcción Column -->
+                            <ng-container matColumnDef="tipoConstruccion">
+                              <th mat-header-cell *matHeaderCellDef>Tipo</th>
+                              <td mat-cell *matCellDef="let row">{{row.tipoConstruccion}}</td>
+                            </ng-container>
+  
+                             <!-- Id tipo construcción Column -->
+                            <ng-container matColumnDef="idTipoConstruccion" sticky>
+                              <th mat-header-cell *matHeaderCellDef>Tipo</th> 
+                              <td mat-cell *matCellDef="let row">  
+                                <mat-form-field floatLabel="never" >            
+                                  <mat-select placeholder=""  value="{{row.idTipoConstruccion}}">
+                                    <mat-option  *ngFor="let item of tpoConstruccion " value="{{item.clave}}"  disabled>
+                                      {{item.descripcion}}
+                                    </mat-option>
+                                  </mat-select>  
+                                </mat-form-field></td>
+                            </ng-container>
+  
+                            <!-- Superficie Column --> 
+                            <ng-container matColumnDef="superficie" sticky>
+                              <th mat-header-cell *matHeaderCellDef> Superficie</th>
+                              <td mat-cell *matCellDef="let row"> 
+                                 <span *ngIf="!row.editable; else editPlace">
+                                {{row.superficie}} 
+                                </span>
+                                 <ng-template #editPlace>
+                                  <input matInput formControlName="superficie" [(ngModel)]="row.superficie" type="text"  appDecimal5Mask maxlength="5" 
+                                  (keyup.enter)="row.editable = false" > 
+                                </ng-template>
+                              </td>
+                            </ng-container>
+  
+                             <!-- Descripción Column --> 
+                             <ng-container matColumnDef="descripcionModulo" sticky>
+                              <th mat-header-cell *matHeaderCellDef> Descripción</th>
+                              <td mat-cell *matCellDef="let row"> 
+                                 <span *ngIf="!row.editable; else editPlace">
+                                {{row.descripcionModulo}} 
+                                </span>
+                                 <ng-template #editPlace>
+                                  <input matInput formControlName="descripcionModulo" [(ngModel)]="row.descripcionModulo" type="text" maxlength="100"
+                                  (keyup.enter)="row.editable = false" > 
+                                </ng-template>
+                              </td>
+                            </ng-container>
+  
+                             <!-- Nivel tipo Column --> 
+                             <ng-container matColumnDef="nivelTipo" sticky>
+                              <th mat-header-cell *matHeaderCellDef> Nivel tipo</th>
+                              <td mat-cell *matCellDef="let row"> 
+                                 <span *ngIf="!row.editable; else editPlace">
+                                {{row.nivelTipo}} 
+                                </span>
+                                 <ng-template #editPlace>
+                                  <input matInput formControlName="nivelTipo" [(ngModel)]="row.nivelTipo" type="number" onKeyPress="if(this.value.length>1) return false;"
+                                  (keyup.enter)="row.editable = false" > 
+                                </ng-template>
+                              </td>
+                            </ng-container>
+  
+  
+                                    <!-- Uso Column -->
+                                    <ng-container matColumnDef="idUsoConstruccion" sticky>
+                                      <th mat-header-cell *matHeaderCellDef>Uso</th> 
+                                      <td mat-cell *matCellDef="let row" >  
+                                        <mat-form-field floatLabel="never" >            
+                                          <mat-select placeholder="" value="{{row.idUsoConstruccion}}" >
+                                            <mat-option  *ngFor="let item of usoConstruccion " value="{{item.clave}}" disabled>
+                                              {{item.descripcion}}
+                                            </mat-option>
+                                          </mat-select>  
+                                        </mat-form-field></td>
+                                    </ng-container>
+  
+                                     <!-- Rango de nivel Column -->
+                                     <ng-container matColumnDef="idRangoNivelTGFD" sticky>
+                                      <th mat-header-cell *matHeaderCellDef>Rango de nivel</th> 
+                                      <td mat-cell *matCellDef="let row">  
+                                        <mat-form-field floatLabel="never" >            
+                                          <mat-select placeholder="" value="{{row.idRangoNivelTGDF}}" >
+                                            <mat-option  *ngFor="let item of rangoNivel " value="{{item.clave}}" disabled>
+                                              {{item.descripcion}}
+                                            </mat-option>
+                                          </mat-select>  
+                                        </mat-form-field></td>
+                                    </ng-container>
+  
+                                  <!-- Clase Column -->
+                                  <ng-container matColumnDef="claseF"  sticky>
+                                    <th mat-header-cell *matHeaderCellDef>CLASE</th>
+                                    <td mat-cell *matCellDef="let row" style="background-color:#ead8f1; text-align: center;">{{row.claseF}}</td>
+                                  </ng-container>
+  
+  
+                                   <!-- Puntaje Column -->
+                                   <ng-container matColumnDef="puntajeF" sticky>
+                                    <th mat-header-cell *matHeaderCellDef>PUNTAJE</th>
+                                    <td mat-cell *matCellDef="let row" style="background-color:#ead8f1; text-align: center;">{{row.puntajeF}}</td>
+                                  </ng-container>
+  
+  
+                                    <!-- Edad Column --> 
+                             <ng-container matColumnDef="edad" sticky>
+                              <th mat-header-cell *matHeaderCellDef> Edad</th>
+                              <td mat-cell *matCellDef="let row"> 
+                                 <span *ngIf="!row.editable; else editPlace">
+                                {{row.edad}} 
+                                </span>
+                                 <ng-template #editPlace>
+                                  <input matInput formControlName="edad" [(ngModel)]="row.edad" type="number" onKeyPress="if(this.value.length>1) return false;"
+                                  (keyup.enter)="row.editable = false" > 
+                                </ng-template>
+                              </td>
+                            </ng-container>
+  
+  
+                                <!-- Co Column -->
+                                <ng-container matColumnDef="idEstadoConservacion" sticky>
+                                  <th mat-header-cell *matHeaderCellDef>Estado de conservación</th> 
+                                  <td mat-cell *matCellDef="let row" >  
+                                    <mat-form-field floatLabel="never" >            
+                                      <mat-select placeholder="" value="{{row.idEstadoConservacion}}" >
+                                        <mat-option  *ngFor="let item of edoConservacion " value="{{item.clave}}" disabled>
+                                          {{item.descripcion}}
+                                        </mat-option>
+                                      </mat-select>  
+                                    </mat-form-field></td>
+                                </ng-container>
+  
+  
+                                 <!-- Indiviso Column -->
+                                 <ng-container matColumnDef="indiviso" sticky>
+                                  <th mat-header-cell *matHeaderCellDef>Indiviso</th>
+                                  <td mat-cell *matCellDef="let row">{{row.indiviso}}</td>
+                                </ng-container>
+  
+                                     <!-- Clase ISAI Column -->
+                                <ng-container matColumnDef="idClaseConstruccionF" sticky>
+                                  <th mat-header-cell *matHeaderCellDef>Clase I.S.A.I.</th>
+                                  <td mat-cell *matCellDef="let row" >{{row.idClaseConstruccionF}}</td>
+                                </ng-container>
+  
+                                          <!-- Puntos totales Column -->
+                                          <ng-container matColumnDef="totalPuntosAjustadosF" sticky>
+                                            <th mat-header-cell *matHeaderCellDef>Puntos totales</th>
+                                            <td mat-cell *matCellDef="let row" >{{row.totalPuntosAjustadosF}}</td>
+                                         </ng-container>
+  
+                            <!-- Vida Min. Rem. Column -->
+                            <ng-container matColumnDef="vidaMinimaRemanenteF" sticky>
+                              <th mat-header-cell *matHeaderCellDef>Vida Min. Rem.</th>
+                              <td mat-cell *matCellDef="let row" >{{row.vidaMinimaRemanenteF}}</td>
+                            </ng-container>
+    
+                                 <!-- Indice de costos Column -->
+                                 <ng-container matColumnDef="indiceCostosRemanenteF" sticky>
+                                  <th mat-header-cell *matHeaderCellDef>Indice Costos Rem.</th>
+                                  <td mat-cell *matCellDef="let row">{{row.indiceCostosRemanenteF}}</td>
+                                </ng-container>
+                      
+                              <!-- Clase s/matriz Column -->
+                              <ng-container matColumnDef="claseSM" sticky>
+                                <th mat-header-cell *matHeaderCellDef>CLASE S/MATRIZ</th>
+                                <td mat-cell *matCellDef="let row" style="background-color:#fff5eb; text-align: center;">{{row.claseSM}}</td>
+                              </ng-container>
+  
+  
+                               <!-- Puntaje  s/matriz Column -->
+                               <ng-container matColumnDef="puntajeSM" sticky>
+                                <th mat-header-cell *matHeaderCellDef>PUNTAJE S/MATRIZ</th>
+                                <td mat-cell *matCellDef="let row" style="background-color:#fff5eb; text-align: center;">{{row.puntajeSM}}</td>
+                              </ng-container>
+  
+                               <!-- Action Column -->
+              <ng-container matColumnDef="actions" stickyEnd >
+                <th *matHeaderCellDef mat-header-cell mat-sort-header>Acciones</th>
+                <td *matCellDef="let row" class="w-10 text-secondary" mat-cell>
+                  <a (click)="$event.stopPropagation()" matTooltip="Consulta de matrices"
+                     class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
+                     mat-icon-button>
+                     <mat-icon>view_comfy</mat-icon >   
+                  </a>
+  
+                  <a (click)="$event.stopPropagation()" matTooltip="Edo. Gral. de conservación"
+                     class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
+                     mat-icon-button>
+                     <mat-icon>toc</mat-icon >   
+                  </a>
+                  <a (click)="editar(row)" matTooltip={{editSave}}
+                     class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
+                     mat-icon-button>
+                    <mat-icon>{{image}}</mat-icon >             
+                  </a>            
+                </td>
+              </ng-container>
+                          
+                     
+                            <tr mat-header-row *matHeaderRowDef="visibleColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: visibleColumns;" [disabled] = "true"></tr>
+                          </table>
+        
+                        </div>
+              
+                        <mat-paginator [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize" class="sticky left-0"></mat-paginator>
+                      </div>
+              
+                    </mat-card-content>       
+                  </mat-card>         
+                </div>
+           </div>
+         </form>
+        </mat-card-content>
+      </mat-card>
+    </div>

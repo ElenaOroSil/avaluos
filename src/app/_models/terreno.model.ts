@@ -134,19 +134,19 @@ export class TerrenoColindancias {
 
     constructor(terrenocolindancias){
     this.idterrenocolindancia = terrenocolindancias.idterrenocolindancia;
-    this.descripcioncolindancia = terrenocolindancias.descripcioncolindancia
-    this.orientacion1a = terrenocolindancias.orientacion1a
-    this.medida1a = terrenocolindancias.medida1a
-    this.detallecolindante1a = terrenocolindancias.detallecolindante1a
-    this.orientacion2a = terrenocolindancias.orientacion2a
-    this.medida2a = terrenocolindancias.medida2a
-    this.detallecolindante2a = terrenocolindancias.detallecolindante2a
-    this.orientacion3a = terrenocolindancias.orientacion3a
-    this.medida3a = terrenocolindancias.medida3a
-    this.detallecolindante3a = terrenocolindancias.detallecolindante3a
-    this.orientacion4a = terrenocolindancias.orientacion4a
-    this.medida4a = terrenocolindancias.medida4a
-    this.detallecolindante4a = terrenocolindancias.detallecolindante4a
+    this.descripcioncolindancia = terrenocolindancias.descripcioncolindancia;
+    this.orientacion1a = terrenocolindancias.orientacion1a;
+    this.medida1a = terrenocolindancias.medida1a;
+    this.detallecolindante1a = terrenocolindancias.detallecolindante1a;
+    this.orientacion2a = terrenocolindancias.orientacion2a;
+    this.medida2a = terrenocolindancias.medida2a;
+    this.detallecolindante2a = terrenocolindancias.detallecolindante2a;
+    this.orientacion3a = terrenocolindancias.orientacion3a;
+    this.medida3a = terrenocolindancias.medida3a;
+    this.detallecolindante3a = terrenocolindancias.detallecolindante3a;
+    this.orientacion4a = terrenocolindancias.orientacion4a;
+    this.medida4a = terrenocolindancias.medida4a;
+    this.detallecolindante4a = terrenocolindancias.detallecolindante4a;
 
 
      }
