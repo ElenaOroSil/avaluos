@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, ViewChildren, QueryList,ElementRef
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { RegistroconstruccionDialogComponent } from '../registroconstruccion-dialog/registroconstruccion-dialog.component';
+import { TablaEdoGralConservacionDialogComponent } from '../tabla-edo-gral-conservacion-dialog/tabla-edo-gral-conservacion-dialog.component';
 import { DescripcionInmuebleService } from '../../../_services/descripcion-inmueble.service';
 import { first } from 'rxjs/operators';
 import { DescripcionInmueble } from './../../../_models/desInmueble.model';
@@ -88,7 +89,7 @@ export class PanelDesInmuebleComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private desInmService: DescripcionInmuebleService,
-    private catalogoService: CatalogosService,) { }
+    private catalogoService: CatalogosService) { }
 
    //muestra columnas en tabla
    get visibleColumns() {
@@ -289,9 +290,7 @@ this.desInmService.addConstruccion(this.folio, this.desInmueble)
   }
 
 
-  editar(e: any) {
-
-    
+  editar(e: any) {   
     this.image = "save";
     this.editSave = "Guardar"
     if (e.editable){
@@ -302,6 +301,19 @@ this.desInmService.addConstruccion(this.folio, this.desInmueble)
     e.editable = !e.editable;    
 
   }
+
+    //Abre modal de la tabla de Estado general de conservación
+openDialogTabEdoGralCons(): void {
+  const dialogRef = this.dialog.open(TablaEdoGralConservacionDialogComponent, {
+    width: '1200px',
+    data: { name: this.name, color: this.color }
+  });
+
+  dialogRef.afterClosed().subscribe(res => {
+    this.color = res;   
+      this.searchConstruccion(res);        
+  });
+}
 
 }
 

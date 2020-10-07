@@ -47,6 +47,8 @@ export class DescripcionInmueble {
 }
 
 export class TablaEdoGralConservacion {
+  idinmuebleconstruccion: number;
+  idclaseconstruccion: string;
   idpartidaporcentaje: number;
   descripcionpartida: string;
   puntospartida: number;
@@ -57,6 +59,8 @@ export class TablaEdoGralConservacion {
   puntosajustados: number; 
 
   constructor(tablaEdoGralConservacion) {
+     this.idinmuebleconstruccion = tablaEdoGralConservacion.idinmuebleconstruccion;
+     this.idclaseconstruccion = tablaEdoGralConservacion.claseconstruccion;
      this.idpartidaporcentaje = tablaEdoGralConservacion.idpartidaporcentaje;
      this.descripcionpartida = tablaEdoGralConservacion.descripcionpartida;
      this.puntospartida = tablaEdoGralConservacion.puntospartida;
@@ -66,5 +70,22 @@ export class TablaEdoGralConservacion {
      this.vidaminimaanios = tablaEdoGralConservacion.vidaminimaanios;
      this.puntosajustados = tablaEdoGralConservacion.puntosajustados;
   }
+
+
+}
+
+export class SinMatrices {
+    idinmuebleconstruccion: number;
+    tipoconstruccion: string;
+    clasesm: string;
+    puntajesm: number;
+
+    constructor(sinMatrices) {
+      this.idinmuebleconstruccion = sinMatrices.idinmuebleconstruccion;
+      this.tipoconstruccion = sinMatrices.tipoconstruccion;
+      this.clasesm = sinMatrices.clasem;
+      this.puntajesm = sinMatrices.puntajesm;
+
+    }
 
 }

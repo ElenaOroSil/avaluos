@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams} from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { DescripcionInmueble  } from '../_models/desInmueble.model'; 
+import { DescripcionInmueble, TablaEdoGralConservacion,   } from '../_models/desInmueble.model'; 
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -13,7 +13,6 @@ export class DescripcionInmuebleService {
 
   addConstruccion(folio: string, value: DescripcionInmueble){
 
-    console.log("paso1")
 
      return this.http.post<any>(`${environment.SERVER_URL}/InmuebleConstrucciones`, { 'IdInmConstruccion': value.idinmconstruccion, 
      'Folio': folio, 'TipoConstruccion': value.tipoconstruccion, 'IdTipoConstruccion': value.idtipoconstruccion, 
@@ -42,5 +41,57 @@ export class DescripcionInmuebleService {
       return desInmConstruccion;
   }));
 }
+
+
+addTablaConservacion(folio: string, value: TablaEdoGralConservacion){
+
+
+  return this.http.post<any>(`${environment.SERVER_URL}/tablaConservacion`, { 'Folio': folio, 
+  'IdInmconstruccion': value.idinmuebleconstruccion, 'IdClaseConstruccion': value.idclaseconstruccion, 
+  'IdPartidaPorcentaje': value.idpartidaporcentaje, 'IdPartidaConserva': value.idpartidaconserva })
+  .pipe(map(resp => {
+        if(resp.ok){
+
+         } 
+    
+      return resp;
+    }));
+}
+
+
+searchTablaConservacion(folio: string, idInmConstruccion: string, clase: string) {
+
+  console.log("folio")
+  console.log(folio)
+  console.log(idInmConstruccion)
+  console.log(clase)
+
+  let params = new HttpParams();
+  params = params.append('Folio', folio);
+  params = params.append('IdInmConstruccion', idInmConstruccion);
+  params = params.append('Clase', clase);
+
+  return this.http.get<any>(`${environment.SERVER_URL}/consultaTablaConservacion`, {params: params})   
+  .pipe(map(tablaConservacion => {
+  
+    return tablaConservacion;
+}));
+}
+
+
+addSinMatrices(folio: string, value: TablaEdoGralConservacion){
+
+  return this.http.post<any>(`${environment.SERVER_URL}/sinMatrices`, {  'IdInmconstruccion': value.idinmuebleconstruccion,
+  'Folio': folio, 'TipoConstruccion': 0, 
+  'IdPartidaPorcentaje': value.idpartidaporcentaje, 'IdPartidaConserva': value.idpartidaconserva })
+  .pipe(map(resp => {
+        if(resp.ok){
+
+         } 
+    
+      return resp;
+    }));
+}
+
 
 }

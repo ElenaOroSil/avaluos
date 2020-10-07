@@ -37,7 +37,7 @@ import { Decimal5MaskDirective } from './_services/decimal5-mask-directive';
 import { Decimal6MaskDirective } from './_services/decimal6-mask-directive';
 import { Decimal12MaskDirective } from './_services/decimal12-mask-directive';
 import { AlertService } from './_services/alert.service';
-import {NgxMaskModule} from 'ngx-mask';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 /* Angular material */
@@ -62,8 +62,7 @@ export function StartupServiceFactory(startupService: StartupService) {
   PanelValorRentasComponent, PanelAnexoFotograficoComponent, PanelVisitasComponent, 
   AguaMaskDirective, Decimal8MaskDirective, Decimal5MaskDirective, 
   Decimal6MaskDirective, Decimal12MaskDirective, ColindanciasDialogComponent,
-  RegistroconstruccionDialogComponent,
-  TablaEdoGralConservacionDialogComponent
+  RegistroconstruccionDialogComponent, TablaEdoGralConservacionDialogComponent
 ],
   imports: [
     BrowserModule,
