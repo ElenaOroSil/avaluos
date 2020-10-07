@@ -36,10 +36,13 @@ export class PanelDesInmuebleComponent implements OnInit {
   info: any = {};
   subject$: ReplaySubject<DescripcionInmueble[]> = new ReplaySubject<DescripcionInmueble[]>(1);
   data$: Observable<DescripcionInmueble[]> = this.subject$.asObservable();
-  selected = 2;
-  editRowId:number=-1
-  @ViewChildren(MatInput,{read:ElementRef}) inputs:QueryList<ElementRef>;
   isExpanded:boolean = false;
+  excluded: boolean;
+  editable: boolean;
+  desInmueble: DescripcionInmueble;
+  image: string = "edit";
+  editSave: string = "Editar";
+ 
 
    //registro CATÁLOGOS
    tpoConstruccion: Catalogo[];
@@ -53,8 +56,8 @@ export class PanelDesInmuebleComponent implements OnInit {
      { label: 'id', property: 'id', type: 'text', visible: false},
      { label: 'folio', property: 'folio', type: 'text', visible: false },
      { label: 'tipoConstruccion', property: 'tipoConstruccion', type: 'text', visible: false },
-     { label: 'Tipo', property: 'idTipoConstruccion', type: 'text', visible: true },
-     { label: 'Superficie', property: 'superficie', type: 'text', visible: true },
+     { label: 'Tipo', property: 'idTipoConstruccion', type: 'text', visible: true},
+     { label: 'Superficie', property: 'superficie', type: 'text', visible: true},
      { label: 'Descripción', property: 'descripcionModulo', type: 'text', visible: true },
      { label: 'Nivel tipo', property: 'nivelTipo', type: 'text', visible: true },
      { label: 'Uso', property: 'idUsoConstruccion', type: 'text', visible: true },
@@ -67,8 +70,7 @@ export class PanelDesInmuebleComponent implements OnInit {
      { label: 'Clase ISAI', property: 'idClaseConstruccionF', type: 'text', visible: true },
      { label: 'totalPuntosAjustadosF', property: 'totalPuntosAjustadosF', type: 'text', visible: true },
      { label: 'Vida Min. Rem.', property: 'vidaMinimaRemanenteF', type: 'text', visible: true },
-     { label: 'Indice Costos Rem.', property: 'indiceCostosRemanenteF', type: 'text', visible: true },
-     { label: 'estadoGralConservacionF', property: 'estadoGralConservacionF', type: 'text', visible: true },   
+     { label: 'Indice Costos Rem.', property: 'indiceCostosRemanenteF', type: 'text', visible: true },  
      { label: 'Clase s/matriz', property: 'claseSM', type: 'text', visible: true },
      { label: 'Puntaje s/matriz', property: 'puntajeSM', type: 'text', visible: true },
      { label: 'Acciones', property: 'actions', type: 'button', visible: true }
@@ -119,28 +121,25 @@ export class PanelDesInmuebleComponent implements OnInit {
      //Sección Terreno
      this.desInmueble1FormGroup = this.formBuilder.group({
       'idInmConstruccion': new FormControl(''),
-      'folio': new FormControl('', [Validators.required]),
-      'tipoConstruccion': new FormControl('', [Validators.required]),
-      'idTipoConstruccion': new FormControl('', [Validators.required]),
+      'folio': new FormControl(''),
+      'tipoConstruccion': new FormControl(''),
+      'idTipoConstruccion': new FormControl(''),
       'superficie': new FormControl('', [Validators.required]),
       'descripcionModulo': new FormControl('', [Validators.required]),
       'nivelTipo': new FormControl('', [Validators.required]),
-      'idUsoConstruccion': new FormControl('', [Validators.required]),
-      'idRangoNivelTGDF': new FormControl('', [Validators.required]),
+      'idUsoConstruccion': new FormControl(''),
+      'idRangoNivelTGDF': new FormControl(''),
       'claseF': new FormControl(''),
-      'puntajeF': new FormControl('', [Validators.required]),
+      'puntajeF': new FormControl(''),
       'edad': new FormControl('', [Validators.required]),
-      'idEstadoConservacion': new FormControl('', [Validators.required]),
+      'idEstadoConservacion': new FormControl(''),
       'indiviso': new FormControl('', [Validators.required]),
-      'idClaseConstruccionF': new FormControl('', [Validators.required]),
-      'medida2': new FormControl('', [Validators.required]),
-      'detalleColindante2': new FormControl('', [Validators.required]),
-      'estadoGralConservacionF': new FormControl('', [Validators.required]),
-      'vidaMinimaRemanenteF': new FormControl('', [Validators.required]),
-      'indiceCostosRemanenteF': new FormControl('', [Validators.required]),
-      'totalPuntosAjustadosF': new FormControl('', [Validators.required]),
-      'claseSM': new FormControl('', [Validators.required]),
-      'puntajeSM': new FormControl('', [Validators.required]),
+      'idClaseConstruccionF': new FormControl(''),
+      'vidaMinimaRemanenteF': new FormControl(''),
+      'indiceCostosRemanenteF': new FormControl(''),
+      'totalPuntosAjustadosF': new FormControl(''),
+      'claseSM': new FormControl(''),
+      'puntajeSM': new FormControl(''),
     });
   }
 
@@ -166,6 +165,56 @@ openDialog(): void {
   });
 }
 
+
+ //Llama servicio para alta de terreno
+ addConstruccion(value: any){
+
+  console.log("VALUE")
+  console.log(value)
+  
+  // stop here if form is invalid
+  //if (this.desInmueble1FormGroup.invalid) {
+  //  return;
+  //}
+
+this.desInmueble = {idinmconstruccion: value.idInmConstruccion, tipoconstruccion: value.tipoConstruccion, idtipoconstruccion: value.idTipoConstruccion, 
+              superficie: value.superficie, descripcionmodulo: value.descripcionModulo,  niveltipo: value.nivelTipo, 
+              idusoconstruccion: value.idUsoConstruccion, idrangoniveltgdf: value.idRangoNivelTGDF,  clasef: "", puntajef: 0,
+              edad: value.edad, idestadoconservacion: value.idEstadoConservacion, indiviso: value.indiviso,
+              idclaseconstruccionf: 0, estadogralconservacionf: "", vidaminimaremanentef: 0, indicecostosremanentef: 0, totalpuntosajustadosf: 0,
+              clasesm: 0, puntajesm: 0}
+
+console.log("this.desInmueble")
+console.log(this.desInmueble)
+
+
+this.loading = true;
+this.desInmService.addConstruccion(this.folio, this.desInmueble)
+    .pipe(first())
+    .subscribe(
+        data => {
+
+        if(data.ok){
+          this.alertDesInmueble = true;        
+          this.loading = false;
+          this.msg = data.mensaje;
+          this.classAlert = 'alert-success alert alert-dismissible fade show';   
+      } else {
+        this.alertDesInmueble = true;   
+        this.loading = false;
+        this.msg = data.mensaje;
+        this.classAlert = 'alert-danger alert alert-dismissible fade show';
+      }
+      },
+      error => {
+        this.alertDesInmueble = true;  
+        this.loading = false;
+        this.msg = error;
+        this.classAlert = 'alert-danger alert alert-dismissible fade show';
+      });
+
+}
+
  //Llama servicio para la consulta de terreno
  searchConstruccion (res: string) {
     
@@ -175,9 +224,6 @@ openDialog(): void {
          .subscribe( data => {                    
                this.loading = false;
                this.info = data.inmuebleConstrucciones;
-             
-               console.log("this.info")
-               console.log(this.info)
               
                this.subject$.next(this.info);
 
@@ -242,21 +288,22 @@ openDialog(): void {
               });    
   }
 
-  edit(row,element)
-  {
 
-    console.log(row)
-    console.log(element)
-    this.editRowId=row;
-    setTimeout(()=>{
-      this.inputs.find(x=>x.nativeElement.getAttribute('formControlName')==element).nativeElement.focus()
+  editar(e: any) {
 
-    })
+    
+    this.image = "save";
+    this.editSave = "Guardar"
+    if (e.editable){
+      this.addConstruccion(e)
+      this.image = "edit";
+      this.editSave = "Editar"
+    } 
+    e.editable = !e.editable;    
+
   }
 
 }
-
-
 
 
 

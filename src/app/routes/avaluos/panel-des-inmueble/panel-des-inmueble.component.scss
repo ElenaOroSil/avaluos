@@ -9,5 +9,18 @@ mat-expansion-panel-header {
     height: 80px !important;
 }
 
+.mat-table-sticky {
+    border-right: 1px solid #e0e0e0;
+  }
+  
+  .mat-table-sticky:last-child {
+    border-left: 1px solid #e0e0e0;
+  }
+
+  .mat-row:hover {
+    background-color:#CCE9E7;
+  }
+  
+
 
 
