@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Catalogo } from './../../../_models/catalogo.model';
+import { Component, OnInit, Input, Inject, Optional } from '@angular/core';
+import { CatalogoString, Catalogo } from './../../../_models/catalogo.model';
 import { CatalogosService } from './../../../_services/catalogos.service';
 import { TableColumn } from './../../../../@vex/interfaces/table-column.interface';
 import { TablaEdoGralConservacion } from './../../../_models/desInmueble.model';
@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable, ReplaySubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { first } from 'rxjs/operators';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-tabla-edo-gral-conservacion-dialog',
@@ -22,13 +23,24 @@ export class TablaEdoGralConservacionDialogComponent implements OnInit {
   info: any = {};
   edoGralFormGroup: FormGroup;
   loading = false;
-  alertDesInmueble: boolean = false;
+  alertTablaEdoGral: boolean = false;
   msg= '';
   classAlert: string;
   folio = localStorage.getItem('folio');
+  submitted = false;
+  tablaEdoGralConservacion: TablaEdoGralConservacion;
+  edoGralConservacionT: string;
+  vidaMinimaRemanenteT: number;
+  indiceCostosRemanente: number;
+  puntosTotales: number;
+  clase: string = "1";
+  idInmCons: string;
+  tipoCons: string;
+
 
    //registro CATÁLOGOS
    edoConservacion: Catalogo[];
+   claseCatalogo: CatalogoString[];
 
    //Nombre de columnas en tabla
   @Input()
@@ -48,7 +60,14 @@ export class TablaEdoGralConservacionDialogComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private desInmService: DescripcionInmuebleService,
-    private catalogoService: CatalogosService) { }
+    private catalogoService: CatalogosService,
+    public dialogRef: MatDialogRef<TablaEdoGralConservacionDialogComponent>,
+    @Optional()  @Inject(MAT_DIALOG_DATA) public data: any) {
+
+      this.idInmCons = data.idInmCons;
+      this.tipoCons = data.tipoCons;
+
+     }
 
   
     //muestra columnas en tabla
@@ -60,8 +79,9 @@ export class TablaEdoGralConservacionDialogComponent implements OnInit {
 
      //Combos de Estado de conservación
      this.getCatalogoEdoConservacion("PARTIDASCONSERVACION");
+     this.getCatalogoClase("CLASECONSTRUCCION");
 
-     this.searchEdoGralConservacion();
+     this.searchEdoGralConservacion(this.folio, this.idInmCons, this.clase);
 
     this.dataSource = new MatTableDataSource();
     this.data$.pipe(
@@ -73,14 +93,19 @@ export class TablaEdoGralConservacionDialogComponent implements OnInit {
 
       //Sección Terreno
       this.edoGralFormGroup = this.formBuilder.group({
+        'claseConstruccion': new FormControl('', [Validators.required]),
         'idPartidaPorcentaje': new FormControl(''),
         'descripcionPartidaPorcentaje': new FormControl(''),
         'puntosPartida': new FormControl(''),
         'idPartidaConserva': new FormControl(''),
-        'manttRequerido': new FormControl('', [Validators.required]),
-        'indiceConservacion': new FormControl('', [Validators.required]),
-        'vidaMinimaAnios': new FormControl('', [Validators.required]),
+        'manttRequerido': new FormControl(''),
+        'indiceConservacion': new FormControl(''),
+        'vidaMinimaAnios': new FormControl(''),
         'puntosAjustados': new FormControl(''),
+        'edoGralConservacionT': new FormControl(''),
+        'vidaMinimaRemanenteT': new FormControl(''),
+        'indiceCostosRemanente': new FormControl(''),
+        'puntosTotales': new FormControl(''),
       });
   }
 
@@ -93,38 +118,140 @@ export class TablaEdoGralConservacionDialogComponent implements OnInit {
           .pipe(first())
           .subscribe( data => {                    
                 this.loading = false;             
-                  this.edoConservacion = data;                
+                  this.edoConservacion = data;             
               },
               error => {
-                this.alertDesInmueble = true;  
+                this.alertTablaEdoGral = true;  
                 this.loading = false;
                 this.msg = error;
                 this.classAlert = 'alert-danger alert alert-dismissible fade show';
               });    
   }
 
-  //Llama servicio para la consulta de la tabla de des
-  searchEdoGralConservacion() {
-   
-  console.log("SEARCH AAAAA");
+   //Llama servicio sección Descripción del Inmueble
+   getCatalogoClase (catalogo: string) {
+
+    this.loading = true;
+    this.catalogoService.getCatalogosDesInmueble(catalogo)
+          .pipe(first())
+          .subscribe( data => {                    
+                this.loading = false;             
+                  this.claseCatalogo = data;             
+              },
+              error => {
+                this.alertTablaEdoGral = true;  
+                this.loading = false;
+                this.msg = error;
+                this.classAlert = 'alert-danger alert alert-dismissible fade show';
+              });    
+  }
+
+   // convenience getter for easy access to form fields
+   get ant1() { return this.edoGralFormGroup.controls; }
+
+   //Llama servicio para guardar la tabla de Edo Gral de conservacion
+   addEdoGralConservacion(value: any, clase: string) {
+    this.submitted = true;
+
+  //stop here if form is invalid
+  if (this.edoGralFormGroup.invalid) {
+     return;
+  }
+
+  this.tablaEdoGralConservacion = {idinmuebleconstruccion: Number(this.idInmCons), 
+    claseconstruccion: clase, 
+    idpartidaporcentaje: value.idPartidaPorcentaje, 
+    descripcionpartida: value.descripcionPartidaPorcentaje, puntospartida: value.puntosPartida, 
+    idpartidaconserva: value.idPartidaConserva,
+    manttrequerido: value.manttRequerido, indiceconservacion: value.indiceConservacion, vidaminimaanios: value.vidaMinimaAnios,
+    puntosajustados: value.puntosAjustados}
+
+    console.log("DATOS PRINCIPALES")
+    console.log(this.folio)
+    console.log(this.tablaEdoGralConservacion)
+  
   this.loading = true;
-  this.desInmService.searchTablaConservacion(this.folio, "5", "1")
+  this.desInmService.addTablaConservacion(this.folio, this.tablaEdoGralConservacion)
+      .pipe(first())
+      .subscribe(
+          data => {
+
+          if(data.ok){
+            this.alertTablaEdoGral = true;        
+            this.loading = false;
+            this.msg = data.mensaje;
+            this.classAlert = 'alert-success alert alert-dismissible fade show';   
+        } else {
+          this.alertTablaEdoGral = true;   
+          this.loading = false;
+          this.msg = data.mensaje;
+          this.classAlert = 'alert-danger alert alert-dismissible fade show';
+        }
+        },
+        error => {
+          this.alertTablaEdoGral = true;  
+          this.loading = false;
+          this.msg = error;
+          this.classAlert = 'alert-danger alert alert-dismissible fade show';
+        });
+
+  }
+
+  //Llama servicio para la consulta de la tabla de estado gral de conservacion
+  searchEdoGralConservacion(folio: string, idInmConstruccion: string, claseConstruccion: string) {
+   
+  this.loading = true;
+  this.desInmService.searchTablaConservacion(folio, idInmConstruccion, claseConstruccion)
          .pipe(first())
          .subscribe( data => {                    
                this.loading = false;
-               this.info = data.inmuebleConstrucciones;
-               console.log("this.info");
-               console.log(this.info);
+               this.info = data.tabla;
+               this.clase = data.claseConstruccion;         
+               this.edoGralFormGroup.controls['claseConstruccion'].setValue(this.clase); 
+            
+
+               this.edoGralConservacionT = data.estadoGralConserva;
+               this.vidaMinimaRemanenteT = data.vidaMinRemanente;
+               this.indiceCostosRemanente = data.indiceCostosRemanente;
+               this.puntosTotales = data.totalPuntosAjustados;
+  
                this.subject$.next(this.info);
 
              },
              error => {
-              this.alertDesInmueble = true;  
+              this.alertTablaEdoGral = true;  
               this.loading = false;
               this.msg = error;
               this.classAlert = 'alert-danger alert alert-dismissible fade show';
              });                           
      }
+
+     closeAlertTablaEdoGral(){
+      this.alertTablaEdoGral = false;
+    }
+
+     onNoClick(): void {
+      this.dialogRef.close(this.tipoCons);
+    }
+
+    onSelectionClass(){
+
+      this.clase = this.ant1.claseConstruccion.value
+      this.searchEdoGralConservacion(this.folio, this.idInmCons, this.clase)
+
+    }
+
+    onSelectionEstado(row: any){
+
+       
+      this.clase = this.ant1.claseConstruccion.value;
+
+      console.log("SELECTTTTT")
+      console.log(row)
+      console.log(this.clase)
+      this.addEdoGralConservacion(row, this.clase);
+
+    }
 
   
 }

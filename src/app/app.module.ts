@@ -47,6 +47,7 @@ import { PanelVisitasComponent } from './routes/avaluos/panel-visitas/panel-visi
 import { ColindanciasDialogComponent } from './routes/avaluos/colindancias-dialog/colindancias-dialog.component';
 import { RegistroconstruccionDialogComponent } from './routes/avaluos/registroconstruccion-dialog/registroconstruccion-dialog.component';
 import { TablaEdoGralConservacionDialogComponent } from './routes/avaluos/tabla-edo-gral-conservacion-dialog/tabla-edo-gral-conservacion-dialog.component';
+import { ListamatricesDialogComponent } from './routes/avaluos/listamatrices-dialog/listamatrices-dialog.component';
 
 
 export function StartupServiceFactory(startupService: StartupService) {
@@ -62,7 +63,7 @@ export function StartupServiceFactory(startupService: StartupService) {
   PanelValorRentasComponent, PanelAnexoFotograficoComponent, PanelVisitasComponent, 
   AguaMaskDirective, Decimal8MaskDirective, Decimal5MaskDirective, 
   Decimal6MaskDirective, Decimal12MaskDirective, ColindanciasDialogComponent,
-  RegistroconstruccionDialogComponent, TablaEdoGralConservacionDialogComponent
+  RegistroconstruccionDialogComponent, TablaEdoGralConservacionDialogComponent, ListamatricesDialogComponent
 ],
   imports: [
     BrowserModule,

@@ -97,7 +97,7 @@ export class ColindanciasDialogComponent implements OnInit {
                 this.msg = error;
                 this.classAlert = 'alert-danger alert alert-dismissible fade show';
               });    
-  }
+      }
 
       //Llama servicio para alta de terreno
       guardarColindancia() {

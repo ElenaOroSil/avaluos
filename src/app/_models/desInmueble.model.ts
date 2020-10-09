@@ -48,7 +48,7 @@ export class DescripcionInmueble {
 
 export class TablaEdoGralConservacion {
   idinmuebleconstruccion: number;
-  idclaseconstruccion: string;
+  claseconstruccion: string;
   idpartidaporcentaje: number;
   descripcionpartida: string;
   puntospartida: number;
@@ -60,7 +60,7 @@ export class TablaEdoGralConservacion {
 
   constructor(tablaEdoGralConservacion) {
      this.idinmuebleconstruccion = tablaEdoGralConservacion.idinmuebleconstruccion;
-     this.idclaseconstruccion = tablaEdoGralConservacion.claseconstruccion;
+     this.claseconstruccion = tablaEdoGralConservacion.claseconstruccion;
      this.idpartidaporcentaje = tablaEdoGralConservacion.idpartidaporcentaje;
      this.descripcionpartida = tablaEdoGralConservacion.descripcionpartida;
      this.puntospartida = tablaEdoGralConservacion.puntospartida;

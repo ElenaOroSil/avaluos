@@ -46,8 +46,12 @@ export class DescripcionInmuebleService {
 addTablaConservacion(folio: string, value: TablaEdoGralConservacion){
 
 
+ // console.log("SERVICIO")
+ // console.log(folio)
+ // console.log(value)
+
   return this.http.post<any>(`${environment.SERVER_URL}/tablaConservacion`, { 'Folio': folio, 
-  'IdInmconstruccion': value.idinmuebleconstruccion, 'IdClaseConstruccion': value.idclaseconstruccion, 
+  'IdInmconstruccion': value.idinmuebleconstruccion, 'IdClaseConstruccion': value.claseconstruccion, 
   'IdPartidaPorcentaje': value.idpartidaporcentaje, 'IdPartidaConserva': value.idpartidaconserva })
   .pipe(map(resp => {
         if(resp.ok){
@@ -59,17 +63,12 @@ addTablaConservacion(folio: string, value: TablaEdoGralConservacion){
 }
 
 
-searchTablaConservacion(folio: string, idInmConstruccion: string, clase: string) {
-
-  console.log("folio")
-  console.log(folio)
-  console.log(idInmConstruccion)
-  console.log(clase)
+searchTablaConservacion(folio: string, idInmConstruccion: string, claseConstruccion: string) {
 
   let params = new HttpParams();
   params = params.append('Folio', folio);
   params = params.append('IdInmConstruccion', idInmConstruccion);
-  params = params.append('Clase', clase);
+  params = params.append('Clase', claseConstruccion);
 
   return this.http.get<any>(`${environment.SERVER_URL}/consultaTablaConservacion`, {params: params})   
   .pipe(map(tablaConservacion => {

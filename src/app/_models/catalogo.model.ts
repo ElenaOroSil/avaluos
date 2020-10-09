@@ -10,3 +10,17 @@ constructor(catalogo){
     
 }
 }
+
+export class CatalogoString {
+    clave: string;
+    descripcion: string;
+
+
+constructor(catalogostring){
+
+    this.clave = catalogostring.clave;
+    this.descripcion = catalogostring.descripcion;
+    
+}
+}
+

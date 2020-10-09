@@ -120,4 +120,17 @@ getCatalogoTpoConstruccion(catalogo: string, tipo: string) {
 }));
 }
 
+
+//Llena catálogo de Matrices
+getCatalogoMatrices() {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/listaMatrices`)   
+  .pipe(map(catalogo => {
+    if(catalogo.ok){   
+             
+     }  
+  return catalogo.lista;
+}));
+}
+
 }

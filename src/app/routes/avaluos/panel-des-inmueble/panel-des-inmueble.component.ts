@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, ViewChild, ViewChildren, QueryList,ElementRef} from '@angular/core';
+import { Component, OnInit, Input, ViewChild} from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { RegistroconstruccionDialogComponent } from '../registroconstruccion-dialog/registroconstruccion-dialog.component';
 import { TablaEdoGralConservacionDialogComponent } from '../tabla-edo-gral-conservacion-dialog/tabla-edo-gral-conservacion-dialog.component';
+import { ListamatricesDialogComponent } from '../listamatrices-dialog/listamatrices-dialog.component';
 import { DescripcionInmuebleService } from '../../../_services/descripcion-inmueble.service';
 import { first } from 'rxjs/operators';
 import { DescripcionInmueble } from './../../../_models/desInmueble.model';
@@ -14,7 +15,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { filter } from 'rxjs/operators';
 import { Catalogo } from './../../../_models/catalogo.model';
 import { CatalogosService } from './../../../_services/catalogos.service';
-import { MatInput } from '@angular/material/input';
+
 
 @Component({
   selector: 'app-panel-des-inmueble',
@@ -43,6 +44,8 @@ export class PanelDesInmuebleComponent implements OnInit {
   desInmueble: DescripcionInmueble;
   image: string = "edit";
   editSave: string = "Editar";
+  tipoCons: string;
+
  
 
    //registro CATÁLOGOS
@@ -67,7 +70,7 @@ export class PanelDesInmuebleComponent implements OnInit {
      { label: 'PUNTAJE', property: 'puntajeF', type: 'text', visible: true },
      { label: 'Edad', property: 'edad', type: 'text', visible: true},
      { label: 'Estado de conservación', property: 'idEstadoConservacion', type: 'text', visible: true },
-     { label: 'Indiviso', property: 'indiviso', type: 'text', visible: false },
+     { label: 'Indiviso', property: 'indiviso', type: 'text', visible: true },
      { label: 'Clase ISAI', property: 'idClaseConstruccionF', type: 'text', visible: true },
      { label: 'totalPuntosAjustadosF', property: 'totalPuntosAjustadosF', type: 'text', visible: true },
      { label: 'Vida Min. Rem.', property: 'vidaMinimaRemanenteF', type: 'text', visible: true },
@@ -109,6 +112,7 @@ export class PanelDesInmuebleComponent implements OnInit {
     
     //busca construcciones
     this.searchConstruccion("P");
+   //this.searchConstruccion("C");
 
 
     this.dataSource = new MatTableDataSource();
@@ -134,7 +138,6 @@ export class PanelDesInmuebleComponent implements OnInit {
       'puntajeF': new FormControl(''),
       'edad': new FormControl('', [Validators.required]),
       'idEstadoConservacion': new FormControl(''),
-      'indiviso': new FormControl('', [Validators.required]),
       'idClaseConstruccionF': new FormControl(''),
       'vidaMinimaRemanenteF': new FormControl(''),
       'indiceCostosRemanenteF': new FormControl(''),
@@ -142,6 +145,30 @@ export class PanelDesInmuebleComponent implements OnInit {
       'claseSM': new FormControl(''),
       'puntajeSM': new FormControl(''),
     });
+
+      //Sección Terreno
+      this.desInmueble2FormGroup = this.formBuilder.group({
+        'idInmConstruccion': new FormControl(''),
+        'folio': new FormControl(''),
+        'tipoConstruccion': new FormControl(''),
+        'idTipoConstruccion': new FormControl(''),
+        'superficie': new FormControl('', [Validators.required]),
+        'descripcionModulo': new FormControl('', [Validators.required]),
+        'nivelTipo': new FormControl('', [Validators.required]),
+        'idUsoConstruccion': new FormControl(''),
+        'idRangoNivelTGDF': new FormControl(''),
+        'claseF': new FormControl(''),
+        'puntajeF': new FormControl(''),
+        'edad': new FormControl('', [Validators.required]),
+        'idEstadoConservacion': new FormControl(''),
+        'indiviso': new FormControl('', [Validators.required]),
+        'idClaseConstruccionF': new FormControl(''),
+        'vidaMinimaRemanenteF': new FormControl(''),
+        'indiceCostosRemanenteF': new FormControl(''),
+        'totalPuntosAjustadosF': new FormControl(''),
+        'claseSM': new FormControl(''),
+        'puntajeSM': new FormControl(''),
+      });
   }
 
   expand(){
@@ -169,9 +196,6 @@ openDialog(): void {
 
  //Llama servicio para alta de terreno
  addConstruccion(value: any){
-
-  console.log("VALUE")
-  console.log(value)
   
   // stop here if form is invalid
   //if (this.desInmueble1FormGroup.invalid) {
@@ -184,10 +208,6 @@ this.desInmueble = {idinmconstruccion: value.idInmConstruccion, tipoconstruccion
               edad: value.edad, idestadoconservacion: value.idEstadoConservacion, indiviso: value.indiviso,
               idclaseconstruccionf: 0, estadogralconservacionf: "", vidaminimaremanentef: 0, indicecostosremanentef: 0, totalpuntosajustadosf: 0,
               clasesm: 0, puntajesm: 0}
-
-console.log("this.desInmueble")
-console.log(this.desInmueble)
-
 
 this.loading = true;
 this.desInmService.addConstruccion(this.folio, this.desInmueble)
@@ -218,6 +238,8 @@ this.desInmService.addConstruccion(this.folio, this.desInmueble)
 
  //Llama servicio para la consulta de terreno
  searchConstruccion (res: string) {
+
+
     
   this.loading = true;
   this.desInmService.searchConstruccion(this.folio, res)
@@ -303,17 +325,34 @@ this.desInmService.addConstruccion(this.folio, this.desInmueble)
   }
 
     //Abre modal de la tabla de Estado general de conservación
-openDialogTabEdoGralCons(): void {
+openDialogTabEdoGralCons(row: any): void {
+
+
   const dialogRef = this.dialog.open(TablaEdoGralConservacionDialogComponent, {
     width: '1200px',
-    data: { name: this.name, color: this.color }
+    data: { idInmCons: row.idInmConstruccion, tipoCons: row.tipoConstruccion}
   });
 
   dialogRef.afterClosed().subscribe(res => {
-    this.color = res;   
-      this.searchConstruccion(res);        
+    this.tipoCons = res;   
+    this.searchConstruccion(this.tipoCons);          
   });
 }
+
+   //Abre modal del catálogo de Matrices
+   openDialogListaMatrices(row: any): void {
+
+
+    const dialogRef = this.dialog.open(ListamatricesDialogComponent, {
+      width: '1200px',
+      data: { idInmCons: row.idInmConstruccion}
+    });
+  
+    dialogRef.afterClosed().subscribe(res => {
+      this.tipoCons = res;   
+      this.searchConstruccion(this.tipoCons);          
+    });
+  }
 
 }
 
