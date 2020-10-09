@@ -3,3 +3,60 @@
 @import 'styles/grid';
 @import 'styles/helpers';
 @import 'styles/plugins';
+
+
+
+div.route-sign-in {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    height: 100vh;
+    min-height: 800px;
+}
+
+div.route-sign-in>div.left {
+  /* background-color: #f7faff;*/
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    display: -ms-flexbox;
+    display: grid;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+div.route-sign-in>div.right {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    background-position: 100% 0,100% 100%;
+    background-repeat: no-repeat;
+    background-color: #130c5c;
+    background-image: url('assets/images/img-login-2.jpg');
+    /*background-size: 80vh auto,75vh auto;*/
+    -ms-flex-positive: 6;
+    flex-grow: 6;
+}
+
+@media only screen and (max-width: 600px) {
+    div.route-sign-in>div.right {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        background-position: 100% 0,100% 100%;
+        background-repeat: no-repeat;
+        /*background-size: 80vh auto,75vh auto;*/
+        background-color: #fff;
+        background-image:none;
+        -ms-flex-positive: 6;
+        flex-grow: 6;
+    }
+}
