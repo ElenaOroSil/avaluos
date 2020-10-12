@@ -35,9 +35,16 @@ export class PanelDesInmuebleComponent implements OnInit {
   alertDesInmueble: boolean = false;
   msg= '';
   classAlert: string;
-  info: any = {};
-  subject$: ReplaySubject<DescripcionInmueble[]> = new ReplaySubject<DescripcionInmueble[]>(1);
-  data$: Observable<DescripcionInmueble[]> = this.subject$.asObservable();
+
+  infoP: any = {};
+  subject$P: ReplaySubject<DescripcionInmueble[]> = new ReplaySubject<DescripcionInmueble[]>(1);
+  data$P: Observable<DescripcionInmueble[]> = this.subject$P.asObservable();
+
+  infoC: any = {};
+  subject$C: ReplaySubject<DescripcionInmueble[]> = new ReplaySubject<DescripcionInmueble[]>(1);
+  data$C: Observable<DescripcionInmueble[]> = this.subject$C.asObservable();
+
+
   isExpanded:boolean = false;
   excluded: boolean;
   editable: boolean;
@@ -45,6 +52,8 @@ export class PanelDesInmuebleComponent implements OnInit {
   image: string = "edit";
   editSave: string = "Editar";
   tipoCons: string;
+  showCancelCom: boolean = false;
+  showCancelPri: boolean = false;
 
  
 
@@ -59,7 +68,7 @@ export class PanelDesInmuebleComponent implements OnInit {
    columns: TableColumn<DescripcionInmueble>[] = [
      { label: 'id', property: 'id', type: 'text', visible: false},
      { label: 'folio', property: 'folio', type: 'text', visible: false },
-     { label: 'tipoConstruccion', property: 'tipoConstruccion', type: 'text', visible: false },
+     { label: 'tipoConstruccion', property: 'tipoConstruccion', type: 'text', visible: true },
      { label: 'Tipo', property: 'idTipoConstruccion', type: 'text', visible: true},
      { label: 'Superficie', property: 'superficie', type: 'text', visible: true},
      { label: 'Descripción', property: 'descripcionModulo', type: 'text', visible: true },
@@ -70,7 +79,7 @@ export class PanelDesInmuebleComponent implements OnInit {
      { label: 'PUNTAJE', property: 'puntajeF', type: 'text', visible: true },
      { label: 'Edad', property: 'edad', type: 'text', visible: true},
      { label: 'Estado de conservación', property: 'idEstadoConservacion', type: 'text', visible: true },
-     { label: 'Indiviso', property: 'indiviso', type: 'text', visible: true },
+     { label: 'Indiviso', property: 'indiviso', type: 'text', visible: false },
      { label: 'Clase ISAI', property: 'idClaseConstruccionF', type: 'text', visible: true },
      { label: 'totalPuntosAjustadosF', property: 'totalPuntosAjustadosF', type: 'text', visible: true },
      { label: 'Vida Min. Rem.', property: 'vidaMinimaRemanenteF', type: 'text', visible: true },
@@ -80,13 +89,21 @@ export class PanelDesInmuebleComponent implements OnInit {
      { label: 'Acciones', property: 'actions', type: 'button', visible: true }
    ];
  
-   pageSize = 10;
-   pageSizeOptions: number[] = [5, 10, 20, 50];
-   dataSource: MatTableDataSource<DescripcionInmueble> | null;
-   selection = new SelectionModel<DescripcionInmueble>(true, []);
+   pageSizeP = 10;
+   pageSizeOptionsP: number[] = [5, 10, 20, 50];
+   dataSourceP: MatTableDataSource<DescripcionInmueble> | null;
+   selectionP = new SelectionModel<DescripcionInmueble>(true, []);
+
+   pageSizeC = 10;
+   pageSizeOptionsC: number[] = [5, 10, 20, 50];
+   dataSourceC: MatTableDataSource<DescripcionInmueble> | null;
+   selectionC = new SelectionModel<DescripcionInmueble>(true, []);
 
   //Paginación
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  //@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  @ViewChild('paginator') paginator: MatPaginator;
+  @ViewChild('paginator2') paginator2: MatPaginator;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -111,16 +128,23 @@ export class PanelDesInmuebleComponent implements OnInit {
       this.getCatalogosDesInmueble("ESTADOCONSERVACION");
     
     //busca construcciones
-    this.searchConstruccion("P");
-   //this.searchConstruccion("C");
+    this.searchConstruccionP("P");
+    this.searchConstruccionC("C");
 
-
-    this.dataSource = new MatTableDataSource();
-    this.data$.pipe(
+    this.dataSourceP = new MatTableDataSource();
+    this.data$P.pipe(
       filter<DescripcionInmueble[]>(Boolean)
     ).subscribe(dataDescripcion => {
-      this.info = dataDescripcion;
-      this.dataSource.data = dataDescripcion;
+      this.infoP = dataDescripcion;
+      this.dataSourceP.data = dataDescripcion;
+    });
+
+    this.dataSourceC = new MatTableDataSource();
+    this.data$C.pipe(
+      filter<DescripcionInmueble[]>(Boolean)
+    ).subscribe(dataDescripcion => {
+      this.infoC = dataDescripcion;
+      this.dataSourceC.data = dataDescripcion;
     });
 
      //Sección Terreno
@@ -175,9 +199,14 @@ export class PanelDesInmuebleComponent implements OnInit {
     this.isExpanded = !this.isExpanded;
     }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+  //ngAfterViewInit() {
+  //  this.dataSourceP.paginator = this.paginator;
+  //  this.dataSourceC.paginator = this.paginator;
+  //}
 
+  ngAfterViewInit() {
+    this.dataSourceP.paginator = this.paginator;
+    this.dataSourceC.paginator = this.paginator2;
   }
 
   //Abre modal para el registro de la construcción
@@ -189,7 +218,8 @@ openDialog(): void {
 
   dialogRef.afterClosed().subscribe(res => {
     this.color = res;   
-      this.searchConstruccion(res);        
+      this.searchConstruccionP("P"); 
+      this.searchConstruccionC("C"); 
   });
 }
 
@@ -237,28 +267,57 @@ this.desInmService.addConstruccion(this.folio, this.desInmueble)
 }
 
  //Llama servicio para la consulta de terreno
- searchConstruccion (res: string) {
+ searchConstruccionP (res: string) {
 
-
-    
+  console.log("ENTRA 1")
+  console.log(res)
+  
   this.loading = true;
   this.desInmService.searchConstruccion(this.folio, res)
          .pipe(first())
          .subscribe( data => {                    
                this.loading = false;
-               this.info = data.inmuebleConstrucciones;
-              
-               this.subject$.next(this.info);
-
+               
+               console.log(data.inmuebleConstrucciones)
+               this.infoP = data.inmuebleConstrucciones;
+               this.subject$P.next(this.infoP);
+            
              },
              error => {
               this.alertDesInmueble = true;  
               this.loading = false;
               this.msg = error;
               this.classAlert = 'alert-danger alert alert-dismissible fade show';
-             });                           
+             });           
+             
      }
 
+
+      //Llama servicio para la consulta de terreno
+ searchConstruccionC (res: string) {
+
+  console.log("ENTRA 2")
+  console.log(res)
+  
+  this.loading = true;
+  this.desInmService.searchConstruccion(this.folio, res)
+         .pipe(first())
+         .subscribe( data => {                    
+               this.loading = false;
+               
+               console.log(data.inmuebleConstrucciones)
+               this.infoC = data.inmuebleConstrucciones;
+               this.subject$C.next(this.infoC);
+            
+             },
+             error => {
+              this.alertDesInmueble = true;  
+              this.loading = false;
+              this.msg = error;
+              this.classAlert = 'alert-danger alert alert-dismissible fade show';
+             });           
+             
+     }
 
   //Llama servicio sección Descripción del Inmueble
   getCatalogoTpoConstruccion (catalogo: string, tipo: string) {
@@ -313,14 +372,22 @@ this.desInmService.addConstruccion(this.folio, this.desInmueble)
 
 
   editar(e: any) {   
+    this.showCancelCom = true;
     this.image = "save";
     this.editSave = "Guardar"
+    
     if (e.editable){
       this.addConstruccion(e)
       this.image = "edit";
       this.editSave = "Editar"
     } 
     e.editable = !e.editable;    
+
+  }
+
+  cancelar(e: any) {   
+    
+    console.log("ELENA")
 
   }
 
@@ -335,7 +402,7 @@ openDialogTabEdoGralCons(row: any): void {
 
   dialogRef.afterClosed().subscribe(res => {
     this.tipoCons = res;   
-    this.searchConstruccion(this.tipoCons);          
+    this.searchConstruccionP("P");          
   });
 }
 
@@ -350,7 +417,7 @@ openDialogTabEdoGralCons(row: any): void {
   
     dialogRef.afterClosed().subscribe(res => {
       this.tipoCons = res;   
-      this.searchConstruccion(this.tipoCons);          
+      this.searchConstruccionP(this.tipoCons);          
     });
   }
 

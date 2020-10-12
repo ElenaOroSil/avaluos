@@ -28,7 +28,7 @@
                     <div class="card overflow-auto -mt-16">                            
                       <div class="example-table-container">
 
-                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;"
+                        <table mat-table [dataSource]="dataSourceP" class="mat-elevation-z8" style="width: 100%;"
                                matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
                           <!-- Id Column -->
                           <ng-container matColumnDef="id">
@@ -235,7 +235,12 @@
                    class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                    mat-icon-button>
                   <mat-icon>{{image}}</mat-icon >             
-                </a>            
+                </a>  
+                <a (click)="cancelar(row)" matTooltip="Cancelar" *ngIf="showCancelPri"
+                class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
+                mat-icon-button>
+               <mat-icon>cancel</mat-icon >             
+             </a>            
               </td>
             </ng-container>
                         
@@ -246,7 +251,10 @@
       
                       </div>
             
-                      <mat-paginator [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize" class="sticky left-0"></mat-paginator>
+                      <mat-paginator #paginator
+                      [pageSize]="10"
+                      [pageSizeOptions]="[5, 10, 20]">
+                       </mat-paginator>
                     </div>
             
                   </mat-card-content>       
@@ -276,7 +284,7 @@
                     <div class="card overflow-auto -mt-16">                            
                       <div class="example-table-container">
 
-                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;"
+                        <table mat-table [dataSource]="dataSourceC" class="mat-elevation-z8" style="width: 100%;"
                                matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
                           <!-- Id Column -->
                           <ng-container matColumnDef="id">
@@ -479,11 +487,18 @@
                    mat-icon-button>
                    <mat-icon>toc</mat-icon >   
                 </a>
-                <a (click)="editar(row)" matTooltip={{editSave}}
+
+              <a (click)="editar(row)" matTooltip={{editSave}}
                    class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                    mat-icon-button>
                   <mat-icon>{{image}}</mat-icon >             
-                </a>            
+                </a> 
+
+                <a (click)="cancelar(row)" matTooltip="Cancelar" *ngIf="showCancelCom"
+                class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
+                mat-icon-button>
+               <mat-icon>cancel</mat-icon >             
+             </a>              
               </td>
             </ng-container>
                         
@@ -494,7 +509,10 @@
       
                       </div>
             
-                      <mat-paginator [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize" class="sticky left-0"></mat-paginator>
+                      <mat-paginator #paginator2
+                      [pageSize]="10"
+                      [pageSizeOptions]="[5, 10, 20]">
+                      </mat-paginator>
                     </div>
             
                   </mat-card-content>       

@@ -54,7 +54,8 @@
                               <th mat-header-cell *matHeaderCellDef>Estado de conservación Observado</th> 
                               <td mat-cell *matCellDef="let row">  
                                 <mat-form-field floatLabel="never" >            
-                                  <mat-select placeholder=""  value="{{row.idPartidaConserva}}" (selectionChange)="onSelectionEstado(row)"> 
+                                  <mat-select formControlName="idPartidaConserva" placeholder=""  value="{{row.idPartidaConserva}}" 
+                                  (selectionChange)="onSelectionEstado(row)"> 
                                     <mat-option  *ngFor="let item of edoConservacion " value="{{item.clave}}" >
                                       {{item.descripcion}}
                                     </mat-option>
