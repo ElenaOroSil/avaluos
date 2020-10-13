@@ -1,1 +1,21 @@
-
+<div mat-dialog-content>
+<mat-list role="list">
+     <mat-card style="margin-top: 1rem">
+        <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Seleccione la matriz que quiere usar</mat-card-title>
+        <mat-divider></mat-divider><br>
+        <mat-card-content>
+	<mat-list-item role="listitem" *ngFor="let x of listaMatrices; let i = index">      
+                <button mat-button style="background-color:#009288; color: white;" [value]="x.clave" (click)="selection = $event.value">
+                     {{x.clave}}
+                </button>  &nbsp;  
+                     {{x.descripcion}}         
+    </mat-list-item>
+    </mat-card-content>
+    </mat-card>
+</mat-list>
+<div *ngIf="alertListaMatrices" class="{{classAlert}}" role="alertListaMatrices">
+    <button type="button" class="close" aria-label="Close" (click)="closeAlertLisMatrices()">
+      <span aria-hidden="true">&times;</span>
+    </button>   
+  </div>
+</div>

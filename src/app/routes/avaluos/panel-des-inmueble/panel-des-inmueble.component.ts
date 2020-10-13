@@ -269,8 +269,6 @@ this.desInmService.addConstruccion(this.folio, this.desInmueble)
  //Llama servicio para la consulta de terreno
  searchConstruccionP (res: string) {
 
-  console.log("ENTRA 1")
-  console.log(res)
   
   this.loading = true;
   this.desInmService.searchConstruccion(this.folio, res)
@@ -402,7 +400,8 @@ openDialogTabEdoGralCons(row: any): void {
 
   dialogRef.afterClosed().subscribe(res => {
     this.tipoCons = res;   
-    this.searchConstruccionP("P");          
+    this.searchConstruccionP("P"); 
+    this.searchConstruccionC("C");         
   });
 }
 
@@ -410,14 +409,15 @@ openDialogTabEdoGralCons(row: any): void {
    openDialogListaMatrices(row: any): void {
 
 
-    const dialogRef = this.dialog.open(ListamatricesDialogComponent, {
-      width: '1200px',
+  const dialogRef = this.dialog.open(ListamatricesDialogComponent, {
+      width: '900px',
       data: { idInmCons: row.idInmConstruccion}
     });
   
     dialogRef.afterClosed().subscribe(res => {
       this.tipoCons = res;   
-      this.searchConstruccionP(this.tipoCons);          
+      this.searchConstruccionP("P"); 
+      this.searchConstruccionC("C");         
     });
   }
 

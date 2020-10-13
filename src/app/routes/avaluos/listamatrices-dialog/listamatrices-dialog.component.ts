@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Catalogo } from './../../../_models/catalogo.model';
-import { TableColumn } from './../../../../@vex/interfaces/table-column.interface';
+import { CatalogosService } from './../../../_services/catalogos.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-listamatrices-dialog',
@@ -8,26 +9,45 @@ import { TableColumn } from './../../../../@vex/interfaces/table-column.interfac
   styleUrls: ['./listamatrices-dialog.component.scss']
 })
 export class ListamatricesDialogComponent implements OnInit {
+  loading = false;
+  alertListaMatrices: boolean = false;
+  msg= '';
+  classAlert: string;
 
   //registro CATÁLOGOS
-  edoConservacion: Catalogo[];
+  listaMatrices: Catalogo[];
 
-   //Nombre de columnas en tabla
-   @Input()
-   columns: TableColumn<Catalogo>[] = [
-     { label: '', property: 'clave', type: 'text', visible: false},
-     { label: '', property: 'descripcionPartidaPorcentaje', type: 'text', visible: true },
-     { label: 'Puntos por partida', property: 'puntosPartida', type: 'text', visible: true },
-     { label: 'Estado de conservación Observado', property: 'idPartidaConserva', type: 'text', visible: true},
-     { label: 'Mantenimiento requerido', property: 'manttRequerido', type: 'text', visible: true},
-     { label: 'Índice de conservación', property: 'indiceConservacion', type: 'text', visible: true },
-     { label: 'Vida mínima (años)', property: 'vidaMinimaAnios', type: 'text', visible: true },
-     { label: 'Puntos ajustados', property: 'puntosAjustados', type: 'text', visible: true },
-   ];
 
-  constructor() { }
+  constructor(private catalogoService: CatalogosService) { }
 
   ngOnInit(): void {
+
+          //Combos de Colindancias
+          this.getCatalogoListMatrices();  
+        }
+
+  //Llama servicio sección Descripción del Inmueble
+  getCatalogoListMatrices () {
+
+    this.loading = true;
+    this.catalogoService.getCatalogoMatrices()
+          .pipe(first())
+          .subscribe( data => {   
+                             
+                this.loading = false;             
+                  this.listaMatrices = data;                
+              },
+              error => {
+                this.alertListaMatrices = true;  
+                this.loading = false;
+                this.msg = error;
+                this.classAlert = 'alert-danger alert alert-dismissible fade show';
+              });    
+  }
+
+
+  closeAlertLisMatrices(){
+    this.alertListaMatrices = false;
   }
 
 }
