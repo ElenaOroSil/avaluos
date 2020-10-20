@@ -113,7 +113,6 @@ export class TablaMatrices {
 export class PrivativaComun {
   idinmconstruccion: number;
   tipoconstruccion: string;
-  idtipoconstruccion: string;
   idusoconstruccion: string;
   idrangoniveltgdf: string;
   clasef: string;
@@ -133,29 +132,49 @@ export class PrivativaComun {
   valorunireponuevo: string;
   losaconcreto: string;
 
-  constructor(PrivativaComun) {
-     this.idinmconstruccion = PrivativaComun.idinmconstruccion;
-     this.tipoconstruccion = PrivativaComun.tipoconstruccion;
-     this.idtipoconstruccion = PrivativaComun.idtipoconstruccion;
-     this.idusoconstruccion = PrivativaComun.idusoconstruccion;
-     this.idrangoniveltgdf = PrivativaComun.idrangoniveltgdf;
-     this.clasef = PrivativaComun.clasef;
-     this.clasifica1f = PrivativaComun.clasifica1f;
-     this.clasifica2f = PrivativaComun.clasifica2f;
-     this.clasifica3f = PrivativaComun.clasifica3f;
-     this.edadf = PrivativaComun.edadf;
-     this.conservaedocve = PrivativaComun.conservaedocve;
-     this.conservaedodesc = PrivativaComun.conservaedodesc;
-     this.conservaedofact = PrivativaComun.conservaedofact;
-     this.vp = PrivativaComun.vp;
-     this.fedicrredf = PrivativaComun.fedicrredf;
-     this.fedicrnoredf = PrivativaComun.fedicrnoredf;
-     this.vurf = PrivativaComun.vurf;
-     this.depedadf = PrivativaComun.depedadf;
-     this.vuccatastralf = PrivativaComun.vuccatastralf;
-     this.valorunireponuevo = PrivativaComun.valorunireponuevo;
-     this.losaconcreto = PrivativaComun.losaconcreto;
+  constructor(privativacomun) {
+     this.idinmconstruccion = privativacomun.idinmconstruccion;
+     this.tipoconstruccion = privativacomun.tipoconstruccion;
+     this.idusoconstruccion = privativacomun.idusoconstruccion;
+     this.idrangoniveltgdf = privativacomun.idrangoniveltgdf;
+     this.clasef = privativacomun.clasef;
+     this.clasifica1f = privativacomun.clasifica1f;
+     this.clasifica2f = privativacomun.clasifica2f;
+     this.clasifica3f = privativacomun.clasifica3f;
+     this.edadf = privativacomun.edadf;
+     this.conservaedocve = privativacomun.conservaedocve;
+     this.conservaedodesc = privativacomun.conservaedodesc;
+     this.conservaedofact = privativacomun.conservaedofact;
+     this.vp = privativacomun.vp;
+     this.fedicrredf = privativacomun.fedicrredf;
+     this.fedicrnoredf = privativacomun.fedicrnoredf;
+     this.vurf = privativacomun.vurf;
+     this.depedadf = privativacomun.depedadf;
+     this.vuccatastralf = privativacomun.vuccatastralf;
+     this.valorunireponuevo = privativacomun.valorunireponuevo;
+     this.losaconcreto = privativacomun.losaconcreto;
 
   }
 
+}
+
+export class OtrosDatosPC{
+     usoactual: string;
+     numeroniveles: number;
+     estadoconservacion: string;
+     calidadproyecto: string;
+     unidadesrentablessuscep: string;
+     porcsuperfyultrespecant: number;
+     avanceobra: number;
+
+     constructor(otrosdatospc){
+       this.usoactual = otrosdatospc.usoactual;
+       this.numeroniveles = otrosdatospc.numeroniveles;
+       this.estadoconservacion = otrosdatospc.estadoconservacion;
+       this.calidadproyecto = otrosdatospc.calidadproyecto;
+       this.unidadesrentablessuscep = otrosdatospc.unidadesrentablessuscep;
+       this.porcsuperfyultrespecant = otrosdatospc.porcsuperfyultrespecant;
+       this.avanceobra = otrosdatospc.avanceobra;
+
+     }
 }

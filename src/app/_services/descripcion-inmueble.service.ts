@@ -13,6 +13,8 @@ export class DescripcionInmuebleService {
 
   addConstruccion(folio: string, value: DescripcionInmueble){
 
+    console.log("value.superficie, value.superficie");
+    console.log(value);
 
      return this.http.post<any>(`${environment.SERVER_URL}/InmuebleConstrucciones`, { 'IdInmConstruccion': value.idinmconstruccion, 
      'Folio': folio, 'TipoConstruccion': value.tipoconstruccion, 'IdTipoConstruccion': Number(value.idtipoconstruccion), 
@@ -128,15 +130,11 @@ searchPrivativaComun(folio: string, tipoConstruccion: string){
 
  addPrivativaComun(data: PrivativaComun){
 
-  console.log("data")
-  console.log(data)
-
   return this.http.post<any>(`${environment.SERVER_URL}/descGeneralInmuebleComple`, {  'IdInmConstruccion': data.idinmconstruccion,
   'ValorUniRepoNuevo': data.valorunireponuevo, 'LosaConcreto': data.losaconcreto })
   .pipe(map(resp => {
         if(resp.ok){
 
-          console.log(resp)
 
          } 
     

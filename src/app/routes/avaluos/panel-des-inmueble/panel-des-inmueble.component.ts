@@ -68,6 +68,7 @@ export class PanelDesInmuebleComponent implements OnInit {
   excluded: boolean;
   editable: boolean = false;
   desInmueble: DescripcionInmueble;
+  privativaComun: PrivativaComun;
   tipoCons: string;
  
 
@@ -358,25 +359,35 @@ openDialog(): void {
  //Llama servicio para alta de terreno
  addConstruccion(value: any){
 
+  console.log("value")
+  console.log(value)
 
   if (this.selectedTipo != -1){
     value.idTipoConstruccion = this.selectedTipo;
-  } 
+  } else {
+    value.idTipoConstruccion = value.idTipoConstruccion;
+  }
 
   if (this.selectedUso != -1){
     value.idUsoConstruccion = this.selectedUso;
-  } 
+  } else {
+    value.idUsoConstruccion = value.idUsoConstruccion;
+  }
 
   if (this.selectedNivel != -1){
     value.idRangoNivelTGDF = this.selectedNivel;
+  } else {
+    value.idRangoNivelTGDF = value.idRangoNivelTGDF;
   } 
 
   if (this.selectedCo != -1){
     value.idEstadoConservacion = this.selectedCo;
-  } 
+  } else {
+    value.idEstadoConservacion = value.idEstadoConservacion;
+  }
 
  
-  this.desInmueble = {idinmconstruccion: value.idInmConstruccion, tipoconstruccion: value.tipoConstruccion, idtipoconstruccion: this.selectedTipo, 
+  this.desInmueble = {idinmconstruccion: value.idInmConstruccion, tipoconstruccion: value.tipoConstruccion, idtipoconstruccion: value.idTipoConstruccion, 
               superficie: value.superficie, descripcionmodulo: value.descripcionModulo,  niveltipo: value.nivelTipo, 
               idusoconstruccion: value.idUsoConstruccion, idrangoniveltgdf: value.idRangoNivelTGDF,  clasef: "", puntajef: 0,
               edad: value.edad, idestadoconservacion: value.idEstadoConservacion, indiviso: value.indiviso,
@@ -414,8 +425,15 @@ this.desInmService.addConstruccion(this.folio, this.desInmueble)
 //Llama servicio para alta de terreno
 addConstruccionPC(value: any){
 
+this.privativaComun = {idinmconstruccion: value.idInmConstruccion, tipoconstruccion: value.tipoConstruccion, idusoconstruccion: value.idUsoConstruccion,
+idrangoniveltgdf: value.idRangoNivelTGDF, clasef: value.claseF, clasifica1f: value.clasifica1F, clasifica2f: value.clasifica2F,
+clasifica3f: value.clasifica3F, edadf: value.edadF, conservaedocve: value.conservaEdoCve, conservaedodesc: value.conservaEdoDesc,
+conservaedofact: value.conservaEdoFact, vp: value.vp, fedicrredf: value.fedICRRedF, fedicrnoredf: value.fedICRNoRedF, vurf: value.vurF,
+depedadf: value.depEdadF, vuccatastralf: value.vucCatastralF, valorunireponuevo: value.valorUniRepoNuevo, losaconcreto: value.losaConcreto.trim()}
+
+
 this.loading = true;
-this.desInmService.addPrivativaComun(value)
+this.desInmService.addPrivativaComun(this.privativaComun)
     .pipe(first())
     .subscribe(
         data => {
