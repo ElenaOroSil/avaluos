@@ -13,9 +13,6 @@ export class DescripcionInmuebleService {
 
   addConstruccion(folio: string, value: DescripcionInmueble){
 
-    console.log("value.superficie, value.superficie");
-    console.log(value);
-
      return this.http.post<any>(`${environment.SERVER_URL}/InmuebleConstrucciones`, { 'IdInmConstruccion': value.idinmconstruccion, 
      'Folio': folio, 'TipoConstruccion': value.tipoconstruccion, 'IdTipoConstruccion': Number(value.idtipoconstruccion), 
      'Superficie': Number(value.superficie), 'DescripcionModulo':value.descripcionmodulo, 'NivelTipo': Number(value.niveltipo), 

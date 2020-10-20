@@ -359,8 +359,6 @@ openDialog(): void {
  //Llama servicio para alta de terreno
  addConstruccion(value: any){
 
-  console.log("value")
-  console.log(value)
 
   if (this.selectedTipo != -1){
     value.idTipoConstruccion = this.selectedTipo;
