@@ -45,9 +45,6 @@ export class CaracteristicasUrbanasService {
 
   addEquipamientoUrbano(folio: string, value: EquipamientoUrbano){
 
-    console.log("value")
-    console.log(value)
-
      return this.http.post<any>(`${environment.SERVER_URL}/equipaUrbano`, { 'Folio': folio, 'IdSuministroTelefonico':value.idsuministrotelefonico, 
      'IdAcometidaInmueble': value.idacometidainmueble, 'IdSenalizacionVias': value.idsenalizacionvias, 'IdNomenclaturaCalle': value.idnomenclaturacalle, 
      'DistanciaTransporteUrbano':value.distanciatransporteurbano, 'FrecuenciaTransporteUrbano': value.frecuenciatransporteurbano, 'DistanciaTransporteSuburbano':value.distanciatransportesuburbano, 

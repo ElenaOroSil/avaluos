@@ -12,9 +12,6 @@ export class TerrenoService {
 
     addTerreno(folio: string, value: Terreno){
 
-      console.log(value)
-
-
        return this.http.post<any>(`${environment.SERVER_URL}/terreno`, { 'Folio': folio, 'CalleFrentePuntoCard': value.callefrentepuntocard, 
        'EntreCalle': value.entrecalle, 'EntreCallePuntoCard': value.entrecallepuntocard, 'CalleY': value.calley, 
        'CalleYPuntoCard':value.calleypuntocard, 'CalleManzana': value.callemanzana, 'CalleManzanaPuntoCard':value.callemanzanapuntocard, 
@@ -98,9 +95,6 @@ searchTerrenoComplemento(folio: string) {
 }
 
 addTerrenoColindancias(folio: string, value: TerrenoColindancias){
-
-  console.log(folio)
-  console.log(value)
 
   return this.http.post<any>(`${environment.SERVER_URL}/terrenoColindancias`, { 'Folio': folio, 'IdTerrenoColindancia': value.idterrenocolindancia, 
   'DescripcionColindancia': value.descripcioncolindancia, 'Orientacion1': value.orientacion1a, 'Medida1': value.medida1a,

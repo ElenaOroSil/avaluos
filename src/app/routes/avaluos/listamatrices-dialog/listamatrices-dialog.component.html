@@ -5,7 +5,7 @@
         <mat-divider></mat-divider><br>
         <mat-card-content>
 	<mat-list-item role="listitem" *ngFor="let x of listaMatrices; let i = index">      
-                <button mat-button style="background-color:#009288; color: white;" [value]="x.clave" (click)="selection = $event.value">
+                <button mat-button style="background-color:#009288; color: white;" [value]="x.clave" (click)="consultaDetalle(x)">
                      {{x.clave}}
                 </button>  &nbsp;  
                      {{x.descripcion}}         

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams} from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { DescripcionInmueble, TablaEdoGralConservacion,   } from '../_models/desInmueble.model'; 
+import { DescripcionInmueble, TablaEdoGralConservacion, TablaMatrices, PrivativaComun  } from '../_models/desInmueble.model'; 
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -15,10 +15,10 @@ export class DescripcionInmuebleService {
 
 
      return this.http.post<any>(`${environment.SERVER_URL}/InmuebleConstrucciones`, { 'IdInmConstruccion': value.idinmconstruccion, 
-     'Folio': folio, 'TipoConstruccion': value.tipoconstruccion, 'IdTipoConstruccion': value.idtipoconstruccion, 
-     'Superficie': value.superficie, 'DescripcionModulo':value.descripcionmodulo, 'NivelTipo': value.niveltipo, 
-     'IdUsoConstruccion':value.idusoconstruccion, 'IdRangoNivelTGDF': value.idrangoniveltgdf, 'Edad': value.edad, 
-     'IdEstadoConservacion': value.idestadoconservacion, 'Indiviso': value.indiviso })
+     'Folio': folio, 'TipoConstruccion': value.tipoconstruccion, 'IdTipoConstruccion': Number(value.idtipoconstruccion), 
+     'Superficie': Number(value.superficie), 'DescripcionModulo':value.descripcionmodulo, 'NivelTipo': Number(value.niveltipo), 
+     'IdUsoConstruccion':value.idusoconstruccion, 'IdRangoNivelTGDF': value.idrangoniveltgdf, 'Edad': Number(value.edad), 
+     'IdEstadoConservacion': Number(value.idestadoconservacion), 'Indiviso': Number(value.indiviso) })
      .pipe(map(resp => {
            if(resp.ok){
 
@@ -45,13 +45,8 @@ export class DescripcionInmuebleService {
 
 addTablaConservacion(folio: string, value: TablaEdoGralConservacion){
 
-
- // console.log("SERVICIO")
- // console.log(folio)
- // console.log(value)
-
   return this.http.post<any>(`${environment.SERVER_URL}/tablaConservacion`, { 'Folio': folio, 
-  'IdInmconstruccion': value.idinmuebleconstruccion, 'IdClaseConstruccion': value.claseconstruccion, 
+  'IdInmConstruccion': value.idinmuebleconstruccion, 'IdClaseConstruccion': value.claseconstruccion, 
   'IdPartidaPorcentaje': value.idpartidaporcentaje, 'IdPartidaConserva': value.idpartidaconserva })
   .pipe(map(resp => {
         if(resp.ok){
@@ -92,5 +87,62 @@ addSinMatrices(folio: string, value: TablaEdoGralConservacion){
     }));
 }
 
+searchCalculoMatrices(idInmConstruccion: string, idMatriz: string){
 
+  let params = new HttpParams()
+  params = params.append('IdInmConstruccion', idInmConstruccion);
+  params = params.append('IdMatriz', idMatriz);
+
+  return this.http.get<any>(`${environment.SERVER_URL}/consultaCalculoMatriz`, {params: params})   
+  .pipe(map(listaMatriz => {
+  
+    return listaMatriz;
+}));
 }
+
+addCalculoMatrices(data: TablaMatrices, valores: string){
+
+  return this.http.post<any>(`${environment.SERVER_URL}/tablaConservacion`, {  'IdInmconstruccion': data.idinmconstruccion,
+  'IdMatriz': data.idmatriz, 'Valores': valores })
+  .pipe(map(resp => {
+        if(resp.ok){
+
+         } 
+    
+      return resp;
+    }));
+}
+
+searchPrivativaComun(folio: string, tipoConstruccion: string){
+ 
+   let params = new HttpParams()
+   params = params.append('Folio', folio);
+   params = params.append('TipoConstruccion', tipoConstruccion);
+ 
+   return this.http.get<any>(`${environment.SERVER_URL}/consultaDescGeneralInmuebleComple`, {params: params})   
+   .pipe(map(desGralComple => {
+   
+     return desGralComple;
+ }));
+ }
+
+ addPrivativaComun(data: PrivativaComun){
+
+  console.log("data")
+  console.log(data)
+
+  return this.http.post<any>(`${environment.SERVER_URL}/descGeneralInmuebleComple`, {  'IdInmConstruccion': data.idinmconstruccion,
+  'ValorUniRepoNuevo': data.valorunireponuevo, 'LosaConcreto': data.losaconcreto })
+  .pipe(map(resp => {
+        if(resp.ok){
+
+          console.log(resp)
+
+         } 
+    
+      return resp;
+    }));
+}
+}
+
+

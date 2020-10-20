@@ -21,8 +21,6 @@ export class Decimal6MaskDirective {
 
    onInputChange(event, backspace) {
 
-    console.log("EKLENAAAA")
-
     let newVal = event.replace(/\D/g, '');
     if (backspace && newVal.length <= 6) {
       newVal = newVal.substring(0, newVal.length - 1);

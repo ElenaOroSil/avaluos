@@ -102,9 +102,6 @@ export class PanelVisitasComponent implements OnInit {
         .subscribe(
             data => {
 
-              console.log("data")
-              console.log(data)
-
             if(data.ok){
               this.alert = true;        
               this.loading = false;
@@ -142,8 +139,6 @@ export class PanelVisitasComponent implements OnInit {
                 //var dateCreated = formatDate(`${this.info[0].fechavisita}`.replace('/','-'),'full','es-MX')
                 let date = new FormControl(new Date(this.info[0].fechavisita));
                         //var date = this.info[0].fechavisita
-                        console.log("date")
-                        console.log(date.value)
 
               this.visitasFormGroup.setValue({
                 fechaVisita: this.info[0].fechavisita,

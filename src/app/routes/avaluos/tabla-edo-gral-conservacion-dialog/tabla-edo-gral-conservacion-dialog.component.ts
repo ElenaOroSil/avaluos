@@ -150,8 +150,9 @@ export class TablaEdoGralConservacionDialogComponent implements OnInit {
    get ant1() { return this.edoGralFormGroup.controls; }
 
    //Llama servicio para guardar la tabla de Edo Gral de conservacion
-   addEdoGralConservacion(value: any, clase: string) {
+   addEdoGralConservacion(idParConserva: any, value: any) {
     this.submitted = true;
+
 
   //stop here if form is invalid
   if (this.edoGralFormGroup.invalid) {
@@ -159,16 +160,13 @@ export class TablaEdoGralConservacionDialogComponent implements OnInit {
   }
 
   this.tablaEdoGralConservacion = {idinmuebleconstruccion: Number(this.idInmCons), 
-    claseconstruccion: clase, 
+    claseconstruccion: this.clase, 
     idpartidaporcentaje: value.idPartidaPorcentaje, 
     descripcionpartida: value.descripcionPartidaPorcentaje, puntospartida: value.puntosPartida, 
-    idpartidaconserva: value.idPartidaConserva,
+    idpartidaconserva: idParConserva.value,
     manttrequerido: value.manttRequerido, indiceconservacion: value.indiceConservacion, vidaminimaanios: value.vidaMinimaAnios,
     puntosajustados: value.puntosAjustados}
 
-    console.log("DATOS PRINCIPALES")
-    console.log(this.folio)
-    console.log(this.tablaEdoGralConservacion)
   
   this.loading = true;
   this.desInmService.addTablaConservacion(this.folio, this.tablaEdoGralConservacion)
@@ -180,6 +178,7 @@ export class TablaEdoGralConservacionDialogComponent implements OnInit {
             this.alertTablaEdoGral = true;        
             this.loading = false;
             this.msg = data.mensaje;
+            this.searchEdoGralConservacion(this.folio, this.idInmCons, this.clase)
             this.classAlert = 'alert-success alert alert-dismissible fade show';   
         } else {
           this.alertTablaEdoGral = true;   
@@ -241,15 +240,9 @@ export class TablaEdoGralConservacionDialogComponent implements OnInit {
 
     }
 
-    onSelectionEstado(row: any){
+    onSelectionEstado(e, row){
 
-       
-      this.clase = this.ant1.claseConstruccion.value;
-
-      console.log("SELECTTTTT")
-      console.log(row)
-      console.log(this.clase)
-      this.addEdoGralConservacion(row, this.clase);
+      this.addEdoGralConservacion(e, row);
 
     }
 

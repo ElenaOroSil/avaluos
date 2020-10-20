@@ -153,7 +153,7 @@ export class RegistroconstruccionDialogComponent implements OnInit {
   idrangoniveltgdf: this.ant1.rangoDeNivel.value, clasef: null, puntajef: null, edad: this.ant1.edad.value,  
   idestadoconservacion: this.ant1.edoDeConservacion.value, indiviso: this.ant1.indiviso.value, 
   idclaseconstruccionf: null, estadogralconservacionf: null, vidaminimaremanentef: null,
-  indicecostosremanentef: null, totalpuntosajustadosf: null, clasesm: null, puntajesm: null }
+  indicecostosremanentef: null, totalpuntosajustadosf: null, clasesm: null, puntajesm: null, claseCMFF: null }
 
   
   this.loading = true;

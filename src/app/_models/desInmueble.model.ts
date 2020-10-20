@@ -19,6 +19,7 @@ export class DescripcionInmueble {
      totalpuntosajustadosf: number;
      clasesm: number;
      puntajesm: number;
+     claseCMFF: number;
 
      constructor(descripcionInmueble) {
         this.idinmconstruccion = descripcionInmueble.idinmconstruccion;
@@ -41,6 +42,7 @@ export class DescripcionInmueble {
         this.totalpuntosajustadosf = descripcionInmueble.idinmconstruccion;
         this.clasesm = descripcionInmueble.idinmconstruccion;
         this.puntajesm = descripcionInmueble.idinmconstruccion;
+        this.claseCMFF = descripcionInmueble.claseCMFF;
 
      }
 
@@ -87,5 +89,73 @@ export class SinMatrices {
       this.puntajesm = sinMatrices.puntajesm;
 
     }
+
+}
+
+export class TablaMatrices {
+  idinmconstruccion: number;
+  idmatriz: number;
+  idseccion: number;
+  idsubseccion: number;
+  clase: number;
+  puntos: number;
+
+  constructor(tablamatrices) {
+    this.idinmconstruccion = tablamatrices.idinmconstruccion;
+    this.idmatriz = tablamatrices.idmatriz;
+    this.idseccion = tablamatrices.idseccion;
+    this.idsubseccion = tablamatrices.idsubseccion;
+    this.clase = tablamatrices.clase;
+    this.puntos = tablamatrices.puntos;
+  }
+}
+
+export class PrivativaComun {
+  idinmconstruccion: number;
+  tipoconstruccion: string;
+  idtipoconstruccion: string;
+  idusoconstruccion: string;
+  idrangoniveltgdf: string;
+  clasef: string;
+  clasifica1f: string;
+  clasifica2f: string;
+  clasifica3f: string; 
+  edadf: number;
+  conservaedocve: number;
+  conservaedodesc: string;
+  conservaedofact: string;
+  vp: number;
+  fedicrredf: string;
+  fedicrnoredf: string;
+  vurf: number;
+  depedadf: string;
+  vuccatastralf: string;
+  valorunireponuevo: string;
+  losaconcreto: string;
+
+  constructor(PrivativaComun) {
+     this.idinmconstruccion = PrivativaComun.idinmconstruccion;
+     this.tipoconstruccion = PrivativaComun.tipoconstruccion;
+     this.idtipoconstruccion = PrivativaComun.idtipoconstruccion;
+     this.idusoconstruccion = PrivativaComun.idusoconstruccion;
+     this.idrangoniveltgdf = PrivativaComun.idrangoniveltgdf;
+     this.clasef = PrivativaComun.clasef;
+     this.clasifica1f = PrivativaComun.clasifica1f;
+     this.clasifica2f = PrivativaComun.clasifica2f;
+     this.clasifica3f = PrivativaComun.clasifica3f;
+     this.edadf = PrivativaComun.edadf;
+     this.conservaedocve = PrivativaComun.conservaedocve;
+     this.conservaedodesc = PrivativaComun.conservaedodesc;
+     this.conservaedofact = PrivativaComun.conservaedofact;
+     this.vp = PrivativaComun.vp;
+     this.fedicrredf = PrivativaComun.fedicrredf;
+     this.fedicrnoredf = PrivativaComun.fedicrnoredf;
+     this.vurf = PrivativaComun.vurf;
+     this.depedadf = PrivativaComun.depedadf;
+     this.vuccatastralf = PrivativaComun.vuccatastralf;
+     this.valorunireponuevo = PrivativaComun.valorunireponuevo;
+     this.losaconcreto = PrivativaComun.losaconcreto;
+
+  }
 
 }

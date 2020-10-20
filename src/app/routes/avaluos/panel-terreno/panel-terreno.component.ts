@@ -517,8 +517,6 @@ searchTerrenoComplemento () {
                this.loading = false;
                this.info = data.terrenoComplemento;
 
-               console.log(this.info)
-
               if (this.info != ""){
                this.terreno3FormGroup.controls['idTopografia'].setValue(this.info.idTopografia); 
                this.terreno3FormGroup.controls['idFormaTerreno'].setValue(this.info.idFormaTerreno); 

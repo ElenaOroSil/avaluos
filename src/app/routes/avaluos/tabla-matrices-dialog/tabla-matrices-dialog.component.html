@@ -1,0 +1,21 @@
+<div mat-dialog-content >
+         <mat-card style="margin-top: 1rem" >
+            <mat-card-content>
+                <mat-radio-group name="opciones" >
+    <mat-radio-button *ngFor="let op of listaDetalle" name="opciones" [value]="op.clase"  style="margin: 10px">
+      {{op.descripcion}}
+    </mat-radio-button>
+  </mat-radio-group>
+        </mat-card-content>
+        </mat-card>
+
+          <mat-card style="margin-top: 1rem" >
+            <mat-card-content>
+<mat-tab-group style="margin-bottom: 20px;" #changeEvent (selectedIndexChange)="tabChanged($event)">
+  <mat-tab label={{x.seccion}} *ngFor="let x of listaSecciones" [value]="x.idSeccion" > {{x.seccion}}</mat-tab>
+</mat-tab-group>
+        </mat-card-content>
+        </mat-card>
+    </div>
+
+
