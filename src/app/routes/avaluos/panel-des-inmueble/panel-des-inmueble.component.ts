@@ -625,9 +625,9 @@ this.desInmService.addPrivativaComun(this.privativaComun)
     this.selectedUso = -1;
     this.selectedNivel = -1;
     this.selectedCo = -1;
-    this.save = true;
-    this.cancel = true;
-    this.edit = false;
+
+    if (this.edit)e.editable = !e.editable;
+    this.edit=false;
     e.editable = !e.editable;    
   }
 
@@ -637,18 +637,17 @@ this.desInmService.addPrivativaComun(this.privativaComun)
     this.searchConstruccionC("C");
     this.searchConstruccionPC("P");
     this.searchConstruccionPC("C");
-    this.save = false;
-    this.cancel = false;
-    this.edit = true;
+    this.edit=true;
+
     e.editable = !e.editable;  
   }
 
   salvar(e) {   
     this.addConstruccion(e);
+    this.edit=true;
+
     e.editable = !e.editable;  
-    this.save = false;
-    this.cancel = false;
-    this.edit = true;
+
     
   }
 
