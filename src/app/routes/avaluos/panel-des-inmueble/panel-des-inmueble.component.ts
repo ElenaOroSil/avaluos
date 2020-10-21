@@ -185,7 +185,8 @@ export class PanelDesInmuebleComponent implements OnInit {
       this.getCatalogosDesInmueble("USOCONSTRUCCION");
       this.getCatalogosDesInmueble("RANGONIVEL");
       this.getCatalogosDesInmueble("ESTADOCONSERVACION");
-      this.getCatalogosDesInmueble("INDICESATURAZONA");
+      this.getCatalogoListaCaracUrbanas("INDICESATURAZONA");
+
     
     //busca construcciones
     this.searchConstruccionP("P");
@@ -331,7 +332,7 @@ export class PanelDesInmuebleComponent implements OnInit {
         'unidadesRentableSuscep': new FormControl(''),
         'porcSuperfUltRespecAnt': new FormControl('', [Validators.required]),
         'avanceObra': new FormControl('', [Validators.required]),
-        'importTotValorCatastralF': new FormControl(''),
+        'importTotValorCatastralF': new FormControl({ value: '', disabled: true }),
       });
 
   }
