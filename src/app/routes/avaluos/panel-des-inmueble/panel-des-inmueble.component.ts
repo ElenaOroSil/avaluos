@@ -31,6 +31,7 @@ export class PanelDesInmuebleComponent implements OnInit {
   desInmueble2FormGroup: FormGroup;
   desInmueble3FormGroup: FormGroup;
   desInmueble4FormGroup: FormGroup;
+  desInmueble5FormGroup: FormGroup;
   name: string;
   color: string;
   loading = false;
@@ -77,6 +78,7 @@ export class PanelDesInmuebleComponent implements OnInit {
    usoConstruccion: Catalogo[];
    rangoNivel: Catalogo[];
    edoConservacion: Catalogo[];
+   listaCaractUrbanas: Catalogo[];
 
    //Nombre de columnas en tabla
    @Input()
@@ -183,6 +185,7 @@ export class PanelDesInmuebleComponent implements OnInit {
       this.getCatalogosDesInmueble("USOCONSTRUCCION");
       this.getCatalogosDesInmueble("RANGONIVEL");
       this.getCatalogosDesInmueble("ESTADOCONSERVACION");
+      this.getCatalogosDesInmueble("INDICESATURAZONA");
     
     //busca construcciones
     this.searchConstruccionP("P");
@@ -318,6 +321,19 @@ export class PanelDesInmuebleComponent implements OnInit {
         'valorUniRepoNuevo': new FormControl(''),
         'losaConcreto': new FormControl(''),
       });
+
+      //Sección Desc General Inmueble
+      this.desInmueble5FormGroup = this.formBuilder.group({
+        'usoActual': new FormControl('', [Validators.required]),
+        'numeroNiveles': new FormControl(''),
+        'estadoConservacion': new FormControl(''),
+        'calidadProyecto': new FormControl(''),
+        'unidadesRentableSuscep': new FormControl(''),
+        'porcSuperfUltRespecAnt': new FormControl('', [Validators.required]),
+        'avanceObra': new FormControl('', [Validators.required]),
+        'importTotValorCatastralF': new FormControl(''),
+      });
+
   }
 
   // convenience getter for easy access to form fields
@@ -542,6 +558,24 @@ this.desInmService.addPrivativaComun(this.privativaComun)
           .subscribe( data => {                    
                 this.loading = false;             
                   this.tpoConstruccion = data;                
+              },
+              error => {
+                this.alertDesInmueble = true;  
+                this.loading = false;
+                this.msg = error;
+                this.classAlert = 'alert-danger alert alert-dismissible fade show';
+              });    
+  }
+
+  //Llama servicio sección Descripción del Inmueble
+  getCatalogoListaCaracUrbanas (catalogo: string) {
+
+    this.loading = true;
+    this.catalogoService.getCatalogoCaractUrb(catalogo)
+          .pipe(first())
+          .subscribe( data => {                    
+                this.loading = false;             
+                  this.listaCaractUrbanas = data;                
               },
               error => {
                 this.alertDesInmueble = true;  

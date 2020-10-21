@@ -1066,30 +1066,19 @@
     </mat-expansion-panel-header>
     <mat-card>
       <mat-card-content>
-        <form [formGroup]="desInmueble4FormGroup" class="matero-form-horizontal">
+        <form [formGroup]="desInmueble5FormGroup" class="matero-form-horizontal">
           <div class="matero-row" fxLayout="row wrap">
             <div fxFlex="100" class="matero-col">
-              <mat-card>
-                <mat-divider></mat-divider><br>
-                <mat-card-header fxLayout="column" fxLayoutAlign="center start">
-                  <div
-                       class="w-full flex flex-col sm:flex-row justify-between">
-                  </div>
-                </mat-card-header>
-
-                <mat-card-content class="-mt-6" fxLayout="column">
-                  <div class="card overflow-auto -mt-16">
-                    <div class="example-table-container">
-
-           
-
-                    </div>
-
-  
-                  </div>
-
-                </mat-card-content>
-              </mat-card>
+              <div fxFlex="25" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Avance de obra</mat-label>
+                  <mat-select formControlName="avanceObra" required>
+                    <mat-option *ngFor="let item of listaCaractUrbanas" [value] = "item.clave" >{{item.descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="desInmueble5FormGroup.get('avanceObra').invalid">Campo
+                    requerido</mat-error>
+                </mat-form-field>
+              </div>
             </div>
           </div>
         </form>
