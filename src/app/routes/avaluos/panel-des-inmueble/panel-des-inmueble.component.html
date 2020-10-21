@@ -281,17 +281,17 @@
                                mat-icon-button>
                               <mat-icon>toc</mat-icon>
                             </a>
-                            <a (click)="editar(row)" matTooltip="Editar" *ngIf="edit"
+                            <a (click)="editar(row)" matTooltip="Editar" *ngIf="row.editable"
                                class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                                mat-icon-button>
                               <mat-icon>edit</mat-icon>
                             </a>
-                            <a (click)="salvar(row)" matTooltip="Guardar" *ngIf="save"
+                            <a (click)="salvar(row)" matTooltip="Guardar" *ngIf="row.editable"
                                class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                                mat-icon-button>
                               <mat-icon>save</mat-icon>
                             </a>
-                            <a (click)="cancelar(row)" matTooltip="Cancelar" *ngIf="cancel"
+                            <a (click)="cancelar(row)" matTooltip="Cancelar" *ngIf="row.editable"
                                class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                                mat-icon-button>
                               <mat-icon>cancel</mat-icon>
@@ -392,7 +392,7 @@
                               <input matInput formControlName="superficie"
                                      [(ngModel)]="row.superficie" type="text"
                                      appDecimal5Mask maxlength="5"
-                                     (keyup.enter)="row.editable = false">
+                                     >
                             </ng-template>
                           </td>
                         </ng-container>
