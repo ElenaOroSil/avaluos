@@ -85,9 +85,6 @@ export class SinmatricesDialogComponent implements OnInit {
               });
     }
 
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
 
     closeAlertSinMatrices(){
       this.alertSinMatrices = false;

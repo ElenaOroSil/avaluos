@@ -386,6 +386,7 @@ export class PanelDesInmuebleComponent implements OnInit {
   //Abre modal para el registro de la construcción
 openDialog(): void {
   const dialogRef = this.dialog.open(RegistroconstruccionDialogComponent, {
+    disableClose: true,
     width: '1300px',
     data: { name: this.name, color: this.color }
   });
@@ -801,8 +802,9 @@ addDatosGenerales(){
 openDialogTabEdoGralCons(row: any): void {
 
   const dialogRef = this.dialog.open(TablaEdoGralConservacionDialogComponent, {
-    width: '1200px',
-    height: 'auto',
+    disableClose: true,
+    width: '1500px',
+    height: '800px',
     data: { idInmCons: row.idInmConstruccion, tipoCons: row.tipoConstruccion}
   });
 
@@ -820,7 +822,9 @@ openDialogTabEdoGralCons(row: any): void {
  openDialogSinMatrices(row: any): void {
 
   const dialogRef = this.dialog.open(SinmatricesDialogComponent, {
-    width: '600px',
+    disableClose: true,
+    width: '800px',
+    height: '260px',
     data: { idInmCons: row.idInmConstruccion, tipoCons: row.tipoConstruccion}
   });
 
@@ -853,6 +857,7 @@ openDialogTabEdoGralCons(row: any): void {
     });
   } else {
     const dialogRef = this.dialog.open(TablaMatricesDialogComponent, {
+      disableClose: true,
       width: '1300px',
       height: '80%',
       data: { idInmCons: row.idInmConstruccion, idMatriz: 0}

@@ -92,11 +92,14 @@ export class ListamatricesDialogComponent implements OnInit {
   openDialogTabMatrices(idInmCons: number, idMatriz: number): void {
 
   const dialogRef = this.dialog.open(TablaMatricesDialogComponent, {
+    disableClose: true,
     width: '1200px',
     data: { idInmCons: idInmCons, idMatriz: idMatriz}
   });
 
   dialogRef.afterClosed().subscribe(res => {
+
+    this.dialogRef.close();
         
   });
 

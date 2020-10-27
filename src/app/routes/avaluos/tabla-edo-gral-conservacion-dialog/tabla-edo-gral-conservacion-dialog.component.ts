@@ -233,9 +233,9 @@ export class TablaEdoGralConservacionDialogComponent implements OnInit {
       this.alertTablaEdoGral = false;
     }
 
-     onNoClick(): void {
-      this.dialogRef.close(this.tipoCons);
-    }
+    // onNoClick(): void {
+    //  this.dialogRef.close(this.tipoCons);
+    //}
 
     onSelectionClass(){
 
