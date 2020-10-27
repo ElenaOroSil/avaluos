@@ -95,18 +95,12 @@ export class SinMatrices {
 export class TablaMatrices {
   idinmconstruccion: number;
   idmatriz: number;
-  idseccion: number;
-  idsubseccion: number;
-  clase: number;
-  puntos: number;
+  valores: string;
 
   constructor(tablamatrices) {
     this.idinmconstruccion = tablamatrices.idinmconstruccion;
     this.idmatriz = tablamatrices.idmatriz;
-    this.idseccion = tablamatrices.idseccion;
-    this.idsubseccion = tablamatrices.idsubseccion;
-    this.clase = tablamatrices.clase;
-    this.puntos = tablamatrices.puntos;
+    this.valores = tablamatrices.valores;
   }
 }
 
@@ -166,6 +160,7 @@ export class OtrosDatosPC{
      unidadesrentablessuscep: string;
      porcsuperfyultrespecant: number;
      avanceobra: number;
+     importetotvalorcatastralf: number;
 
      constructor(otrosdatospc){
        this.usoactual = otrosdatospc.usoactual;
@@ -175,6 +170,8 @@ export class OtrosDatosPC{
        this.unidadesrentablessuscep = otrosdatospc.unidadesrentablessuscep;
        this.porcsuperfyultrespecant = otrosdatospc.porcsuperfyultrespecant;
        this.avanceobra = otrosdatospc.avanceobra;
+       this.importetotvalorcatastralf = otrosdatospc.importetotvalorcatastralf;
 
      }
 }
+

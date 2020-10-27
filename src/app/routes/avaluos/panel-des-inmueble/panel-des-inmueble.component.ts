@@ -5,9 +5,10 @@ import { RegistroconstruccionDialogComponent } from '../registroconstruccion-dia
 import { TablaEdoGralConservacionDialogComponent } from '../tabla-edo-gral-conservacion-dialog/tabla-edo-gral-conservacion-dialog.component';
 import { TablaMatricesDialogComponent } from '../tabla-matrices-dialog/tabla-matrices-dialog.component';
 import { ListamatricesDialogComponent } from '../listamatrices-dialog/listamatrices-dialog.component';
+import { SinmatricesDialogComponent } from '../sinmatrices-dialog/sinmatrices-dialog.component';
 import { DescripcionInmuebleService } from '../../../_services/descripcion-inmueble.service';
 import { first } from 'rxjs/operators';
-import { DescripcionInmueble, PrivativaComun } from './../../../_models/desInmueble.model';
+import { DescripcionInmueble, PrivativaComun, OtrosDatosPC } from './../../../_models/desInmueble.model';
 import { Observable, ReplaySubject } from 'rxjs';
 import { TableColumn } from './../../../../@vex/interfaces/table-column.interface';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -37,16 +38,36 @@ export class PanelDesInmuebleComponent implements OnInit {
   loading = false;
   folio = localStorage.getItem('folio');
   alertDesInmueble: boolean = false;
+  alertOtrosDatos: boolean = false;
   msg= '';
   classAlert: string;
   valorTipo: number;
+  sumaP: number = 0;
+  sumaC: number = 0;
+  edadPonderadaP: string;
+  vidaUtilPonderadaP: string;
+  vidaUtilPonderadaRemP: string;
+  edadPonderadaC: string;
+  vidaUtilPonderadaC: string;
+  vidaUtilPonderadaRemC: string;
+
   edit: boolean = true;
   save: boolean = false;
   cancel: boolean = false;
+  editPC: boolean = true;
+  savePC: boolean = false;
+  cancelPC: boolean = false;
+
+  listMat: boolean = true;
+  tabEdoGral: boolean = true;
+  sinMatrices: boolean = true;
+
   selectedTipo: number = -1;
   selectedUso: number = -1;
   selectedNivel: number = -1;
   selectedCo: number = -1;
+  otrosDatos: any = {};
+  otrosDatosPC: OtrosDatosPC;
 
   infoP: any = {};
   subject$P: ReplaySubject<DescripcionInmueble[]> = new ReplaySubject<DescripcionInmueble[]>(1);
@@ -68,6 +89,7 @@ export class PanelDesInmuebleComponent implements OnInit {
   isExpanded:boolean = false;
   excluded: boolean;
   editable: boolean = false;
+  editablePC: boolean = false;
   desInmueble: DescripcionInmueble;
   privativaComun: PrivativaComun;
   tipoCons: string;
@@ -179,6 +201,8 @@ export class PanelDesInmuebleComponent implements OnInit {
   ngOnInit(): void {
 
       this.expand();
+
+      this.searchOtrosDatos();
 
       //Combos de Colindancias
       this.getCatalogoTpoConstruccion("TIPOCONSTRUCCION", "P");
@@ -340,6 +364,9 @@ export class PanelDesInmuebleComponent implements OnInit {
   // convenience getter for easy access to form fields
   get ant1() { return this.desInmueble1FormGroup.controls; }
 
+  // convenience getter for easy access to form fields
+  get ant5() { return this.desInmueble5FormGroup.controls; }
+
   expand(){
     this.isExpanded = !this.isExpanded;
     }
@@ -373,7 +400,7 @@ openDialog(): void {
 }
 
 
- //Llama servicio para alta de terreno
+ //Llama servicio para alta de tabal 1 y 2
  addConstruccion(value: any){
 
 
@@ -437,7 +464,7 @@ this.desInmService.addConstruccion(this.folio, this.desInmueble)
 }
 
 
-//Llama servicio para alta de terreno
+//Llama servicio para alta de tabla 3 y 4
 addConstruccionPC(value: any){
 
 this.privativaComun = {idinmconstruccion: value.idInmConstruccion, tipoconstruccion: value.tipoConstruccion, idusoconstruccion: value.idUsoConstruccion,
@@ -474,17 +501,58 @@ this.desInmService.addPrivativaComun(this.privativaComun)
 
 }
 
- //Llama servicio para la consulta de terreno
- searchConstruccionP (res: string) {
+//Llama servicio para alta de datos generales
+addDatosGenerales(){
 
+   // stop here if form is invalid
+   if (this.desInmueble5FormGroup.invalid) {
+    return;
+  }
+
+
+  this.otrosDatosPC = {usoactual: this.ant5.usoActual.value, numeroniveles: this.ant5.numeroNiveles.value, 
+    estadoconservacion: this.ant5.estadoConservacion.value, calidadproyecto: this.ant5.calidadProyecto.value, 
+    unidadesrentablessuscep: this.ant5.unidadesRentableSuscep.value, porcsuperfyultrespecant: this.ant5.porcSuperfUltRespecAnt.value, 
+    avanceobra: this.ant5.avanceObra.value, importetotvalorcatastralf: this.ant5.importTotValorCatastralF.value}
   
+  
+  this.loading = true;
+  this.desInmService.addDesGralInmueble(this.folio, this.otrosDatosPC)
+      .pipe(first())
+      .subscribe(
+          data => {
+  
+          if(data.ok){
+            this.alertOtrosDatos = true;        
+            this.loading = false;
+            this.msg = data.mensaje;
+            this.classAlert = 'alert-success alert alert-dismissible fade show';   
+        } else {
+          this.alertOtrosDatos = true;   
+          this.loading = false;
+          this.msg = data.mensaje;
+          this.classAlert = 'alert-danger alert alert-dismissible fade show';
+        }
+        },
+        error => {
+          this.alertOtrosDatos = true;  
+          this.loading = false;
+          this.msg = error;
+          this.classAlert = 'alert-danger alert alert-dismissible fade show';
+        });
+  
+  }
+
+ //Llama servicio para la consulta de privativas
+ searchConstruccionP (res: string) { 
   this.loading = true;
   this.desInmService.searchConstruccion(this.folio, res)
          .pipe(first())
          .subscribe( data => {                    
-               this.loading = false;
-               
-               this.infoP = data.inmuebleConstrucciones;
+               this.loading = false               
+               this.infoP = data.inmuebleConstrucciones;        
+               this.sumaP = this.infoP.map(t1 => Number(t1.superficie)).reduce((acc, value) => acc + value, 0);
+             
                this.subject$P.next(this.infoP);
             
              },
@@ -495,20 +563,24 @@ this.desInmService.addPrivativaComun(this.privativaComun)
               this.classAlert = 'alert-danger alert alert-dismissible fade show';
              });           
              
-     }
+}
+
+ /** Gets the total cost of all transactions. */
+ getTotalCost() {
+  return this.infoP.map(t => t.cost).reduce((acc, value) => acc + value, 0);
+}
 
 
-      //Llama servicio para la consulta de terreno
+
+ //Llama servicio para la consulta de comunes
  searchConstruccionC (res: string) {
-
-  
   this.loading = true;
   this.desInmService.searchConstruccion(this.folio, res)
          .pipe(first())
          .subscribe( data => {                    
-               this.loading = false;
-               
+               this.loading = false;            
                this.infoC = data.inmuebleConstrucciones;
+               this.sumaC = this.infoC.map(t2 => Number(t2.superficie)).reduce((acc, value) => acc + value, 0);
                this.subject$C.next(this.infoC);
             
              },
@@ -522,7 +594,7 @@ this.desInmService.addPrivativaComun(this.privativaComun)
      }
 
 
-         //Llama servicio para la consulta de terreno
+  //Llama servicio para la consulta de privativas y comunes
  searchConstruccionPC (res: string) {
  
   this.loading = true;
@@ -530,12 +602,17 @@ this.desInmService.addPrivativaComun(this.privativaComun)
          .pipe(first())
          .subscribe( data => {                    
                this.loading = false;
-               
-
+                   
                if (res == "P"){
+               this.edadPonderadaP = data.edadPonderada;
+               this.vidaUtilPonderadaP = data.vidaUtilPonderada;
+               this.vidaUtilPonderadaRemP = data.vidaUtilPonderadaRema;
                this.infoPri = data.descripcionGralComple;
                this.subject$Pri.next(this.infoPri);
                } else {
+               this.edadPonderadaC = data.edadPonderada;
+               this.vidaUtilPonderadaC = data.vidaUtilPonderada;
+               this.vidaUtilPonderadaRemC = data.vidaUtilPonderadaRema;
                this.infoCom = data.descripcionGralComple;
                this.subject$Com.next(this.infoCom); 
                }
@@ -543,6 +620,36 @@ this.desInmService.addPrivativaComun(this.privativaComun)
              },
              error => {
               this.alertDesInmueble = true;  
+              this.loading = false;
+              this.msg = error;
+              this.classAlert = 'alert-danger alert alert-dismissible fade show';
+             });           
+             
+     }
+
+
+  //Llama servicio para la consulta de otros datos
+ searchOtrosDatos () {
+ 
+  this.loading = true;
+  this.desInmService.searchDesGralInmueble(this.folio)
+         .pipe(first())
+         .subscribe( data => {                    
+               this.loading = false;
+               this.otrosDatos = data.descripcionGral;   
+               
+               this.desInmueble5FormGroup.controls['usoActual'].setValue(this.otrosDatos.usoActual); 
+               this.desInmueble5FormGroup.controls['porcSuperfUltRespecAnt'].setValue(this.otrosDatos.porcSuperfUltRespecAnt); 
+               this.desInmueble5FormGroup.controls['avanceObra'].setValue(this.otrosDatos.AvanceObra); 
+               this.desInmueble5FormGroup.controls['importTotValorCatastralF'].setValue(this.otrosDatos.importTotValorCatastralF); 
+               this.desInmueble5FormGroup.controls['numeroNiveles'].setValue(this.otrosDatos.numeroNiveles); 
+               this.desInmueble5FormGroup.controls['estadoConservacion'].setValue(this.otrosDatos.estadoConservacion); 
+               this.desInmueble5FormGroup.controls['calidadProyecto'].setValue(this.otrosDatos.calidadProyecto); 
+               this.desInmueble5FormGroup.controls['unidadesRentableSuscep'].setValue(this.otrosDatos.unidadesRentableSuscep);
+            
+             },
+             error => {
+              this.alertOtrosDatos = true;  
               this.loading = false;
               this.msg = error;
               this.classAlert = 'alert-danger alert alert-dismissible fade show';
@@ -621,6 +728,10 @@ this.desInmService.addPrivativaComun(this.privativaComun)
 
 
   editar(e) {  
+
+    this.listMat = false;
+    this.tabEdoGral = false;
+    this.sinMatrices = false;
        
     this.selectedTipo = -1;
     this.selectedUso = -1;
@@ -629,8 +740,16 @@ this.desInmService.addPrivativaComun(this.privativaComun)
 
     if (this.edit)e.editable = !e.editable;
     this.edit=false;
-    e.editable = !e.editable;    
+   // e.editable = !e.editable;    
   }
+
+  editarPC(e) {
+
+    if (this.editPC)e.editablePC = !e.editablePC;
+    this.editPC = false;
+
+  }
+
 
   cancelar(e) {   
     
@@ -639,40 +758,78 @@ this.desInmService.addPrivativaComun(this.privativaComun)
     this.searchConstruccionPC("P");
     this.searchConstruccionPC("C");
     this.edit=true;
+    this.listMat = true;
+    this.tabEdoGral = true;
+    this.sinMatrices = true;
 
     e.editable = !e.editable;  
+  }
+
+  cancelarPC(e) {   
+    
+    this.searchConstruccionP("P");
+    this.searchConstruccionC("C");
+    this.searchConstruccionPC("P");
+    this.searchConstruccionPC("C");
+    this.editPC=true;
+
+    e.editablePC = !e.editablePC;  
   }
 
   salvar(e) {   
     this.addConstruccion(e);
     this.edit=true;
+    this.listMat = true;
+    this.tabEdoGral = true;
+    this.sinMatrices = true;
 
     e.editable = !e.editable;  
-
-    
+   
   }
 
+  
   salvarPC(e) {    
     this.addConstruccionPC(e);
-    e.editable = !e.editable;  
-    this.save = false;
-    this.cancel = false;
-    this.edit = true;
+    this.editPC = true;
+
+    e.editablePC = !e.editablePC;  
     
   }
+
 
     //Abre modal de la tabla de Estado general de conservación
 openDialogTabEdoGralCons(row: any): void {
 
   const dialogRef = this.dialog.open(TablaEdoGralConservacionDialogComponent, {
     width: '1200px',
+    height: 'auto',
     data: { idInmCons: row.idInmConstruccion, tipoCons: row.tipoConstruccion}
   });
 
   dialogRef.afterClosed().subscribe(res => {
     this.tipoCons = res;   
-    this.searchConstruccionP("P"); 
-    this.searchConstruccionC("C");         
+    this.searchConstruccionP("P");
+    this.searchConstruccionC("C");
+    this.searchConstruccionPC("P");
+    this.searchConstruccionPC("C");    
+  });
+
+}
+
+ //Abre modal de la tabla de Estado general de conservación
+ openDialogSinMatrices(row: any): void {
+
+  const dialogRef = this.dialog.open(SinmatricesDialogComponent, {
+    width: '600px',
+    data: { idInmCons: row.idInmConstruccion, tipoCons: row.tipoConstruccion}
+  });
+
+  dialogRef.afterClosed().subscribe(res => {
+    this.tipoCons = res;   
+    this.searchConstruccionP("P");
+    this.searchConstruccionC("C");
+    this.searchConstruccionPC("P");
+    this.searchConstruccionPC("C");    
   });
 
 }
@@ -682,26 +839,31 @@ openDialogTabEdoGralCons(row: any): void {
 
     if(row.claseCMFF == null){
 
-  const dialogRef = this.dialog.open(ListamatricesDialogComponent, {
+    const dialogRef = this.dialog.open(ListamatricesDialogComponent, {
       width: '900px',
       data: { idInmCons: row.idInmConstruccion}
     });
   
     dialogRef.afterClosed().subscribe(res => {
       this.tipoCons = res;   
-      this.searchConstruccionP("P"); 
-      this.searchConstruccionC("C");         
+      this.searchConstruccionP("P");
+    this.searchConstruccionC("C");
+    this.searchConstruccionPC("P");
+    this.searchConstruccionPC("C");   
     });
   } else {
     const dialogRef = this.dialog.open(TablaMatricesDialogComponent, {
       width: '1300px',
-      data: { idInmCons: row.idInmConstruccion, idMatriz: null}
+      height: '80%',
+      data: { idInmCons: row.idInmConstruccion, idMatriz: 0}
     });
   
     dialogRef.afterClosed().subscribe(res => {
       this.tipoCons = res;   
-      this.searchConstruccionP("P"); 
-      this.searchConstruccionC("C");         
+      this.searchConstruccionP("P");
+    this.searchConstruccionC("C");
+    this.searchConstruccionPC("P");
+    this.searchConstruccionPC("C");   
     });
   }
   }
@@ -725,6 +887,10 @@ openDialogTabEdoGralCons(row: any): void {
     
     this.selectedCo = e.source.value;
 
+  }
+
+  closeAlertOtrosDatos(){
+    this.alertOtrosDatos = false;
   }
 
 }

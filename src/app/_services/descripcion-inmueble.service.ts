@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams} from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { DescripcionInmueble, TablaEdoGralConservacion, TablaMatrices, PrivativaComun  } from '../_models/desInmueble.model'; 
+import { DescripcionInmueble, TablaEdoGralConservacion, TablaMatrices, 
+PrivativaComun, OtrosDatosPC, SinMatrices } from '../_models/desInmueble.model'; 
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -28,7 +29,7 @@ export class DescripcionInmuebleService {
    }
 
 
-  searchConstruccion(folio: string, tpoCons: string) {
+searchConstruccion(folio: string, tpoCons: string) {
 
     let params = new HttpParams();
     params = params.append('Folio', folio);
@@ -72,11 +73,14 @@ searchTablaConservacion(folio: string, idInmConstruccion: string, claseConstrucc
 }
 
 
-addSinMatrices(folio: string, value: TablaEdoGralConservacion){
+addSinMatrices(folio: string, value: SinMatrices){
 
-  return this.http.post<any>(`${environment.SERVER_URL}/sinMatrices`, {  'IdInmconstruccion': value.idinmuebleconstruccion,
-  'Folio': folio, 'TipoConstruccion': 0, 
-  'IdPartidaPorcentaje': value.idpartidaporcentaje, 'IdPartidaConserva': value.idpartidaconserva })
+  console.log("folio")
+  console.log(folio)
+  console.log(value)
+
+  return this.http.post<any>(`${environment.SERVER_URL}/sinMatrices`, {  'IdInmConstruccion': value.idinmuebleconstruccion,
+  'Folio': folio, 'TipoConstruccion': value.tipoconstruccion, 'ClaseSM': value.clasesm, 'PuntajeSM': value.puntajesm})
   .pipe(map(resp => {
         if(resp.ok){
 
@@ -99,15 +103,14 @@ searchCalculoMatrices(idInmConstruccion: string, idMatriz: string){
 }));
 }
 
-addCalculoMatrices(data: TablaMatrices, valores: string){
+addCalculoMatrices(data: TablaMatrices){
 
   return this.http.post<any>(`${environment.SERVER_URL}/tablaConservacion`, {  'IdInmconstruccion': data.idinmconstruccion,
-  'IdMatriz': data.idmatriz, 'Valores': valores })
+  'IdMatriz': data.idmatriz, 'Valores': data.valores })
   .pipe(map(resp => {
         if(resp.ok){
 
-         } 
-    
+         }     
       return resp;
     }));
 }
@@ -129,6 +132,35 @@ searchPrivativaComun(folio: string, tipoConstruccion: string){
 
   return this.http.post<any>(`${environment.SERVER_URL}/descGeneralInmuebleComple`, {  'IdInmConstruccion': data.idinmconstruccion,
   'ValorUniRepoNuevo': data.valorunireponuevo, 'LosaConcreto': data.losaconcreto })
+  .pipe(map(resp => {
+        if(resp.ok){
+
+
+         } 
+    
+      return resp;
+    }));
+}
+
+searchDesGralInmueble(folio: string){
+ 
+  let params = new HttpParams()
+  params = params.append('Folio', folio);
+
+
+  return this.http.get<any>(`${environment.SERVER_URL}/consultaDescGeneralInmueble`, {params: params})   
+  .pipe(map(desGralInmueble => {
+  
+    return desGralInmueble;
+}));
+}
+
+addDesGralInmueble(folio: string, data: OtrosDatosPC){
+
+  return this.http.post<any>(`${environment.SERVER_URL}/descGeneralInmueble`, {  'Folio': folio,
+  'UsoActual': data.usoactual, 'NumeroNiveles': data.numeroniveles, 'EstadoConservacion': data.estadoconservacion,
+  'CalidadProyecto':  data.calidadproyecto, 'UnidadesRentableSuscep': data.unidadesrentablessuscep,
+  'PorcSuperfUltRespecAnt': data.porcsuperfyultrespecant, 'AvanceObra': data.avanceobra})
   .pipe(map(resp => {
         if(resp.ok){
 

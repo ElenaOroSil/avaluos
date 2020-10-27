@@ -27,7 +27,7 @@
                        <div class="example-container mat-elevation-z8"> 
                           <table mat-table [dataSource]="dataSource" style="width: 100%;">  
                              <!-- Id Column -->
-                            <ng-container matColumnDef="idPartidaPorcentaje">
+                            <ng-container matColumnDef="idPartidaPorcentaje" sticky>
                               <th mat-header-cell *matHeaderCellDef>Id Partida</th>
                               <td mat-cell *matCellDef="let row"> 
                                 <input matInput formControlName="idPartidaPorcentaje" [(ngModel)]="row.idPartidaPorcentaje" type="number"> </td>
@@ -36,14 +36,14 @@
                             </ng-container>
                       
                             <!-- Partida Column -->
-                            <ng-container matColumnDef="descripcionPartidaPorcentaje">
+                            <ng-container matColumnDef="descripcionPartidaPorcentaje" sticky>
                               <th mat-header-cell *matHeaderCellDef>Partidas</th>
                               <td mat-cell *matCellDef="let row">{{row.descripcionPartidaPorcentaje}}</td>
                               <td mat-footer-cell *matFooterCellDef>  </td>
                             </ng-container>
                       
                              <!-- Puntos partida Column -->
-                            <ng-container matColumnDef="puntosPartida">
+                            <ng-container matColumnDef="puntosPartida" sticky>
                               <th mat-header-cell *matHeaderCellDef>Puntos por partida</th>
                               <td mat-cell *matCellDef="let row">{{row.puntosPartida}}</td>
                               <td mat-footer-cell *matFooterCellDef> Estado general de conservación </td>
@@ -65,28 +65,28 @@
                             </ng-container>
 
                               <!-- Mantenimiento requerido Column -->
-                              <ng-container matColumnDef="manttRequerido">
+                              <ng-container matColumnDef="manttRequerido" sticky>
                                 <th mat-header-cell *matHeaderCellDef>Mantenimiento requerido</th>
                                 <td mat-cell *matCellDef="let row">{{row.manttRequerido}}</td>
                                 <td mat-footer-cell *matFooterCellDef>  </td>
                               </ng-container>
 
                                 <!-- Indice de conservación Column -->
-                                <ng-container matColumnDef="indiceConservacion">
+                                <ng-container matColumnDef="indiceConservacion" sticky>
                                     <th mat-header-cell *matHeaderCellDef>Índice de conservación</th>
                                     <td mat-cell *matCellDef="let row">{{row.indiceConservacion}}</td>
                                     <td mat-footer-cell *matFooterCellDef> Vida mínima remanente </td>
                                   </ng-container>
 
                                     <!-- Vida mínima años Column -->
-                                <ng-container matColumnDef="vidaMinimaAnios">
+                                <ng-container matColumnDef="vidaMinimaAnios" sticky>
                                     <th mat-header-cell *matHeaderCellDef>Vida mínima (años)</th>
                                     <td mat-cell *matCellDef="let row">{{row.vidaMinimaAnios}}</td>
                                     <td mat-footer-cell *matFooterCellDef> {{vidaMinimaRemanenteT}} </td>
                                   </ng-container>
   
                                          <!-- Puntos ajustados Column -->
-                                         <ng-container matColumnDef="puntosAjustados">
+                                         <ng-container matColumnDef="puntosAjustados" sticky>
                                             <th mat-header-cell *matHeaderCellDef>Puntos ajustados</th>
                                             <td mat-cell *matCellDef="let row">{{row.puntosAjustados}}</td>
                                             <td mat-footer-cell *matFooterCellDef> {{puntosTotales}} </td>
@@ -102,13 +102,13 @@
                   </mat-card>         
                 </div>
            </div>
- 
          </form>
-  <!--       <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+       <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
           <button mat-fab style="background-color: #f65545; outline:none;" matTooltip="Cerrar" (click)="onNoClick()" >
              <mat-icon>clear</mat-icon>
            </button>
-         </div>-->
+           <button mat-button  matDialogClose><mat-icon>clear</mat-icon></button>
+         </div>
         </mat-card-content>
       </mat-card>
     </div>

@@ -1,0 +1,51 @@
+<div mat-dialog-content>
+    <mat-card>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+          <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Registro sin matrices</mat-card-title>
+      </mat-card-actions>
+      <mat-card-content>
+        <form [formGroup]="sinMatricesFormGroup" class="matero-form-horizontal" >
+          <div fxLayout="row wrap" fxLayoutGap="10px grid">
+
+            <div fxFlex="50" fxFlex.lt-md="100" fxl>
+                <mat-form-field>
+                  <mat-label>Clase</mat-label>
+                  <input matInput placeholder="Clase" maxlength="1"
+                         formControlName="clase" required>
+                  <mat-error *ngIf="sinMatricesFormGroup.get('clase').invalid">Campo
+                    requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+            <div fxFlex="50" fxFlex.lt-md="100" fxl>
+              <mat-form-field>
+                <mat-label>Puntaje</mat-label>
+                <input matInput placeholder="Puntaje" formControlName="puntaje" required
+                maxlength="8"  appDecimal8Mask type="text">
+              <mat-error *ngIf="sinMatricesFormGroup.get('puntaje').invalid">Campo
+                  requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+          </div>
+          <div *ngIf="alertSinMatrices" class="{{classAlert}}" role="alertSinMatrices">
+            <button type="button" class="close" aria-label="Close" (click)="closeAlertSinMatrices()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{msg}}
+          </div>
+        </form>
+
+          <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+            <button mat-fab style="background-color: #f65545; outline:none;" matTooltip="Cerrar" (click)="onNoClick()" >
+               <mat-icon>clear</mat-icon>
+             </button>
+             <button mat-fab style="background-color: #00b140; outline:none;" matTooltip="Aceptar" (click)="guardarRegConstruccion()" >
+               <mat-icon>done</mat-icon>
+             </button>
+           </div>
+      </mat-card-content>
+    </mat-card>
+</div>

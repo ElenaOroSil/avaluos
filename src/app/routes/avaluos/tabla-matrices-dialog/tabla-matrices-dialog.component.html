@@ -1,21 +1,162 @@
-<div mat-dialog-content >
-         <mat-card style="margin-top: 1rem" >
-            <mat-card-content>
-                <mat-radio-group name="opciones" >
-    <mat-radio-button *ngFor="let op of listaDetalle" name="opciones" [value]="op.clase"  style="margin: 10px">
-      {{op.descripcion}}
-    </mat-radio-button>
-  </mat-radio-group>
-        </mat-card-content>
-        </mat-card>
+<div mat-dialog-content>
+  <mat-card style="margin-top: 1rem">
+    <mat-card-content>
+      <mat-list class="list-horizontal">
+      <mat-list-item  *ngFor="let op of seccion1Detalle" >
+        <mat-checkbox  name="opciones" [value]="op.clase" style="margin: 10px" [checked]="op.seccionado">
+          {{op.descripcion}}
+        </mat-checkbox>
+    </mat-list-item>
+  </mat-list>
+    </mat-card-content>
+  </mat-card>
 
-          <mat-card style="margin-top: 1rem" >
-            <mat-card-content>
-<mat-tab-group style="margin-bottom: 20px;" #changeEvent (selectedIndexChange)="tabChanged($event)">
-  <mat-tab label={{x.seccion}} *ngFor="let x of listaSecciones" [value]="x.idSeccion" > {{x.seccion}}</mat-tab>
-</mat-tab-group>
-        </mat-card-content>
-        </mat-card>
-    </div>
+  <mat-card style="margin-top: 1rem">
+    <mat-card-content>
+      <div fxLayout="row wrap" fxLayoutGap="10px grid">
+      <mat-tab-group>
+        <mat-tab label="Estructura">
+          <ng-template matTabContent>
+            <div fxLayout="row" fxLayoutGap="12px" [style.margin-top]="'12px'">
+              <mat-card >
+                <mat-list>
+                  <mat-list-item class="pathitem" *ngFor="let item of seccionEstructuraDetalle" >     
+                      <mat-checkbox name="opciones" [value]="item.clase" style="margin: 10px" [checked]="item.seccionado">
+                        {{item.descripcion}}
+                      </mat-checkbox>
+                    <mat-divider class="background-divider"></mat-divider>
+                  </mat-list-item>
+                </mat-list>
+              </mat-card>
 
+              <mat-card >
+                <mat-list>
+                  <mat-list-item class="pathitem" *ngFor="let item of seccionEstructura1Detalle" >
+                      <mat-checkbox name="opciones" [value]="item.clase" style="margin: 10px" [checked]="item.seccionado">
+                        {{item.descripcion}}
+                      </mat-checkbox>
+                    <mat-divider class="background-divider"></mat-divider>
+                  </mat-list-item>
+                </mat-list>
+              </mat-card>
 
+              <mat-card >
+                <mat-list>
+                  <mat-list-item class="pathitem" *ngFor="let item of seccionEstructura2Detalle" >
+                      <mat-checkbox name="opciones" [value]="item.clase" style="margin: 10px" [checked]="item.seccionado">
+                        {{item.descripcion}}
+                      </mat-checkbox>
+                    <mat-divider class="background-divider"></mat-divider>
+                  </mat-list-item>
+                </mat-list>
+              </mat-card>
+
+              <mat-card >
+                <mat-list>
+                  <mat-list-item class="pathitem" *ngFor="let item of seccionEstructura3Detalle" >
+                      <mat-checkbox name="opciones" [value]="item.clase" style="margin: 10px" [checked]="item.seccionado">
+                        {{item.descripcion}}
+                      </mat-checkbox>
+                    <mat-divider class="background-divider"></mat-divider>
+                  </mat-list-item>
+                </mat-list>
+              </mat-card>
+            </div>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Acabados">
+          <ng-template matTabContent>
+            <div fxLayout="row" fxLayoutGap="12px" [style.margin-top]="'12px'">
+              <mat-card>
+                <mat-list>
+                  <mat-list-item class="pathitem" *ngFor="let item of seccionAcabadosDetalle">
+                      <mat-checkbox name="opciones" [value]="item.clase"
+                                        style="margin: 10px" [checked]="item.seccionado">
+                        {{item.descripcion}}
+                      </mat-checkbox>
+                    <mat-divider class="background-divider"></mat-divider>
+                  </mat-list-item>
+                </mat-list>
+              </mat-card>
+
+              <mat-card>
+                <mat-list>
+                  <mat-list-item class="pathitem" *ngFor="let item of seccionAcabados1Detalle">
+                      <mat-checkbox name="opciones" [value]="item.clase" [checked]="item.seccionado"
+                                        style="margin: 10px">
+                        {{item.descripcion}}
+                      </mat-checkbox>
+                    <mat-divider class="background-divider"></mat-divider>
+                  </mat-list-item>
+                </mat-list>
+              </mat-card>
+
+              <mat-card>
+                <mat-list>
+                  <mat-list-item class="pathitem" *ngFor="let item of seccionAcabados2Detalle">
+                      <mat-checkbox name="opciones" [value]="item.clase" [checked]="item.seccionado"
+                                        style="margin: 10px">
+                        {{item.descripcion}}
+                      </mat-checkbox>
+                    <mat-divider class="background-divider"></mat-divider>
+                  </mat-list-item>
+                </mat-list>
+              </mat-card>
+
+              <mat-card>
+                <mat-list>
+                  <mat-list-item class="pathitem" *ngFor="let item of seccionAcabados3Detalle">
+                      <mat-checkbox name="opciones" [value]="item.clase"
+                                        style="margin: 10px">
+                        {{item.descripcion}}
+                      </mat-checkbox>
+                    <mat-divider class="background-divider"></mat-divider>
+                  </mat-list-item>
+                </mat-list>
+              </mat-card>
+
+              <mat-card>
+                <mat-list>
+                  <mat-list-item class="pathitem" *ngFor="let item of seccionAcabados4Detalle">
+                      <mat-checkbox name="opciones" [value]="item.clase" [checked]="item.seccionado"
+                                        style="margin: 10px">
+                        {{item.descripcion}}
+                      </mat-checkbox>
+                    <mat-divider class="background-divider"></mat-divider>
+                  </mat-list-item>
+                </mat-list>
+              </mat-card>
+            </div>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Servicios">
+          <ng-template matTabContent>
+            <div fxLayout="row" fxLayoutGap="12px" [style.margin-top]="'12px'">
+              <mat-card>
+                <mat-list>
+                  <mat-list-item class="pathitem" *ngFor="let item of seccionServiciosDetalle">
+                      <mat-checkbox name="opciones" [value]="item.clase" [checked]="item.seccionado"
+                                        style="margin: 10px">
+                        {{item.descripcion}}
+                      </mat-checkbox>
+                    <mat-divider class="background-divider"></mat-divider>
+                  </mat-list-item>
+                </mat-list>
+              </mat-card>
+            </div>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+
+      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <button mat-fab style="background-color: #f65545; outline:none;" matTooltip="Cerrar" (click)="onNoClick()" >
+           <mat-icon>clear</mat-icon>
+         </button>
+         <button mat-fab style="background-color: #00b140; outline:none;" matTooltip="Aceptar" (click)="guardarMatrices()" >
+           <mat-icon>done</mat-icon>
+         </button>
+       </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

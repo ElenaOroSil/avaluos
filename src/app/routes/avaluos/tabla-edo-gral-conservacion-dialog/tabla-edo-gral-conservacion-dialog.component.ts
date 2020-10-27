@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject, Optional } from '@angular/core';
+import { Component, OnInit, Input, Inject, Optional, HostListener } from '@angular/core';
 import { CatalogoString, Catalogo } from './../../../_models/catalogo.model';
 import { CatalogosService } from './../../../_services/catalogos.service';
 import { TableColumn } from './../../../../@vex/interfaces/table-column.interface';
@@ -68,6 +68,10 @@ export class TablaEdoGralConservacionDialogComponent implements OnInit {
       this.tipoCons = data.tipoCons;
 
      }
+
+     @HostListener('window:keyup.esc') onKeyUp() {
+      this.dialogRef.close();
+    }
 
   
     //muestra columnas en tabla
