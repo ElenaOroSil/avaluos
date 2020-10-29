@@ -858,8 +858,8 @@ openDialogTabEdoGralCons(row: any): void {
   } else {
     const dialogRef = this.dialog.open(TablaMatricesDialogComponent, {
       disableClose: true,
-      width: '1300px',
-      height: '80%',
+      width: '1600px',
+      height: '90%',
       data: { idInmCons: row.idInmConstruccion, idMatriz: 0}
     });
   

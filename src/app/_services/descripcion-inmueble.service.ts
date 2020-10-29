@@ -106,7 +106,7 @@ searchCalculoMatrices(idInmConstruccion: string, idMatriz: string){
 addCalculoMatrices(data: TablaMatrices){
 
   return this.http.post<any>(`${environment.SERVER_URL}/tablaConservacion`, {  'IdInmconstruccion': data.idinmconstruccion,
-  'IdMatriz': data.idmatriz, 'Valores': data.valores })
+  'IdMatriz': data.idmatriz, 'Valores': "" })
   .pipe(map(resp => {
         if(resp.ok){
 

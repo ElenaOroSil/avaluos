@@ -95,12 +95,18 @@ export class SinMatrices {
 export class TablaMatrices {
   idinmconstruccion: number;
   idmatriz: number;
-  valores: string;
+  idseccion: number;
+  idsubseccion: number;
+  clase: number;
+  puntos: number;
 
   constructor(tablamatrices) {
     this.idinmconstruccion = tablamatrices.idinmconstruccion;
     this.idmatriz = tablamatrices.idmatriz;
-    this.valores = tablamatrices.valores;
+    this.idseccion = tablamatrices.idseccion;
+    this.idsubseccion = tablamatrices.idsubseccion;
+    this.clase = tablamatrices.clase;
+    this.puntos = tablamatrices.puntos;
   }
 }
 

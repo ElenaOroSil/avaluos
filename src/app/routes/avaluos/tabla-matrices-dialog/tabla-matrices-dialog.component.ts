@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatRadioChange } from '@angular/material/radio';
 
 @Component({
   selector: 'app-tabla-matrices-dialog',
@@ -12,6 +13,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./tabla-matrices-dialog.component.scss']
 })
 export class TablaMatricesDialogComponent implements OnInit {
+  matrizFormGroup: FormGroup;
   tablaMatrices: TablaMatrices;
   submitted = false;
   loading = false;
@@ -20,28 +22,32 @@ export class TablaMatricesDialogComponent implements OnInit {
   classAlert: string;
   idInmCons: string;
   idMatriz: string;
+  desMatriz: string;
+
+  idSeccion: string;
+  idSeccionEst: string;
+  idSeccionAca: string;
+  idSeccionSer: string;
+
+  valores: string;
   listaSecciones: any[];
-  seccion1Enc: any[];
-  seccion1Detalle: any[];
+  finalArray: any[] = [];
+  finalArrayEstructura: any[] = [];
+
+  viewTab: boolean = true;
+  guardar: boolean = true;
+
+  seccion1: any[];
+  subSeccion1: any[];
+
   seccionEstructura: any[];
-  seccionEstructuraDetalle: any[];
-  seccionEstructura1Detalle: any[];
-  seccionEstructura2Detalle: any[];
-  seccionEstructura3Detalle: any[];
+  subSeccionEstructura: any[];
 
   seccionAcabados: any[];
-  seccionAcabadosDetalle: any[];
-  seccionAcabados1Detalle: any[];
-  seccionAcabados2Detalle: any[];
-  seccionAcabados3Detalle: any[];
-  seccionAcabados4Detalle: any[];
+  subSeccionAcabados: any[];
 
   seccionServicios: any[];
-  seccionServiciosDetalle: any[];
-  seccionServicios1Detalle: any[];
-  seccionServicios2Detalle: any[];
-  seccionServicios3Detalle: any[];
-  seccionServicios4Detalle: any[];
+  subSeccionServicios: any[];
 
   constructor(private formBuilder: FormBuilder,
     public dialog: MatDialog,
@@ -56,101 +62,88 @@ export class TablaMatricesDialogComponent implements OnInit {
   ngOnInit(): void {
 
     this.searchMatrices();
+
+     //Sección TerrenoColindancias
+     this.matrizFormGroup = this.formBuilder.group({
+      'opciones': new FormControl(''),   
+    });
   }
 
+
   //Llama servicio sección Descripción del Inmueble
-  searchMatrices () {
+  searchMatrices () {   
 
     this.loading = true;
     this.desInmService.searchCalculoMatrices(this.idInmCons, this.idMatriz)
           .pipe(first())
           .subscribe( data => {   
 
-            console.log("this.idMatriz")
-            console.log(this.idMatriz)
-                             
-                this.loading = false;  
+                                   
+               this.loading = false;  
                 //Llena tabs           
                 this.listaSecciones = data.secciones; 
+                this.idMatriz = data.idMatriz;
+                this.desMatriz = data.matriz;
 
                 switch(Number(this.idMatriz))
                 { 
-                case 0:
-                case 1:
-                case 2:               
+                  case 1:
+                  case 2:
+
                 //Sección 1 Encabezado     
-                this.seccion1Enc = this.listaSecciones[0].idSubSeccion;  
-                this.seccion1Detalle = this.seccion1Enc[0].detalle;
-
+                this.seccion1 = this.listaSecciones[0];
+                this.subSeccion1 = this.seccion1["idSubSeccion"];
+                this.idSeccion = this.seccion1["idSeccion"];
+       
                 //Sección Estructura      
-                this.seccionEstructura = this.listaSecciones[1].idSubSeccion;  
-                this.seccionEstructuraDetalle = this.seccionEstructura[0].detalle;
-                this.seccionEstructura1Detalle = this.seccionEstructura[1].detalle;
-                this.seccionEstructura2Detalle = this.seccionEstructura[2].detalle;
-                this.seccionEstructura3Detalle = this.seccionEstructura[3].detalle;
-
-
-                 //Sección Acabados     
-                 this.seccionAcabados = this.listaSecciones[2].idSubSeccion;  
-                 this.seccionAcabadosDetalle = this.seccionAcabados[0].detalle;
-                 this.seccionAcabados1Detalle = this.seccionAcabados[1].detalle;
-                 this.seccionAcabados2Detalle = this.seccionAcabados[2].detalle;
-                 this.seccionAcabados3Detalle = this.seccionAcabados[3].detalle;
-                 this.seccionAcabados4Detalle = this.seccionAcabados[4].detalle;
-
-                  //Sección Servicios     
-                  this.seccionServicios = this.listaSecciones[3].idSubSeccion;  
-                  this.seccionServiciosDetalle = this.seccionServicios[0].detalle;
-                  break;
-                  case 3: 
-                  case null:
-                  //Sección Estructura      
-                  this.seccionEstructura = this.listaSecciones[0].idSubSeccion; 
-                  this.seccionEstructuraDetalle = this.seccionEstructura[0].detalle;
-                  this.seccionEstructura1Detalle = this.seccionEstructura[1].detalle;
-                  this.seccionEstructura2Detalle = this.seccionEstructura[2].detalle;
-                  this.seccionEstructura3Detalle = this.seccionEstructura[3].detalle;
-  
-                   //Sección Acabados     
-                   this.seccionAcabados = this.listaSecciones[1].idSubSeccion;  
-                   this.seccionAcabadosDetalle = this.seccionAcabados[0].detalle;
-                   this.seccionAcabados1Detalle = this.seccionAcabados[1].detalle;
-                   this.seccionAcabados2Detalle = this.seccionAcabados[2].detalle;
-                   this.seccionAcabados3Detalle = this.seccionAcabados[3].detalle;
-  
-                   //Sección Servicios     
-                   this.seccionServicios = this.listaSecciones[2].idSubSeccion;  
-                   this.seccionServiciosDetalle = this.seccionServicios[0].detalle;
-                  break;
-                  case 4:
-                  case null:
-                  //Sección Estructura      
-                  this.seccionEstructura = this.listaSecciones[0].idSubSeccion; 
-                  this.seccionEstructuraDetalle = this.seccionEstructura[0].detalle;
-                  this.seccionEstructura1Detalle = this.seccionEstructura[1].detalle;
-                  this.seccionEstructura2Detalle = this.seccionEstructura[2].detalle;
-  
-                   //Sección Acabados     
-                   this.seccionAcabados = this.listaSecciones[1].idSubSeccion;  
-                   this.seccionAcabadosDetalle = this.seccionAcabados[0].detalle;
-                   this.seccionAcabados1Detalle = this.seccionAcabados[1].detalle;
-                   this.seccionAcabados2Detalle = this.seccionAcabados[2].detalle;
-                  break;
-                  case 5:
-                  case null:
-                    //Sección Estructura      
-                  this.seccionEstructura = this.listaSecciones[0].idSubSeccion; 
-                  this.seccionEstructuraDetalle = this.seccionEstructura[0].detalle;
+                this.seccionEstructura = this.listaSecciones[1];  
+                this.subSeccionEstructura = this.seccionEstructura["idSubSeccion"];
+                this.idSeccionEst = this.seccionEstructura["idSeccion"];
 
                 //Sección Acabados     
-                this.seccionAcabados = this.listaSecciones[1].idSubSeccion;  
-                this.seccionAcabadosDetalle = this.seccionAcabados[0].detalle;
-                this.seccionAcabados1Detalle = this.seccionAcabados[1].detalle;
-                this.seccionAcabados2Detalle = this.seccionAcabados[2].detalle;
-               break;
+                this.seccionAcabados = this.listaSecciones[2];  
+                this.subSeccionAcabados = this.seccionAcabados["idSubSeccion"];
+                this.idSeccionAca = this.seccionAcabados["idSeccion"];
+
+                //Sección Servicios     
+                this.seccionServicios = this.listaSecciones[3];  
+                this.subSeccionServicios = this.seccionServicios["idSubSeccion"];
+                this.idSeccionSer = this.seccionServicios["idSeccion"];
+                  break;
+                  case 3:
+                //Sección Estructura      
+                this.seccionEstructura = this.listaSecciones[0];  
+                this.subSeccionEstructura = this.seccionEstructura["idSubSeccion"];
+                this.idSeccionEst = this.seccionEstructura["idSeccion"];
+
+                //Sección Acabados     
+                this.seccionAcabados = this.listaSecciones[1];  
+                this.subSeccionAcabados = this.seccionAcabados["idSubSeccion"];
+                this.idSeccionAca = this.seccionAcabados["idSeccion"];
+
+                //Sección Servicios     
+                this.seccionServicios = this.listaSecciones[2];  
+                this.subSeccionServicios = this.seccionServicios["idSubSeccion"];
+                this.idSeccionSer = this.seccionServicios["idSeccion"];
+
+                  break;
+                  case 4:
+                  case 5:
+                    this.viewTab = false;
+                    //Sección Estructura      
+                    this.seccionEstructura = this.listaSecciones[0];  
+                    this.subSeccionEstructura = this.seccionEstructura["idSubSeccion"];
+                    this.idSeccionEst = this.seccionEstructura["idSeccion"];
+    
+                    //Sección Acabados     
+                    this.seccionAcabados = this.listaSecciones[1];  
+                    this.subSeccionAcabados = this.seccionAcabados["idSubSeccion"];
+                    this.idSeccionAca = this.seccionAcabados["idSeccion"];
+    
+                      break;
                   default: 
-                } 
-                   
+                }  
+                  
               },
               error => {
                 this.alertTablaMatrices = true;  
@@ -160,14 +153,17 @@ export class TablaMatricesDialogComponent implements OnInit {
               });    
   }
 
+     // convenience getter for easy access to form fields
+     get ant1() { return this.matrizFormGroup.controls; }
+
   guardarMatrices() {
     this.submitted = true;
 
-    this.tablaMatrices = {idinmconstruccion: Number(this.idInmCons), idmatriz: Number(this.idMatriz), 
-      valores: ""};  
+    console.log("this.finalArray")
+    console.log(this.finalArray)
 
-      console.log("this.tablaMatrices")
-      console.log(this.tablaMatrices)
+    this.tablaMatrices = {idinmconstruccion: Number(this.idInmCons), idmatriz: Number(this.idMatriz), 
+     idseccion: 0, idsubseccion: 0, clase: 0, puntos: 0};  
 
   
     this.loading = true;
@@ -200,9 +196,75 @@ export class TablaMatricesDialogComponent implements OnInit {
     this.alertTablaMatrices = false;
   }
 
-  tabChanged(e){
-     console.log(e)
-    
+  radioChange(event: MatRadioChange, data, item, seccion) {
+    switch(seccion)
+    { 
+      case 1:
+        var obj = this.listaSecciones.filter(x => x.id == data.id)[0];
+        obj.seccion = seccion;
+        obj.idsubseccion = data.idSubSeccion;   
+        obj.clase = item.clase;
+        obj.puntos = item.puntos; 
+        
+        console.log(this.finalArray.some(x => x.idsubseccion == data.idsubseccion))
+        if (!this.finalArray.some(x => x.idsubseccion == data.idsubseccion)) {
+          this.finalArray.push(obj);
+        }
+    break;
+    case 2:
+      var obj = this.subSeccionEstructura.filter(x => x.idSubSeccion == data.idSubSeccion)[0];
+      obj.seccion = seccion;
+      obj.idsubseccion = obj.idSubSeccion;   
+      obj.clase = item.clase;
+      obj.puntos = item.puntos;
+
+      console.log(this.finalArray.some(x => x.idSubSeccion == data.idSubSeccion))
+      if (!this.finalArray.some(x => x.idSubSeccion == data.idSubSeccion)) {
+        this.finalArray.push(obj);
+      }
+    break;
+    case 3:
+        var obj = this.subSeccionAcabados.filter(x => x.idSubSeccion == data.idSubSeccion)[0];
+        obj.seccion = seccion;
+        obj.idsubseccion = obj.idSubSeccion; 
+        obj.clase = item.clase;
+        obj.puntos = item.puntos;   
+
+        console.log(this.finalArray.some(x => x.idSubSeccion == data.idSubSeccion))
+        if (!this.finalArray.some(x => x.idSubSeccion == data.idSubSeccion)) {
+          this.finalArray.push(obj);
+        }
+    break;
+    case 4:
+        var obj = this.subSeccionServicios.filter(x => x.idSubSeccion == data.idSubSeccion)[0];
+        obj.seccion = seccion;
+        obj.idsubseccion = obj.idSubSeccion;   
+        obj.clase = item.clase;
+        obj.puntos = item.puntos;  
+
+        console.log(this.finalArray.some(x => x.idSubSeccion == data.idSubSeccion))
+        if (!this.finalArray.some(x => x.id == data.idSubSeccion)) {
+          this.finalArray.push(obj);
+        }
+    break;
+    default: 
+    }   
   }
 
+  onTabChanged($event) {
+   
+    switch($event.index)
+    { 
+      case 0:
+        this.guardar = true;
+      break;
+      case 1:
+        this.guardar = false;
+      break;
+      case 2:
+        this.guardar = false;
+      break;
+      default:
+    }
+  }
 }
