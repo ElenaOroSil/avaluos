@@ -29,7 +29,10 @@ export class TablaMatricesDialogComponent implements OnInit {
   idSeccionAca: string;
   idSeccionSer: string;
 
-  valores: string;
+  valores = [];
+  val: any[] = [];
+  valParam: string;
+
   listaSecciones: any[];
   finalArray: any[] = [];
   finalArrayEstructura: any[] = [];
@@ -159,15 +162,40 @@ export class TablaMatricesDialogComponent implements OnInit {
   guardarMatrices() {
     this.submitted = true;
 
-    console.log("this.finalArray")
-    console.log(this.finalArray)
+      //this.finalArray.forEach(element => console.log(element.seccion + "," + 
+      //element.idsubseccion + "," + element.clase + "," + element.puntos + "|")); 
+ 
+      //  this.finalArray.forEach(element => console.log(element.seccion + "," + element.idsubseccion + "," + 
+      //  element.clase + "," + element.puntos + "|")         
+      //);  
 
-    this.tablaMatrices = {idinmconstruccion: Number(this.idInmCons), idmatriz: Number(this.idMatriz), 
-     idseccion: 0, idsubseccion: 0, clase: 0, puntos: 0};  
 
-  
+      //this.finalArray.forEach((item) => {
+      //  console.log("DATA")
+       // this.valores = item.seccion + "," + item.idsubseccion + "," + item.clase + "," + item.puntos + "|";
+      //  this.data.add(this.valores);
+      //});
+
+
+      this.finalArray.forEach((item) => {
+        
+        this.valores.push(item.seccion);
+        this.valores.push(item.idsubseccion);
+        this.valores.push(item.clase);
+        this.valores.push(item.puntos);
+        this.valores.push("|");
+      
+       });
+
+       this.val.push(this.valores);  
+       this.valParam = this.val.toString();
+
+
+
+ 
     this.loading = true;
-    this.desInmService.addCalculoMatrices(this.tablaMatrices)
+    this.desInmService.addCalculoMatrices(Number(this.idInmCons), Number(this.idMatriz), 
+    this.valParam)
         .pipe(first())
         .subscribe(
             data => {
@@ -200,7 +228,7 @@ export class TablaMatricesDialogComponent implements OnInit {
     switch(seccion)
     { 
       case 1:
-        var obj = this.listaSecciones.filter(x => x.id == data.id)[0];
+        var obj = this.subSeccion1.filter(x => x.id == data.id)[0];
         obj.seccion = seccion;
         obj.idsubseccion = data.idSubSeccion;   
         obj.clase = item.clase;
