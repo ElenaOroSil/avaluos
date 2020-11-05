@@ -105,18 +105,14 @@ searchCalculoMatrices(idInmConstruccion: string, idMatriz: string){
 
 addCalculoMatrices(idInmConstruccion: number, idMatriz: number, valores: string){
 
-  console.log("SERVICIO")
   console.log(idInmConstruccion)
   console.log(idMatriz)
   console.log(valores)
 
-  return this.http.post<any>(`${environment.SERVER_URL}/tablaConservacion`, {  'IdInmconstruccion': idInmConstruccion,
+  return this.http.post<any>(`${environment.SERVER_URL}/CalculoMatriz`, {  'IdInmConstruccion': idInmConstruccion,
   'IdMatriz': idMatriz, 'Valores': valores })
   .pipe(map(resp => {
         if(resp.ok){
-
-          console.log("resp")
-          console.log(resp)
 
          }     
       return resp;

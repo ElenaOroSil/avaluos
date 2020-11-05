@@ -1,5 +1,8 @@
 <div mat-dialog-content>
     <mat-card>
+      <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon1" color="warn">close</mat-icon>
+      </button>
       <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
           <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Registro de la construcción</mat-card-title>
       </mat-card-actions>
@@ -127,7 +130,7 @@
           </div>
         </form>
 
-          <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
             <button mat-fab style="background-color: #f65545; outline:none;" matTooltip="Cerrar" matDialogClose >
                <mat-icon>clear</mat-icon>
              </button>

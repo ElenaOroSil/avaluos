@@ -1,83 +1,111 @@
-<div mat-dialog-content>  
-  <section>
-    <h5>{{desMatriz}}</h5>
-    <mat-card style="margin-top: 1rem">
-      <mat-card-content>
-        <ng-container *ngFor="let sort of subSeccion1; let i=index">
-            <mat-radio-group >
-             <mat-radio-button class="example-radio-button" *ngFor="let op of sort.detalle" 
-             [checked]="op.seccionado" [value]="op.clase" style="margin: 8px" sticky (change)="radioChange($event,sort, op,this.idSeccion)">
-              {{op.descripcion}}
-            </mat-radio-button>
-            </mat-radio-group>
-        </ng-container>
-      </mat-card-content>
-    </mat-card>
-  </section>
+<div mat-dialog-content1>
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="ant1FormGroup" class="matero-form-horizontal">
+      <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon1" color="warn">close</mat-icon>
+      </button>
+      <section>
+        <h5>{{desMatriz}}</h5>
+        <mat-card style="margin-top: 1rem" *ngIf="visibleEnc">
+          <mat-card-content>
+            <ng-container *ngFor="let sort of subSeccion1; let i=index">
+              <mat-radio-group formControlName="tpoEncabezado" >
+                <mat-radio-button class="example-radio-button" *ngFor="let op of sort.detalle"
+                                  [checked]="op.seccionado" [value]="op.clase" style="margin: 8px"
+                                  sticky (change)="onItemChange(op)" required>
+                  {{op.descripcion}}
+                </mat-radio-button>
+              </mat-radio-group>
+              <mat-error *ngIf="ant1FormGroup.get('tpoEncabezado').invalid">Campo requerido</mat-error> 
+            </ng-container>
+          </mat-card-content>
+        </mat-card>
+      </section>
 
-      <div fxLayout="row wrap" fxLayoutGap="10px grid">
-        <mat-tab-group (selectedTabChange)="onTabChanged($event);">
-          <mat-tab label="Estructura" >
-            <ng-template matTabContent>  
-              <div fxLayout="row"  fxLayoutGap="12px"  [style.margin-top]="'12px'">         
-                <mat-card class="example-card">
-                  <ng-container *ngFor="let sort of subSeccionEstructura; let i=index">
-                        <mat-radio-group >
-                         <mat-radio-button class="example-radio-button" *ngFor="let item of sort.detalle"
-                         [checked]="item.seccionado" [value]="item.clase" style="margin: 5px" (change)="radioChange($event,sort,item,this.idSeccionEst)">
-                         {{item.descripcion}}
-                        </mat-radio-button>
-                        </mat-radio-group>
-                  </ng-container>
-                </mat-card>
-              </div>
-            </ng-template>
-          </mat-tab>
 
-          <mat-tab label="Acabados">
-            <ng-template matTabContent>
-              <div fxLayout="row" fxLayoutGap="12px" [style.margin-top]="'12px'">
-                <mat-card class="example-card">
-                  <ng-container *ngFor="let sort of subSeccionAcabados; let i=index">
-                        <mat-radio-group >
-                         <mat-radio-button class="example-radio-button" *ngFor="let item of sort.detalle"
-                         [checked]="item.seccionado" [value]="item.clase" style="margin: 5px" (change)="radioChange($event,sort,item,idSeccionAca)">
-                         {{item.descripcion}}
-                        </mat-radio-button>
-                        </mat-radio-group>
-                  </ng-container>
-                </mat-card>
-              </div>
-            </ng-template>
-          </mat-tab>
+      <div fxLayout="row wrap" fxLayoutGap="30px grid">
+        <mat-tab-group (selectedTabChange)="onTabChanged($event);" >
+          <mat-tab *ngFor="let tab of listaTab; let index = index" [label]="tab.seccion" >
 
-          <mat-tab label="Servicios" *ngIf="viewTab">
-            <ng-template matTabContent>
-              <div fxLayout="row" fxLayoutGap="12px" [style.margin-top]="'12px'">
+            <div fxLayout="row" fxLayoutGap="12px" [style.margin-top]="'12px'"
+                 *ngIf="viewEstructura">
+              <ng-container *ngFor="let sortEst of subSeccionEstructura; let i=index">
                 <mat-card class="example-card">
-                  <ng-container *ngFor="let sort of subSeccionServicios; let i=index">
-                  <mat-radio-group >
-                   <mat-radio-button class="example-radio-button" *ngFor="let item of sort.detalle"
-                   [checked]="item.seccionado" [value]="item.clase" style="margin: 5px" (change)="radioChange($event,sort,item,idSeccionSer)">
-                   {{item.descripcion}}
-                  </mat-radio-button>
+                  <mat-radio-group formControlName="tpoEstructura" required>
+                    <mat-radio-button class="example-radio-button"
+                                      *ngFor="let itemEst of sortEst.detalle"
+                                      [checked]="itemEst.seccionado" [value]="itemEst.clase"
+                                      style="margin: 5px"
+                                      (change)="radioChange($event,sortEst,itemEst,this.idSeccionEst)">
+                      {{itemEst.descripcion}}
+                    </mat-radio-button>
                   </mat-radio-group>
-                  </ng-container>
+                  <mat-error *ngIf="ant1FormGroup.get('tpoEstructura').invalid">Campo requerido</mat-error> 
                 </mat-card>
-              </div>
-            </ng-template>
-          </mat-tab>
+              </ng-container>
+            </div>
 
+            <div fxLayout="row" fxLayoutGap="12px" [style.margin-top]="'12px'" *ngIf="viewAcabados">
+              <ng-container *ngFor="let sortAca of subSeccionAcabados; let i=index">
+                <mat-card class="example-card">
+                  <mat-radio-group formControlName="tpoAcabados" required>
+                    <mat-radio-button class="example-radio-button"
+                                      *ngFor="let itemAca of sortAca.detalle"
+                                      [checked]="itemAca.seccionado" [value]="itemAca.clase"
+                                      style="margin: 5px"
+                                      (change)="radioChange($event,sortAca,itemAca,idSeccionAca)">
+                      {{itemAca.descripcion}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                  <mat-error *ngIf="ant1FormGroup.get('tpoAcabados').invalid">Campo requerido</mat-error>
+                </mat-card>
+              </ng-container>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="12px" [style.margin-top]="'12px'"
+                 *ngIf="viewServicios">
+              <ng-container *ngFor="let sortSer of subSeccionServicios; let i=index">
+                <mat-card class="example-card">
+                  <mat-radio-group formControlName="tpoServicios" required>
+                    <mat-radio-button class="example-radio-button"
+                                      *ngFor="let itemSer of sortSer.detalle"
+                                      [checked]="itemSer.seccionado" [value]="itemSer.clase"
+                                      style="margin: 5px"
+                                      (change)="radioChange($event,sortSer,itemSer,idSeccionSer)">
+                      {{itemSer.descripcion}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                  <mat-error *ngIf="ant1FormGroup.get('tpoServicios').invalid">Campo requerido</mat-error>
+                </mat-card>
+              </ng-container>
+            </div>
+          </mat-tab>
         </mat-tab-group>
-        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px" *ngIf="guardar">
-          <button mat-fab style="background-color: #f65545; outline:none;" matTooltip="Cerrar"
-                  matDialogClose>
-            <mat-icon>clear</mat-icon>
-          </button>
-          <button mat-fab style="background-color: #00b140; outline:none;" matTooltip="Aceptar"
-                  (click)="guardarMatrices()">
-            <mat-icon>done</mat-icon>
-          </button>
-        </div>
-      </div>    
+
+      </div>
+    
+
+      <div *ngIf="alertTablaMatrices" class="{{classAlert}}" role="alertTablaMatrices">
+        <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{msg}}
+      </div>
+
+    </form>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" *ngIf="guardar">
+        <button mat-fab style="background-color: #f65545; outline:none;" matTooltip="Cerrar"
+                matDialogClose>
+          <mat-icon>clear</mat-icon>
+        </button>
+        <button mat-fab style="background-color: #00b140; outline:none;" matTooltip="Aceptar"
+                (click)="guardarMatrices()">
+          <mat-icon>done</mat-icon>
+        </button>
+      </div>
+   
+    </mat-card-content>
+  </mat-card>
 </div>

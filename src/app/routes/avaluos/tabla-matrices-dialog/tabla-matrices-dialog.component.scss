@@ -1,0 +1,40 @@
+.close-button{
+    float: right;
+    top:-24px;
+    right:-24px;
+    outline: none;
+    background-color: transparent!important;
+  }
+  
+  .close-icon {
+    transition: 1s ease-in-out;
+  }
+
+  .mat-icon-button ::ng-deep .mat-button-focus-overlay {
+    display: none;
+}
+
+.close-dialog-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+}
+
+.sortOptions > label {
+  font-size:          8px;
+}
+
+.sortOptions > input[type=radio] {
+  width:              10px;
+  height:             10px;
+}
+
+
+
+
+  
+  
+
+  
+  

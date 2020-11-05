@@ -13,5 +13,21 @@
     font-size: 14px;
     width: 100%;
   }
+
+  .close-button{
+    float: right;
+    top:-24px;
+    right:-24px;
+    outline: none;
+    background-color: transparent!important;
+  }
+  
+  .close-icon {
+    transition: 1s ease-in-out;
+  }
+
+  .mat-icon-button ::ng-deep .mat-button-focus-overlay {
+    display: none;
+}
   
 

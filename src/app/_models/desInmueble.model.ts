@@ -93,16 +93,16 @@ export class SinMatrices {
 }
 
 export class TablaMatrices {
-  idinmconstruccion: number;
   idmatriz: number;
+  idinmconstruccion: number;
   idseccion: number;
   idsubseccion: number;
   clase: number;
   puntos: number;
 
   constructor(tablamatrices) {
-    this.idinmconstruccion = tablamatrices.idinmconstruccion;
     this.idmatriz = tablamatrices.idmatriz;
+    this.idinmconstruccion = tablamatrices.idinmconstruccion;
     this.idseccion = tablamatrices.idseccion;
     this.idsubseccion = tablamatrices.idsubseccion;
     this.clase = tablamatrices.clase;
