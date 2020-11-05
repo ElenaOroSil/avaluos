@@ -16,7 +16,7 @@ export class ElementosConstruccionService {
        'Estructuras': value.estructuras, 'Muros': value.muros, 'Entrepisos': value.entrepisos, 
        'Techos':value.techos, 'Azoteas': value.azoteas, 'Bardas':value.bardas, 
        'Aplanados': value.aplanados, 'Plafones': value.plafones, 'Lambrines': value.lambrines, 
-       'Pisos': value.pisos, 'Zoclos': value.zoclos, 'Escaleras': value.escaleeras, 
+       'Pisos': value.pisos, 'Zoclos': value.zoclos, 'Escaleras': value.escaleras, 
        'Pintura': value.pintura, 'RecubrimientosEspeciales': value.recubrimientosEspeciales,
        'PuertasInteriores': value.puertasInteriores, 'Guardaropas': value.guardaropas, 'MueblesEmpotradosFijos': value.mueblesEmpotradosFijos,
         'MueblesBaño': value.mueblesBanio, 'RamaleosHidraulicos': value.ramaleosHidraulicos, 'RamaleosSanitarios': value.ramaleosSanitarios,
@@ -34,15 +34,15 @@ export class ElementosConstruccionService {
      }
 
 
-     searchCaractUrbanas(folio: string) {
+     searchElementosConst(folio: string) {
 
       let params = new HttpParams();
       params = params.append('Folio', folio);
  
       return this.http.get<any>(`${environment.SERVER_URL}/consultaElementosConstruccion`, {params: params})   
-      .pipe(map(elemtnosCons => {
+      .pipe(map(elementosCons => {
       
-        return elemtnosCons;
+        return elementosCons;
     }));
   } 
 

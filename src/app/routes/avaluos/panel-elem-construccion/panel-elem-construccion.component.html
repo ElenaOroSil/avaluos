@@ -1,170 +1,123 @@
 <section class="demo-expansion">
-    <mat-expansion-panel #elementosPanel1>
+    <mat-expansion-panel #elementosPanel1  [expanded]='isExpanded'>
       <mat-expansion-panel-header>
-        <mat-panel-title>Obra negra</mat-panel-title>
+        <mat-panel-title>Elementos de la construcción</mat-panel-title>
       </mat-expansion-panel-header>
+      <form [formGroup]="eleConst1FormGroup" class="matero-form-horizontal">
       <mat-card>
+        <mat-panel-title>Obra negra</mat-panel-title>
         <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
         </mat-card-actions>
-        <mat-card-content>
-          <form [formGroup]="eleConst1FormGroup" class="matero-form-horizontal">
+        <mat-card-content>        
             <div fxLayout="row wrap" fxLayoutGap="30px grid">
 
               <div fxFlex="25" fxFlex.lt-md="100" fxl>
                 <mat-form-field>
                   <mat-label>Cimentación</mat-label>
-                  <input matInput placeholder="Cimentación" formControlName="cimentacion"
-                         required>
-                  <mat-error *ngIf="eleConst1FormGroup.get('cimentacion').invalid">Campo
-                    requerido
-                  </mat-error>
+                  <input matInput placeholder="Cimentación" formControlName="cimientos" type="text" maxlength="250">     
                 </mat-form-field>
               </div>
 
               <div fxFlex="25" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Estructura</mat-label>
-                  <input matInput placeholder="Estructura" formControlName="estructura"
-                         required>
-                  <mat-error *ngIf="eleConst1FormGroup.get('estructura').invalid">Campo
-                    requerido</mat-error>
+                  <input matInput placeholder="Estructura" formControlName="estructuras" type="text" maxlength="250">    
                 </mat-form-field>
               </div>
 
               <div fxFlex="25" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Muros</mat-label>
-                  <input matInput placeholder="Muros" formControlName="muros" required>
-                  <mat-error *ngIf="eleConst1FormGroup.get('muros').invalid">Campo requerido
-                  </mat-error>
+                  <input matInput placeholder="Muros" formControlName="muros" type="text" maxlength="250">   
                 </mat-form-field>
               </div>
 
               <div fxFlex="25" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Entrepisos</mat-label>
-                  <input matInput placeholder="Entrepisos" formControlName="entrepisos"
-                         required>
-                  <mat-error *ngIf="eleConst1FormGroup.get('entrepisos').invalid">Campo
-                    requerido</mat-error>
+                  <input matInput placeholder="Entrepisos" formControlName="entrepisos" type="text" maxlength="250">   
+
                 </mat-form-field>
               </div>
 
               <div fxFlex="25" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Techos</mat-label>
-                  <input matInput placeholder="Techos" formControlName="techos" required>
-                  <mat-error *ngIf="eleConst1FormGroup.get('techos').invalid">Campo requerido
-                  </mat-error>
+                  <input matInput placeholder="Techos" formControlName="techos" type="text" maxlength="250">    
                 </mat-form-field>
               </div>
 
               <div fxFlex="25" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Azoteas</mat-label>
-                  <input matInput placeholder="Azoteas" formControlName="azoteas" required>
-                  <mat-error *ngIf="eleConst1FormGroup.get('azoteas').invalid">Campo requerido
-                  </mat-error>
+                  <input matInput placeholder="Azoteas" formControlName="azoteas" type="text" maxlength="250">   
                 </mat-form-field>
               </div>
 
               <div fxFlex="25" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Bardas</mat-label>
-                  <input matInput placeholder="Bardas" formControlName="bardas" required>
-                  <mat-error *ngIf="eleConst1FormGroup.get('bardas').invalid">Campo requerido
-                  </mat-error>
+                  <input matInput placeholder="Bardas" formControlName="bardas" type="text" maxlength="250">   
                 </mat-form-field>
               </div>
             </div>
-          </form>
         </mat-card-content>
       </mat-card>
-      <mat-action-row>
-        <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
-                (click)="elementosPanel1.expanded = false">
-          <mat-icon>close</mat-icon>
-        </button>
 
-        <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
-          <mat-icon>done</mat-icon>
-        </button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  </section>
-  <br>
-  <section class="demo-expansion">
-    <mat-expansion-panel #elementosPanel2>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Revestimientos y acabados interiores</mat-panel-title>
-      </mat-expansion-panel-header>
       <mat-card>
+        <mat-panel-title>Revestimientos y acabados interiores</mat-panel-title>
         <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
         </mat-card-actions>
         <mat-card-content>
-          <form [formGroup]="eleConst2FormGroup" class="matero-form-horizontal">
+  
             <div fxLayout="row wrap" fxLayoutGap="30px grid">
 
               <div fxFlex="25" fxFlex.lt-md="100" fxl>
                 <mat-form-field>
                   <mat-label>Aplanados</mat-label>
-                  <input matInput placeholder="Aplanados" formControlName="aplanados" required>
-                  <mat-error *ngIf="eleConst2FormGroup.get('aplanados').invalid">Campo requerido
-                  </mat-error>
+                  <input matInput placeholder="Aplanados" formControlName="aplanados" type="text" maxlength="500">   
                 </mat-form-field>
               </div>
 
               <div fxFlex="25" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Plafones</mat-label>
-                  <input matInput placeholder="Plafones" formControlName="plafones" required>
-                  <mat-error *ngIf="eleConst2FormGroup.get('plafones').invalid">Campo requerido
-                  </mat-error>
+                  <input matInput placeholder="Plafones" formControlName="plafones" type="text" maxlength="500">   
                 </mat-form-field>
               </div>
 
               <div fxFlex="25" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Lambrines</mat-label>
-                  <input matInput placeholder="Lambrines" formControlName="lambrines" required>
-                  <mat-error *ngIf="eleConst2FormGroup.get('lambrines').invalid">Campo requerido
-                  </mat-error>
+                  <input matInput placeholder="Lambrines" formControlName="lambrines" type="text" maxlength="500">   
                 </mat-form-field>
               </div>
 
               <div fxFlex="25" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Pisos</mat-label>
-                  <input matInput placeholder="Pisos" formControlName="pisos" required>
-                  <mat-error *ngIf="eleConst2FormGroup.get('pisos').invalid">Campo requerido
-                  </mat-error>
+                  <input matInput placeholder="Pisos" formControlName="pisos" type="text" maxlength="500">  
                 </mat-form-field>
               </div>
 
               <div fxFlex="25" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Zoclos</mat-label>
-                  <input matInput placeholder="Zoclos" formControlName="zoclos" required>
-                  <mat-error *ngIf="eleConst2FormGroup.get('zoclos').invalid">Campo requerido
-                  </mat-error>
+                  <input matInput placeholder="Zoclos" formControlName="zoclos" type="text" maxlength="500">  
                 </mat-form-field>
               </div>
 
               <div fxFlex="25" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Escaleras</mat-label>
-                  <input matInput placeholder="Escaleras" formControlName="escaleras" required>
-                  <mat-error *ngIf="eleConst2FormGroup.get('escaleras').invalid">Campo requerido
-                  </mat-error>
+                  <input matInput placeholder="Escaleras" formControlName="escaleras" type="text" maxlength="500">  
                 </mat-form-field>
               </div>
 
               <div fxFlex="25" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Pintura</mat-label>
-                  <input matInput placeholder="Pintura" formControlName="pintura" required>
-                  <mat-error *ngIf="eleConst2FormGroup.get('pintura').invalid">Campo requerido
-                  </mat-error>
+                  <input matInput placeholder="Pintura" formControlName="pintura" type="text" maxlength="250"> 
                 </mat-form-field>
               </div>
 
@@ -172,57 +125,32 @@
                 <mat-form-field>
                   <mat-label>Recubrimientos especiales</mat-label>
                   <input matInput placeholder="Recubrimientos especiales"
-                         formControlName="recubEspeciales" required>
-                  <mat-error *ngIf="eleConst2FormGroup.get('recubEspeciales').invalid">Campo
-                    requerido</mat-error>
+                         formControlName="recubrimientosEspeciales" >
                 </mat-form-field>
               </div>
             </div>
-          </form>
+    
         </mat-card-content>
       </mat-card>
-      <mat-action-row>
-        <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
-                (click)="elementosPanel2.expanded = false">
-          <mat-icon>close</mat-icon>
-        </button>
 
-        <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
-          <mat-icon>done</mat-icon>
-        </button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  </section>
-  <br>
-  <section class="demo-expansion">
-    <mat-expansion-panel #elementosPanel3>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Carpintería</mat-panel-title>
-      </mat-expansion-panel-header>
       <mat-card>
+        <mat-panel-title>Carpintería</mat-panel-title>
         <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
         </mat-card-actions>
         <mat-card-content>
-          <form [formGroup]="eleConst3FormGroup" class="matero-form-horizontal">
+
             <div fxLayout="row wrap" fxLayoutGap="30px grid">
               <div fxFlex="50" fxFlex.lt-md="100" fxl>
                 <mat-form-field>
                   <mat-label>Puertas interiores</mat-label>
-                  <input matInput placeholder="Puertas interiores" formControlName="puertasInt"
-                         required>
-                  <mat-error *ngIf="eleConst3FormGroup.get('puertasInt').invalid">Campo
-                    requerido
-                  </mat-error>
+                  <input matInput placeholder="Puertas interiores" formControlName="puertasInteriores" type="text" maxlength="250"> 
                 </mat-form-field>
               </div>
 
               <div fxFlex="50" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Guardaropas</mat-label>
-                  <input matInput placeholder="Guardaropas" formControlName="guardaropas"
-                         required>
-                  <mat-error *ngIf="eleConst3FormGroup.get('guardaropas').invalid">Campo
-                    requerido</mat-error>
+                  <input matInput placeholder="Guardaropas" formControlName="guardaropas" type="text" maxlength="250"> 
                 </mat-form-field>
               </div>
 
@@ -230,48 +158,26 @@
                 <mat-form-field>
                   <mat-label>Muebles empotrados o fijos</mat-label>
                   <input matInput placeholder="Muebles empotrados o fijos"
-                         formControlName="mueblesEmp" required>
-                  <mat-error *ngIf="eleConst3FormGroup.get('mueblesEmp').invalid">Campo
-                    requerido</mat-error>
+                         formControlName="mueblesEmpotradosFijos" type="text" maxlength="250"> 
                 </mat-form-field>
               </div>
             </div>
-          </form>
+
         </mat-card-content>
       </mat-card>
-      <mat-action-row>
-        <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
-                (click)="elementosPanel3.expanded = false">
-          <mat-icon>close</mat-icon>
-        </button>
 
-        <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
-          <mat-icon>done</mat-icon>
-        </button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  </section>
-  <br>
-  <section class="demo-expansion">
-    <mat-expansion-panel #elementosPanel4>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Instalaciones hidraúlicas y sanitarias</mat-panel-title>
-      </mat-expansion-panel-header>
       <mat-card>
+        <mat-panel-title>Instalaciones hidraúlicas y sanitarias</mat-panel-title>
         <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
         </mat-card-actions>
         <mat-card-content>
-          <form [formGroup]="eleConst4FormGroup" class="matero-form-horizontal">
+     
             <div fxLayout="row wrap" fxLayoutGap="30px grid">
 
               <div fxFlex="50" fxFlex.lt-md="100" fxl>
                 <mat-form-field>
                   <mat-label>Muebles de baño</mat-label>
-                  <input matInput placeholder="Muebles de baño" formControlName="mueblesBano"
-                         required>
-                  <mat-error *ngIf="eleConst4FormGroup.get('mueblesBano').invalid">Campo
-                    requerido
-                  </mat-error>
+                  <input matInput placeholder="Muebles de baño" formControlName="mueblesBanio" type="text" maxlength="500"> 
                 </mat-form-field>
               </div>
 
@@ -280,9 +186,7 @@
                 <mat-form-field>
                   <mat-label>Ramaleos hidraúlicos</mat-label>
                   <input matInput placeholder="Ramaleos hidraúlicos"
-                         formControlName="ramaleosHid" required>
-                  <mat-error *ngIf="eleConst4FormGroup.get('ramaleosHid').invalid">Campo
-                    requerido</mat-error>
+                         formControlName="ramaleosHidraulicos" type="text" maxlength="500"> 
                 </mat-form-field>
               </div>
 
@@ -290,944 +194,91 @@
                 <mat-form-field>
                   <mat-label>Ramaleos sanitarios</mat-label>
                   <input matInput placeholder="Muebles empotrados o fijos"
-                         formControlName="ramaleosSanit" required>
-                  <mat-error *ngIf="eleConst4FormGroup.get('ramaleosSanit').invalid">Campo
-                    requerido</mat-error>
+                         formControlName="ramaleosSanitarios" type="text" maxlength="500"> 
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100">
+                <mat-form-field>
+                  <mat-label>Instalaciones eléctricas</mat-label>
+                  <input matInput placeholder="Instalaciones eléctricas"
+                         formControlName="instalacionesElectricas" type="text" maxlength="250"> 
                 </mat-form-field>
               </div>
             </div>
 
-          </form>
         </mat-card-content>
       </mat-card>
-      <mat-action-row>
-        <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
-                (click)="elementosPanel4.expanded = false">
-          <mat-icon>close</mat-icon>
-        </button>
 
-        <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
-          <mat-icon>done</mat-icon>
-        </button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  </section>
-  <br>
-  <section class="demo-expansion">
-    <mat-expansion-panel #elementosPanel5>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Puertas y ventanería metálica</mat-panel-title>
-      </mat-expansion-panel-header>
       <mat-card>
+        <mat-panel-title>Puertas y ventanería metálica</mat-panel-title>
         <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
         </mat-card-actions>
         <mat-card-content>
-          <form [formGroup]="eleConst5FormGroup" class="matero-form-horizontal">
+     
             <div fxLayout="row wrap" fxLayoutGap="30px grid">
 
               <div fxFlex="50" fxFlex.lt-md="100" fxl>
                 <mat-form-field>
                   <mat-label>Herrería</mat-label>
-                  <input matInput placeholder="Herrería" formControlName="herreria" required>
-                  <mat-error *ngIf="eleConst5FormGroup.get('herreria').invalid">Campo requerido
-                  </mat-error>
+                  <input matInput placeholder="Herrería" formControlName="herreria" type="text" maxlength="250"> 
                 </mat-form-field>
               </div>
 
               <div fxFlex="50" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Ventanería</mat-label>
-                  <input matInput placeholder="Ventanería" formControlName="ventaneria"
-                         required>
-                  <mat-error *ngIf="eleConst5FormGroup.get('ventaneria').invalid">Campo
-                    requerido</mat-error>
+                  <input matInput placeholder="Ventanería" formControlName="ventaneria" type="text" maxlength="250"> 
                 </mat-form-field>
               </div>
 
               <div fxFlex="50" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Vidriería</mat-label>
-                  <input matInput placeholder="Vidriería" formControlName="vidrieria" required>
-                  <mat-error *ngIf="eleConst5FormGroup.get('vidrieria').invalid">Campo requerido
-                  </mat-error>
+                  <input matInput placeholder="Vidriería" formControlName="vidrieria" type="text" maxlength="250"> 
                 </mat-form-field>
               </div>
 
               <div fxFlex="50" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Cerrajería</mat-label>
-                  <input matInput placeholder="Cerrajería" formControlName="cerrajeria"
-                         required>
-                  <mat-error *ngIf="eleConst5FormGroup.get('cerrajeria').invalid">Campo
-                    requerido</mat-error>
+                  <input matInput placeholder="Cerrajería" formControlName="cerrajeria" type="text" maxlength="250"> 
                 </mat-form-field>
               </div>
 
               <div fxFlex="50" fxFlex.lt-md="100">
                 <mat-form-field>
                   <mat-label>Fachadas</mat-label>
-                  <input matInput placeholder="Fachadas" formControlName="fachadas" required>
-                  <mat-error *ngIf="eleConst5FormGroup.get('fachadas').invalid">Campo requerido
-                  </mat-error>
+                  <input matInput placeholder="Fachadas" formControlName="fachadas" type="text" maxlength="250"> 
                 </mat-form-field>
               </div>
             </div>
-          </form>
+     
         </mat-card-content>
       </mat-card>
+
+      <div *ngIf="alertElementoCons" class="{{classAlert}}" role="alertElementoCons">
+        <button type="button" class="close" aria-label="Close" (click)="closeAlertElementosCons()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{msg}}
+      </div>
+  
       <mat-action-row>
         <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
-                (click)="elementosPanel5.expanded = false">
+                (click)="elementosPanel1.expanded = false">
           <mat-icon>close</mat-icon>
         </button>
 
-        <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
+        <button mat-fab style="background-color: #91d400;" matTooltip="Guardar" (click)="addElementosCons()" type="onSubmit">
           <mat-icon>done</mat-icon>
         </button>
       </mat-action-row>
+    </form>
     </mat-expansion-panel>
   </section>
-  <br>
-  <section class="demo-expansion">
-    <mat-expansion-panel #elementosPanel6>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Instalaciones especiales / PRIVATIVAS</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-card>
-        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-        </mat-card-actions>
-        <mat-card-content>
-          <form [formGroup]="eleConst6FormGroup" class="matero-form-horizontal">
-            <div fxLayout="row wrap" fxLayoutGap="30px grid">
 
-              <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
-                <mat-form-field>
-                  <mat-label>Clave instalación especial</mat-label>
-                  <input matInput placeholder="Clave instalación especial"
-                         formControlName="cveIntEspecial" required>
-                  <mat-error *ngIf="eleConst6FormGroup.get('cveIntEspecial').invalid">Campo
-                    requerido
-                  </mat-error>
-                </mat-form-field>
-              </div>
+ 
 
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Descripción instalación especial</mat-label>
-                  <input matInput placeholder="Descripción instalación especial"
-                         formControlName="desInstEspecial" required>
-                  <mat-error *ngIf="eleConst6FormGroup.get('desInstEspecial').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
 
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Unidad instalación especial</mat-label>
-                  <input matInput placeholder="Unidad instalación especial"
-                         formControlName="uniInstEspecial" required>
-                  <mat-error *ngIf="eleConst6FormGroup.get('uniInstEspecial').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Cantidad instalación especial</mat-label>
-                  <input matInput placeholder="Cantidad instalación especial"
-                         formControlName="cantInstEspecial" required>
-                  <mat-error *ngIf="eleConst6FormGroup.get('cantInstEspecial').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Edad instalación especial</mat-label>
-                  <input matInput placeholder="Edad instalación especial"
-                         formControlName="edadInstEspecial" required>
-                  <mat-error *ngIf="eleConst6FormGroup.get('edadInstEspecial').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Vida útil total instalación especial</mat-label>
-                  <input matInput placeholder="Vida útil total instalación especial"
-                         formControlName="vidaUtilInstEspecial" required>
-                  <mat-error *ngIf="eleConst6FormGroup.get('vidaUtilInstEspecial').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Valor unitario instalación especial</mat-label>
-                  <input matInput placeholder="Valor unitario instalación especial"
-                         formControlName="valorUnitInstEspecial" required>
-                  <mat-error *ngIf="eleConst6FormGroup.get('valorUnitInstEspecial').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Factor de edad instalación especial</mat-label>
-                  <input matInput placeholder="Factor de edad instalación especial"
-                         formControlName="factorEdadInstEspecial" required>
-                  <mat-error *ngIf="eleConst6FormGroup.get('factorEdadInstEspecial').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Importe instalación especial</mat-label>
-                  <input matInput placeholder="Importe instalación especial"
-                         formControlName="importeInstEspecial" required>
-                  <mat-error *ngIf="eleConst6FormGroup.get('importeInstEspecial').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Importe total instalación especial</mat-label>
-                  <input matInput placeholder="Importe instalación especial"
-                         formControlName="importeInstEspecial" required>
-                  <mat-error *ngIf="eleConst6FormGroup.get('importeTotalInstEspecial').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-          </form>
-        </mat-card-content>
-      </mat-card>
-      <mat-action-row>
-        <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
-                (click)="elementosPanel6.expanded = false">
-          <mat-icon>close</mat-icon>
-        </button>
-
-        <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
-          <mat-icon>done</mat-icon>
-        </button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  </section>
-  <br>
-  <section class="demo-expansion">
-    <mat-expansion-panel #elementosPanel7>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Instalaciones especiales / COMUNES</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-card>
-        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-        </mat-card-actions>
-        <mat-card-content>
-          <form [formGroup]="eleConst7FormGroup" class="matero-form-horizontal">
-            <div fxLayout="row wrap" fxLayoutGap="30px grid">
-
-              <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
-                <mat-form-field>
-                  <mat-label>Clave instalación especial</mat-label>
-                  <input matInput placeholder="Clave instalación especial"
-                         formControlName="cveIntEspecial" required>
-                  <mat-error *ngIf="eleConst7FormGroup.get('cveIntEspecial').invalid">Campo
-                    requerido
-                  </mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Descripción instalación especial</mat-label>
-                  <input matInput placeholder="Descripción instalación especial"
-                         formControlName="desInstEspecial" required>
-                  <mat-error *ngIf="eleConst7FormGroup.get('desInstEspecial').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Unidad instalación especial</mat-label>
-                  <input matInput placeholder="Unidad instalación especial"
-                         formControlName="uniInstEspecial" required>
-                  <mat-error *ngIf="eleConst7FormGroup.get('uniInstEspecial').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Cantidad instalación especial</mat-label>
-                  <input matInput placeholder="Cantidad instalación especial"
-                         formControlName="cantInstEspecial" required>
-                  <mat-error *ngIf="eleConst7FormGroup.get('cantInstEspecial').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Edad instalación especial</mat-label>
-                  <input matInput placeholder="Edad instalación especial"
-                         formControlName="edadInstEspecial" required>
-                  <mat-error *ngIf="eleConst7FormGroup.get('edadInstEspecial').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Vida útil total instalación especial</mat-label>
-                  <input matInput placeholder="Vida útil total instalación especial"
-                         formControlName="vidaUtilInstEspecial" required>
-                  <mat-error *ngIf="eleConst7FormGroup.get('vidaUtilInstEspecial').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Valor unitario instalación especial</mat-label>
-                  <input matInput placeholder="Valor unitario instalación especial"
-                         formControlName="valorUnitInstEspecial" required>
-                  <mat-error *ngIf="eleConst7FormGroup.get('valorUnitInstEspecial').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Factor de edad instalación especial</mat-label>
-                  <input matInput placeholder="Factor de edad instalación especial"
-                         formControlName="factorEdadInstEspecial" required>
-                  <mat-error *ngIf="eleConst7FormGroup.get('factorEdadInstEspecial').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Importe instalación especial</mat-label>
-                  <input matInput placeholder="Importe instalación especial"
-                         formControlName="importeInstEspecial" required>
-                  <mat-error *ngIf="eleConst7FormGroup.get('importeInstEspecial').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Importe total instalación especial</mat-label>
-                  <input matInput placeholder="Importe instalación especial"
-                         formControlName="importeInstEspecial" required>
-                  <mat-error *ngIf="eleConst7FormGroup.get('importeTotalInstEspecial').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-          </form>
-        </mat-card-content>
-      </mat-card>
-      <mat-action-row>
-        <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
-                (click)="elementosPanel7.expanded = false">
-          <mat-icon>close</mat-icon>
-        </button>
-
-        <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
-          <mat-icon>done</mat-icon>
-        </button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  </section>
-  <br>
-  <section class="demo-expansion">
-    <mat-expansion-panel #elementosPanel8>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Elementos accesorios / PRIVATIVAS</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-card>
-        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-        </mat-card-actions>
-        <mat-card-content>
-          <form [formGroup]="eleConst8FormGroup" class="matero-form-horizontal">
-            <div fxLayout="row wrap" fxLayoutGap="30px grid">
-
-              <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
-                <mat-form-field>
-                  <mat-label>Clave elemento accesorio</mat-label>
-                  <input matInput placeholder="Clave elemento accesorio"
-                         formControlName="cveEleAccesorio" required>
-                  <mat-error *ngIf="eleConst8FormGroup.get('cveEleAccesorio').invalid">Campo
-                    requerido
-                  </mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Descripción elemento accesorio</mat-label>
-                  <input matInput placeholder="Descripción elemento accesorio"
-                         formControlName="desEleAccesorio" required>
-                  <mat-error *ngIf="eleConst8FormGroup.get('desEleAccesorio').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Unidad elemento accesorio</mat-label>
-                  <input matInput placeholder="Unidad elemento accesorio"
-                         formControlName="uniElemAccesorio" required>
-                  <mat-error *ngIf="eleConst8FormGroup.get('uniElemAccesorio').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Cantidad elemento accesorio</mat-label>
-                  <input matInput placeholder="Cantidad elemento accesorio"
-                         formControlName="cantElemAccesorio" required>
-                  <mat-error *ngIf="eleConst8FormGroup.get('cantElemAccesorio').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Edad elemento accesorio</mat-label>
-                  <input matInput placeholder="Edad elemento accesorio"
-                         formControlName="edadElemAccesorio" required>
-                  <mat-error *ngIf="eleConst8FormGroup.get('edadElemAccesorio').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Vida útil total elemento accesorio</mat-label>
-                  <input matInput placeholder="Vida útil total elemento accesorio"
-                         formControlName="vidaUtilElemAccesorio" required>
-                  <mat-error *ngIf="eleConst8FormGroup.get('vidaUtilElemAccesorio').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Valor unitario elemento accesorio</mat-label>
-                  <input matInput placeholder="Valor unitario elemento accesorio"
-                         formControlName="valorUnitElemAccesorio" required>
-                  <mat-error *ngIf="eleConst8FormGroup.get('valorUnitElemAccesorio').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Factor de edad elemento accesorio</mat-label>
-                  <input matInput placeholder="Factor de edad elemento accesorio"
-                         formControlName="factorEdadElemAccesorio" required>
-                  <mat-error *ngIf="eleConst8FormGroup.get('factorEdadElemAccesorio').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Importe elemento accesorio</mat-label>
-                  <input matInput placeholder="Importe elemento accesorio"
-                         formControlName="importeElemAccesorio" required>
-                  <mat-error *ngIf="eleConst8FormGroup.get('importeElemAccesorio').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Importe total elemento accesorio</mat-label>
-                  <input matInput placeholder="Importe total elemento accesorio"
-                         formControlName="importeTotElemAccesorio" required>
-                  <mat-error *ngIf="eleConst8FormGroup.get('importeTotElemAccesorio').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-          </form>
-        </mat-card-content>
-      </mat-card>
-      <mat-action-row>
-        <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
-                (click)="elementosPanel8.expanded = false">
-          <mat-icon>close</mat-icon>
-        </button>
-
-        <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
-          <mat-icon>done</mat-icon>
-        </button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  </section>
-  <br>
-  <section class="demo-expansion">
-    <mat-expansion-panel #elementosPanel9>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Elementos accesorios / COMUNES</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-card>
-        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-        </mat-card-actions>
-        <mat-card-content>
-          <form [formGroup]="eleConst9FormGroup" class="matero-form-horizontal">
-            <div fxLayout="row wrap" fxLayoutGap="30px grid">
-
-              <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
-                <mat-form-field>
-                  <mat-label>Clave elemento accesorio</mat-label>
-                  <input matInput placeholder="Clave elemento accesorio"
-                         formControlName="cveEleAccesorio" required>
-                  <mat-error *ngIf="eleConst9FormGroup.get('cveEleAccesorio').invalid">Campo
-                    requerido
-                  </mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Descripción elemento accesorio</mat-label>
-                  <input matInput placeholder="Descripción elemento accesorio"
-                         formControlName="desEleAccesorio" required>
-                  <mat-error *ngIf="eleConst9FormGroup.get('desEleAccesorio').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Unidad elemento accesorio</mat-label>
-                  <input matInput placeholder="Unidad elemento accesorio"
-                         formControlName="uniElemAccesorio" required>
-                  <mat-error *ngIf="eleConst9FormGroup.get('uniElemAccesorio').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Cantidad elemento accesorio</mat-label>
-                  <input matInput placeholder="Cantidad elemento accesorio"
-                         formControlName="cantElemAccesorio" required>
-                  <mat-error *ngIf="eleConst9FormGroup.get('cantElemAccesorio').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Edad elemento accesorio</mat-label>
-                  <input matInput placeholder="Edad elemento accesorio"
-                         formControlName="edadElemAccesorio" required>
-                  <mat-error *ngIf="eleConst9FormGroup.get('edadElemAccesorio').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Vida útil total elemento accesorio</mat-label>
-                  <input matInput placeholder="Vida útil total elemento accesorio"
-                         formControlName="vidaUtilElemAccesorio" required>
-                  <mat-error *ngIf="eleConst9FormGroup.get('vidaUtilElemAccesorio').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Valor unitario elemento accesorio</mat-label>
-                  <input matInput placeholder="Valor unitario elemento accesorio"
-                         formControlName="valorUnitElemAccesorio" required>
-                  <mat-error *ngIf="eleConst9FormGroup.get('valorUnitElemAccesorio').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Factor de edad elemento accesorio</mat-label>
-                  <input matInput placeholder="Factor de edad elemento accesorio"
-                         formControlName="factorEdadElemAccesorio" required>
-                  <mat-error *ngIf="eleConst9FormGroup.get('factorEdadElemAccesorio').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Importe elemento accesorio</mat-label>
-                  <input matInput placeholder="Importe elemento accesorio"
-                         formControlName="importeElemAccesorio" required>
-                  <mat-error *ngIf="eleConst9FormGroup.get('importeElemAccesorio').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Importe total elemento accesorio</mat-label>
-                  <input matInput placeholder="Importe total elemento accesorio"
-                         formControlName="importeTotElemAccesorio" required>
-                  <mat-error *ngIf="eleConst9FormGroup.get('importeTotElemAccesorio').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-          </form>
-        </mat-card-content>
-      </mat-card>
-      <mat-action-row>
-        <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
-                (click)="elementosPanel9.expanded = false">
-          <mat-icon>close</mat-icon>
-        </button>
-
-        <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
-          <mat-icon>done</mat-icon>
-        </button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  </section>
-  <br>
-  <section class="demo-expansion">
-    <mat-expansion-panel #elementosPanel10>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Obras complementarias / PRIVATIVAS</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-card>
-        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-        </mat-card-actions>
-        <mat-card-content>
-          <form [formGroup]="eleConst10FormGroup" class="matero-form-horizontal">
-            <div fxLayout="row wrap" fxLayoutGap="30px grid">
-
-              <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
-                <mat-form-field>
-                  <mat-label>Clave obra complementaria</mat-label>
-                  <input matInput placeholder="Clave obra complementaria"
-                         formControlName="cveObraComplementaria" required>
-                  <mat-error *ngIf="eleConst10FormGroup.get('cveObraComplementaria').invalid">Campo
-                    requerido
-                  </mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Descripción obra complementaria</mat-label>
-                  <input matInput placeholder="Descripción obra complementaria"
-                         formControlName="desObraComplementaria" required>
-                  <mat-error *ngIf="eleConst10FormGroup.get('desObraComplementaria').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Unidad obra complementaria</mat-label>
-                  <input matInput placeholder="Unidad obra complementaria"
-                         formControlName="uniObraComplementaria" required>
-                  <mat-error *ngIf="eleConst10FormGroup.get('uniObraComplementaria').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Cantidad obra complementaria</mat-label>
-                  <input matInput placeholder="Cantidad obra complementaria"
-                         formControlName="cantObraComplementaria" required>
-                  <mat-error *ngIf="eleConst10FormGroup.get('cantObraComplementaria').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Edad obra complementaria</mat-label>
-                  <input matInput placeholder="Edad obra complementaria"
-                         formControlName="edadObraComplementaria" required>
-                  <mat-error *ngIf="eleConst10FormGroup.get('edadObraComplementaria').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Vida útil total obra complementaria</mat-label>
-                  <input matInput placeholder="Vida útil total obra complementaria"
-                         formControlName="vidaUtilTotalObraComple" required>
-                  <mat-error *ngIf="eleConst10FormGroup.get('vidaUtilTotalObraComple').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Valor unitario obra complementaria</mat-label>
-                  <input matInput placeholder="Valor unitario obra complementaria"
-                         formControlName="valorUnitObraComple" required>
-                  <mat-error *ngIf="eleConst10FormGroup.get('valorUnitObraComple').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Factor de edad obra complementaria</mat-label>
-                  <input matInput placeholder="Factor de edad obra complementaria"
-                         formControlName="factorEdadObraComple" required>
-                  <mat-error *ngIf="eleConst10FormGroup.get('factorEdadObraComple').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Importe obra complementaria</mat-label>
-                  <input matInput placeholder="Importe elemento accesorio"
-                         formControlName="importeObraComplementaria" required>
-                  <mat-error *ngIf="eleConst10FormGroup.get('importeObraComplementaria').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Importe total obra complementaria</mat-label>
-                  <input matInput placeholder="Importe total obra complementaria"
-                         formControlName="importeTotObraComple" required>
-                  <mat-error *ngIf="eleConst10FormGroup.get('importeTotObraComple').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-          </form>
-        </mat-card-content>
-      </mat-card>
-      <mat-action-row>
-        <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
-                (click)="elementosPanel10.expanded = false">
-          <mat-icon>close</mat-icon>
-        </button>
-
-        <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
-          <mat-icon>done</mat-icon>
-        </button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  </section>
-  <br>
-  <section class="demo-expansion">
-    <mat-expansion-panel #elementosPanel11>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Obras complementarias / COMUNES</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-card>
-        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-        </mat-card-actions>
-        <mat-card-content>
-          <form [formGroup]="eleConst11FormGroup" class="matero-form-horizontal">
-            <div fxLayout="row wrap" fxLayoutGap="30px grid">
-
-              <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
-                <mat-form-field>
-                  <mat-label>Clave obra complementaria</mat-label>
-                  <input matInput placeholder="Clave obra complementaria"
-                         formControlName="cveObraComplementaria" required>
-                  <mat-error *ngIf="eleConst11FormGroup.get('cveObraComplementaria').invalid">Campo
-                    requerido
-                  </mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Descripción obra complementaria</mat-label>
-                  <input matInput placeholder="Descripción obra complementaria"
-                         formControlName="desObraComplementaria" required>
-                  <mat-error *ngIf="eleConst11FormGroup.get('desObraComplementaria').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Unidad obra complementaria</mat-label>
-                  <input matInput placeholder="Unidad obra complementaria"
-                         formControlName="uniObraComplementaria" required>
-                  <mat-error *ngIf="eleConst11FormGroup.get('uniObraComplementaria').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Cantidad obra complementaria</mat-label>
-                  <input matInput placeholder="Cantidad obra complementaria"
-                         formControlName="cantObraComplementaria" required>
-                  <mat-error *ngIf="eleConst11FormGroup.get('cantObraComplementaria').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Edad obra complementaria</mat-label>
-                  <input matInput placeholder="Edad obra complementaria"
-                         formControlName="edadObraComplementaria" required>
-                  <mat-error *ngIf="eleConst11FormGroup.get('edadObraComplementaria').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Vida útil total obra complementaria</mat-label>
-                  <input matInput placeholder="Vida útil total obra complementaria"
-                         formControlName="vidaUtilTotalObraComple" required>
-                  <mat-error *ngIf="eleConst11FormGroup.get('vidaUtilTotalObraComple').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Valor unitario obra complementaria</mat-label>
-                  <input matInput placeholder="Valor unitario obra complementaria"
-                         formControlName="valorUnitObraComple" required>
-                  <mat-error *ngIf="eleConst11FormGroup.get('valorUnitObraComple').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Factor de edad obra complementaria</mat-label>
-                  <input matInput placeholder="Factor de edad obra complementaria"
-                         formControlName="factorEdadObraComple" required>
-                  <mat-error *ngIf="eleConst11FormGroup.get('factorEdadObraComple').invalid">
-                    Campo requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Importe obra complementaria</mat-label>
-                  <input matInput placeholder="Importe elemento accesorio"
-                         formControlName="importeObraComplementaria" required>
-                  <mat-error *ngIf="eleConst11FormGroup.get('importeObraComplementaria').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="33.3" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Importe total obra complementaria</mat-label>
-                  <input matInput placeholder="Importe total obra complementaria"
-                         formControlName="importeTotObraComple" required>
-                  <mat-error *ngIf="eleConst11FormGroup.get('importeTotObraComple').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-          </form>
-        </mat-card-content>
-      </mat-card>
-      <mat-action-row>
-        <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
-                (click)="elementosPanel11.expanded = false">
-          <mat-icon>close</mat-icon>
-        </button>
-
-        <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
-          <mat-icon>done</mat-icon>
-        </button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  </section>
-  <br>
-  <section class="demo-expansion">
-    <mat-expansion-panel #elementosPanel12>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Importes totales</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-card>
-        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-        </mat-card-actions>
-        <mat-card-content>
-          <form [formGroup]="eleConst12FormGroup" class="matero-form-horizontal">
-            <div fxLayout="row wrap" fxLayoutGap="30px grid">
-
-              <div fxFlex="50" fxFlex.lt-md="100" fxl>
-                <mat-form-field>
-                  <mat-label>Importe total instalaciones especiales, obras complementarias y elementos accesorios PRIVATIVAS</mat-label>
-                  <input matInput placeholder="Importe total instalaciones especiales, obras complementarias y elementos accesorios PRIVATIVAS"
-                         formControlName="impTotalInstEspPriv" required>
-                  <mat-error *ngIf="eleConst12FormGroup.get('impTotalInstEspPriv').invalid">Campo
-                    requerido
-                  </mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="50" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Importe total instalaciones especiales, obras complementarias y elementos accesorios COMUNES</mat-label>
-                  <input matInput placeholder="Importe total instalaciones especiales, obras complementarias y elementos accesorios COMUNES"
-                         formControlName="impTotalInstEspCom" required>
-                  <mat-error *ngIf="eleConst12FormGroup.get('impTotalInstEspCom').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="50" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Importe INDIVISO instalaciones especiales, obras y elementos accesorios PRIVATIVAS</mat-label>
-                  <input matInput placeholder="Importe INDIVISO instalaciones especiales, obras y elementos accesorios PRIVATIVAS"
-                         formControlName="impIndivisoInstEspPriva" required>
-                  <mat-error *ngIf="eleConst12FormGroup.get('impIndivisoInstEspPriva').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxFlex="50" fxFlex.lt-md="100">
-                <mat-form-field>
-                  <mat-label>Importe INDIVISO instalaciones especiales, obras y elementos accesorios COMUNES</mat-label>
-                  <input matInput placeholder="Importe INDIVISO instalaciones especiales, obras y elementos accesorios COMUNES"
-                         formControlName="impIndivisoInstEspCom" required>
-                  <mat-error *ngIf="eleConst12FormGroup.get('impIndivisoInstEspCom').invalid">Campo
-                    requerido</mat-error>
-                </mat-form-field>
-              </div>
-           </div>
-          </form>
-        </mat-card-content>
-      </mat-card>
-      <mat-action-row>
-        <button mat-fab style="background-color: #f65545;" matTooltip="Cancelar"
-                (click)="elementosPanel12.expanded = false">
-          <mat-icon>close</mat-icon>
-        </button>
-
-        <button mat-fab style="background-color: #91d400;" matTooltip="Guardar">
-          <mat-icon>done</mat-icon>
-        </button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  </section>
 

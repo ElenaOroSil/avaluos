@@ -209,8 +209,7 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
            .subscribe( data => {                    
                  this.loading = false;
                  this.info = data.comunicados;
-                
-                  console.log(this.info)
+
                },
                error => {  
                 this.loading = false;
