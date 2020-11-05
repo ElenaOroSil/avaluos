@@ -92,3 +92,27 @@ constructor(avanceavaluo){
    
 }
 }
+
+export class ReporteSeguimiento {
+    idSociedad: number;
+    sociedad: string;
+    idperito: number;
+    perito: string;
+    idtipoavaluo: number;
+    tipoAvaluo: string;
+    idestatusavaluo: number;
+    estatusavaluo: string;
+    registros: number;
+      
+    constructor(reporteseguimiento){
+        this.idSociedad = reporteseguimiento.idSociedad;
+        this.sociedad = reporteseguimiento.sociedad;
+        this.idperito = reporteseguimiento.idperito;
+        this.perito = reporteseguimiento.perito;
+        this.idtipoavaluo = reporteseguimiento.idtipoavaluo;
+        this.tipoAvaluo = reporteseguimiento.tipoAvaluo;
+        this.idestatusavaluo = reporteseguimiento.idtipoavaluo;
+        this.estatusavaluo = reporteseguimiento.estatusavaluo;
+        this.registros = reporteseguimiento.registros;
+}
+}

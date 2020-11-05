@@ -94,6 +94,17 @@ avanceAvaluo(folio: string) {
 }));
 } 
 
+searchSeguimientoAvaluo() {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/reporteSeguimiento`)   
+  .pipe(map(inmueble => {
+    if(inmueble.ok){  
+   
+     }  
+  return inmueble.inmuebleConstrucciones;
+}));
+}
+
   }
 
 
