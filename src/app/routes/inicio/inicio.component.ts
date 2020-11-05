@@ -9,7 +9,7 @@ import { Observable, of, ReplaySubject } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { TableColumn } from './../../../@vex/interfaces/table-column.interface';
 import { MatTableDataSource } from '@angular/material/table';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { aioTableData, aioTableLabels } from './../../../static-data/aio-table-data';
 import theme from './../../../@vex/utils/tailwindcss';
 import { MatPaginator } from '@angular/material/paginator';
@@ -20,6 +20,9 @@ import { MatSelectChange } from '@angular/material/select';
 import { stagger40ms } from './../../../@vex/animations/stagger.animation';
 import { fadeInUp400ms } from './../../../@vex/animations/fade-in-up.animation';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@angular/material/form-field';
+import { ComunicadosService } from './../../_services/comunicados.service';
+import { first } from 'rxjs/operators';
+import { Comunicados } from './../../_models/comunicados.model';
 
 
 @Component({
@@ -41,10 +44,12 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@ang
 })
 export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
 
-
+  comunicadosFormGroup: FormGroup;
   subject$: ReplaySubject<Customer[]> = new ReplaySubject<Customer[]>(1);
   data$: Observable<Customer[]> = this.subject$.asObservable();
   customers: Customer[];
+  msg= '';
+  classAlert: string;
 
   @Input()
   columns: TableColumn<Customer>[] = [
@@ -66,10 +71,10 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource: MatTableDataSource<Customer> | null;
   selection = new SelectionModel<Customer>(true, []);
   searchCtrl = new FormControl();
+  loading = false;
+  info: Comunicados;
 
   labels = aioTableLabels;
-
-
   theme = theme;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -78,7 +83,8 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     public dialog1: MtxDialog,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private comunicadosService: ComunicadosService) { }
 
     get visibleColumns() {
       return this.columns.filter(column => column.visible).map(column => column.property);
@@ -93,6 +99,9 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   
     ngOnInit() {
+
+     this.searchComunicados();
+
       this.getData().subscribe(customers => {
         this.subject$.next(customers);
       });
@@ -115,6 +124,27 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
+
+    //Llama servicio para la consulta de comunicados
+  searchComunicados () {
+
+    this.loading = true;
+    this.comunicadosService.getComunicados()
+           .pipe(first())
+           .subscribe( data => {                    
+                 this.loading = false;
+                 this.info = data.comunicados;
+                
+                 console.log("this.info")
+                  console.log(this.info)
+               },
+               error => {  
+                this.loading = false;
+                this.msg = error;
+                this.classAlert = 'alert-danger alert alert-dismissible fade show';
+               });               
+               
+       }
   
   
   
